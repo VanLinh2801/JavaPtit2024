@@ -53,14 +53,14 @@ public class bao_ve {
         System.out.println("Ca làm việc: " + this.calamviec);
     }
     public static void main(String[] args) {
-        bao_ve baoVe1 = new bao_ve("Nguyễn Văn A", "Nam", "BV001", "0367505366", "sáng");
+        bao_ve baoVe1 = new bao_ve("Nguyễn Văn A", "Nam", "BV001", "0367505366", 1);
         System.out.println("Thông tin ban đầu của bảo vệ:");
         baoVe1.hienThiThongTin();
         baoVe1.setTen("Trần Văn B");
         baoVe1.setGioiTinh("Nam");
         baoVe1.setId("BV002");
         baoVe1.setSodienthoai("0794172227");
-        baoVe1.setCalamviec("chiều");
+        baoVe1.setCalamviec(2);
         System.out.println("\nThông tin sau khi cập nhật:");
         baoVe1.hienThiThongTin();
     }
