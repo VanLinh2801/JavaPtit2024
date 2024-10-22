@@ -4,9 +4,9 @@ public class bao_ve {
     private String gioiTinh;
     private String id;
     private String sodienthoai;
-    private String calamviec;
+    private int calamviec;
 
-    public bao_ve(String ten, String gioiTinh, String id, String sodienthoai, String calamviec) {
+    public bao_ve(String ten, String gioiTinh, String id, String sodienthoai, int calamviec) {
         this.ten = ten;
         this.gioiTinh = gioiTinh;
         this.id = id;
@@ -38,10 +38,10 @@ public class bao_ve {
     public void setSodienthoai(String sodienthoai){
         this.sodienthoai = sodienthoai;
     }
-    public String getCalamviec() {
+    public int getCalamviec() {
         return calamviec;
     }
-    public void setCalamviec(String calamviec){
+    public void setCalamviec(int calamviec){
         this.calamviec = calamviec;
     }
 
