@@ -80,7 +80,7 @@ public class Ticket{
         /* Bang gia gui xe
         07h00 -> 18h00: 3.000
         18h00 -> 22h00: 5.000
-        18h00 -> 07h00 (ngay hom sau): 11.000
+        22h00 -> 07h00 (ngay hom sau): 11.000
         Ke tu 07h00: tinh gia theo ngay la 11.000
          */
         if (ngay >= 1){
