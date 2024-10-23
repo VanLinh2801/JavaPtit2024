@@ -34,6 +34,13 @@ public class Vehicle {
         this.id = id;
     }
 
+    // Phương thức khởi tạo mặc định
+    public Vehicle(int id, String type, String numberPlate) {
+        this.id = id;
+        setType(type);
+        this.numberPlate = numberPlate;
+    }
+
     // Phương thức thiết lập loại xe từ chuỗi (CAR, MOTOR_BIKE, ...)
     public void setType(String type) {
         try {
