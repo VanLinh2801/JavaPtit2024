@@ -26,24 +26,36 @@ public class UsersDAO {
 
     public Users getProfile() throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
-        String query = "SELECT UserId FROM lastLogin WHERE loginTime = (SELECT MAX(loginTime) FROM lastLogin)";
+        String query = "SELECT * FROM LastLogin WHERE loginTime = (SELECT MAX(loginTime) FROM LastLogin)";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         ResultSet resultSet = preparedStatement.executeQuery();
-        int userId = resultSet.getInt("UserId");
-        String profileQuery = "SELECT * FROM Users WHERE id = ?";
-        PreparedStatement profileStatement = connection.prepareStatement(profileQuery);
-        profileStatement.setInt(1, userId);
-        ResultSet profileResultSet = profileStatement.executeQuery();
-        Users user = new Users(profileResultSet.getInt("id"), profileResultSet.getString("username"),
-                profileResultSet.getString("password"), profileResultSet.getString("fullName"),
-                profileResultSet.getString("gender"), profileResultSet.getString("phoneNumber"),
-                profileResultSet.getInt("shift"));
-        return user;
+        while (resultSet.next()) {
+            int userId = resultSet.getInt("UserId");
+            String profileQuery = "SELECT * FROM Users WHERE id = ?";
+            PreparedStatement profileStatement = connection.prepareStatement(profileQuery);
+            profileStatement.setInt(1, userId);
+            ResultSet profileResultSet = profileStatement.executeQuery();
+            while (profileResultSet.next()) {
+                int id = profileResultSet.getInt("id");
+                String userName = profileResultSet.getString("username");
+                String password = profileResultSet.getString("password");
+                String fullName = profileResultSet.getString("fullName");
+                String gender = profileResultSet.getString("gender");
+                String phoneNumber = profileResultSet.getString("phoneNumber");
+                int workShift = profileResultSet.getInt("workShift");
+                Users user = new Users(id, userName, password, fullName, gender, phoneNumber,
+                        workShift);
+                connection.close();
+                return user;
+            }
+        }
+        return null;
+
     }
 
     public boolean addSecurityGuard(Users user) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
-        String query = "INSERT INTO Users (username, password, fullName, gender, phoneNumber, shift,roleId) VALUES (?, ?, ?, ?, ?, ?,2)";
+        String query = "INSERT INTO Users (username, password, fullName, gender, phoneNumber, workShift,roleId) VALUES (?, ?, ?, ?, ?, ?,2)";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, user.getUserName());
         preparedStatement.setString(2, user.getPassword());
@@ -64,15 +76,6 @@ public class UsersDAO {
         int result = preparedStatement.executeUpdate();
         connection.close();
         return result > 0;
-    }
-
-    public static void main(String[] args) {
-        UsersDAO usersDAO = new UsersDAO();
-        try {
-            System.out.println(usersDAO.login("admin", "admin"));
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
 }
