@@ -41,19 +41,16 @@ public class UsersDAO {
         return user;
     }
 
-    public boolean addSecurityGuard(String username, String fullName, String password, String gender,
-            String phoneNumber,
-            int workShift) throws SQLException, ClassNotFoundException {
+    public boolean addSecurityGuard(Users user) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
-        String query = "INSERT INTO Users (username, fullName, password,gender, phoneNumber, shift,roleId) VALUES (?, ?, ?, ?, ?, ?,2)";
+        String query = "INSERT INTO Users (username, password, fullName, gender, phoneNumber, shift,roleId) VALUES (?, ?, ?, ?, ?, ?,2)";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, username);
-        preparedStatement.setString(2, fullName);
-        preparedStatement.setString(3, password);
-        preparedStatement.setString(4, gender);
-        preparedStatement.setString(5, phoneNumber);
-        preparedStatement.setInt(6, workShift);
-        preparedStatement.executeUpdate();
+        preparedStatement.setString(1, user.getUserName());
+        preparedStatement.setString(2, user.getPassword());
+        preparedStatement.setString(3, user.getFullName());
+        preparedStatement.setString(4, user.getGender());
+        preparedStatement.setString(5, user.getPhoneNumber());
+        preparedStatement.setInt(6, user.getShift());
         int result = preparedStatement.executeUpdate();
         connection.close();
         return result > 0;
@@ -67,6 +64,15 @@ public class UsersDAO {
         int result = preparedStatement.executeUpdate();
         connection.close();
         return result > 0;
+    }
+
+    public static void main(String[] args) {
+        UsersDAO usersDAO = new UsersDAO();
+        try {
+            System.out.println(usersDAO.login("admin", "admin"));
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }
