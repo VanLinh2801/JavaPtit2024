@@ -8,17 +8,27 @@ public class Users {
     private String fullName;
     private String gender;
     private String phoneNumber;
-    private int shift;
+    private int workShift;
 
     public Users(int id, String userName, String password, String fullName, String gender, String phoneNumber,
-            int shift) {
+            int workShift) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.fullName = fullName;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
-        this.shift = shift;
+        this.workShift = workShift;
+    }
+
+    public Users(String userName, String password, String fullName, String gender, String phoneNumber,
+            int workShift) {
+        this.userName = userName;
+        this.password = password;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.phoneNumber = phoneNumber;
+        this.workShift = workShift;
     }
 
     public String getUserName() {
@@ -66,11 +76,11 @@ public class Users {
     }
 
     public int getShift() {
-        return shift;
+        return workShift;
     }
 
-    public void setShift(int shift) {
-        this.shift = shift;
+    public void setShift(int workShift) {
+        this.workShift = workShift;
     }
 
 }
