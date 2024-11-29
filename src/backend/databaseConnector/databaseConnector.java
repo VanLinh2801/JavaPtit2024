@@ -16,4 +16,4 @@ public class databaseConnector {
         // Establish connection using the URL, username, and password
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
-}
+}//
