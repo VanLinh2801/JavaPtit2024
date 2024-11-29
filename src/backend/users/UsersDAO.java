@@ -106,19 +106,27 @@ public class UsersDAO {
         return result > 0;
     }
 
-    public boolean changeProfile(Users user) throws SQLException, ClassNotFoundException {
+    public boolean changeCurrentUserProfile(Users user) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
-        String query = "UPDATE Users SET username = ?, fullName = ?, gender = ?, phoneNumber = ?, workShift = ? WHERE id = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, user.getUserName());
-        preparedStatement.setString(2, user.getFullName());
-        preparedStatement.setString(3, user.getGender());
-        preparedStatement.setString(4, user.getPhoneNumber());
-        preparedStatement.setInt(5, user.getShift());
-        preparedStatement.setInt(6, user.getId());
-        int result = preparedStatement.executeUpdate();
+        String currentUser = "SELECT * FROM LastLogin WHERE loginTime = (SELECT MAX(loginTime) FROM LastLogin)";
+        PreparedStatement currentUserStatement = connection.prepareStatement(currentUser);
+        ResultSet currentUserResultSet = currentUserStatement.executeQuery();
+        while (currentUserResultSet.next()) {
+            int userId = currentUserResultSet.getInt("UserId");
+            String query = "UPDATE Users SET username = ?, fullName = ?, gender = ?, phoneNumber = ?, workShift = ? WHERE id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, user.getUserName());
+            preparedStatement.setString(2, user.getFullName());
+            preparedStatement.setString(3, user.getGender());
+            preparedStatement.setString(4, user.getPhoneNumber());
+            preparedStatement.setInt(5, user.getShift());
+            preparedStatement.setInt(6, user.getId());
+            int result = preparedStatement.executeUpdate();
+            connection.close();
+            return result > 0;
+        }
         connection.close();
-        return result > 0;
+        return false;
     }
 
     public boolean changeRole(int id, int roleId) throws SQLException, ClassNotFoundException {
