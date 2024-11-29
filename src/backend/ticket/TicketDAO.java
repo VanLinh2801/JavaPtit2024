@@ -158,7 +158,8 @@ public class TicketDAO {
         return true;
     }
 
-    public List<Ticket> getManyTickets(String plateNumber, vehicleTypeEnum vehicleType, Date startTimeFilter,
+    public List<Ticket> getManyTickets(String plateNumber, ticketTypeEnum ticketType, vehicleTypeEnum vehicleType,
+            Date startTimeFilter,
             Date endTimeFilter) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
 
@@ -184,6 +185,11 @@ public class TicketDAO {
             parameters.add(endTimeFilter);
         }
 
+        if (ticketType != null) {
+            queryBuilder.append(" AND ticketType = ?");
+            parameters.add(ticketType.toString());
+        }
+
         // Prepare the statement with the dynamically built query
         String query = queryBuilder.toString();
         PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -198,14 +204,15 @@ public class TicketDAO {
         List<Ticket> tickets = new ArrayList<>();
         while (resultSet.next()) {
             int id = resultSet.getInt("id");
-            ticketTypeEnum ticketType = ticketTypeEnum.valueOf(resultSet.getString("ticketType"));
+            ticketTypeEnum ticketTypeResult = ticketTypeEnum.valueOf(resultSet.getString("ticketType"));
             Date entryTime = resultSet.getDate("entryTime");
             Date exitTime = resultSet.getDate("exitTime");
             double price = resultSet.getDouble("price");
             String plateNumberResult = resultSet.getString("plateNumber");
             vehicleTypeEnum vehicleTypeResult = vehicleTypeEnum.valueOf(resultSet.getString("vehicleType"));
             int userId = resultSet.getInt("UserId");
-            Ticket ticket = new Ticket(id, ticketType, entryTime, exitTime, price, plateNumberResult, vehicleTypeResult,
+            Ticket ticket = new Ticket(id, ticketTypeResult, entryTime, exitTime, price, plateNumberResult,
+                    vehicleTypeResult,
                     userId);
             tickets.add(ticket);
         }
@@ -239,16 +246,4 @@ public class TicketDAO {
 
     }
 
-    public static void main(String[] args) {
-        TicketDAO ticketDAO = new TicketDAO();
-        try {
-            List<Ticket> tickets = ticketDAO.getManyTickets("29U1 497-92", null, Date.valueOf("2024-11-29"),
-                    Date.valueOf("2024-11-30"));
-            for (Ticket ticket : tickets) {
-                System.out.println(ticket.getEntryTime());
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 }
