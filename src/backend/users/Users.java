@@ -9,6 +9,7 @@ public class Users {
     private String gender;
     private String phoneNumber;
     private int workShift;
+    private int roleId;
 
     public Users(int id, String userName, String password, String fullName, String gender, String phoneNumber,
             int workShift) {
