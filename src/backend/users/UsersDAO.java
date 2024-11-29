@@ -2,7 +2,7 @@ package src.backend.users;
 
 import java.sql.*;
 
-import src.backend.databaseConnector;
+import src.backend.databaseConnector.databaseConnector;
 import src.backend.enums.roleEnum;
 
 public class UsersDAO {
@@ -137,6 +137,15 @@ public class UsersDAO {
         int result = preparedStatement.executeUpdate();
         connection.close();
         return result > 0;
+    }
+
+    public static void main(String[] args) {
+        UsersDAO usersDAO = new UsersDAO();
+        try {
+            System.out.println(usersDAO.login("admin", "Abc@12345"));
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }
