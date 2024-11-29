@@ -3,6 +3,7 @@ package src.backend.users;
 import java.sql.*;
 
 import src.backend.databaseConnector;
+import src.backend.enums.roleEnum;
 
 public class UsersDAO {
     public boolean login(String username, String password) throws SQLException, ClassNotFoundException {
@@ -55,6 +56,13 @@ public class UsersDAO {
 
     public boolean addSecurityGuard(Users user) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
+        String checkPermission = "SELECT r.roleName FROM Users u JOIN [Role] r ON r.id = u.roleId JOIN LastLogin ll ON ll.UserId = u.id WHERE ll.loginTime = (SELECT MAX(loginTime) FROM LastLogin) GROUP BY r.roleName";
+        PreparedStatement checkPermissionStatement = connection.prepareStatement(checkPermission);
+        ResultSet resultSet = checkPermissionStatement.executeQuery();
+        if (!resultSet.next() || !resultSet.getString("roleName").equals(roleEnum.ADMIN.toString())) {
+            connection.close();
+            return false;
+        }
         String query = "INSERT INTO Users (username, password, fullName, gender, phoneNumber, workShift,roleId) VALUES (?, ?, ?, ?, ?, ?,2)";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, user.getUserName());
@@ -70,9 +78,62 @@ public class UsersDAO {
 
     public boolean removeSecurityGuard(int id) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
+        String checkPermission = "SELECT r.roleName FROM Users u JOIN [Role] r ON r.id = u.roleId JOIN LastLogin ll ON ll.UserId = u.id WHERE ll.loginTime = (SELECT MAX(loginTime) FROM LastLogin) GROUP BY r.roleName";
+        PreparedStatement checkPermissionStatement = connection.prepareStatement(checkPermission);
+        ResultSet resultSet = checkPermissionStatement.executeQuery();
+        if (!resultSet.next() || !resultSet.getString("roleName").equals(roleEnum.ADMIN.toString())) {
+            connection.close();
+            return false;
+        }
         String query = "DELETE FROM Users WHERE id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, id);
+        int result = preparedStatement.executeUpdate();
+        connection.close();
+        return result > 0;
+    }
+
+    public boolean changePassword(int id, String oldPassword, String newPassword)
+            throws SQLException, ClassNotFoundException {
+        Connection connection = databaseConnector.getConnection();
+        String query = "UPDATE Users SET password = ? WHERE id = ? AND password = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, newPassword);
+        preparedStatement.setInt(2, id);
+        preparedStatement.setString(3, oldPassword);
+        int result = preparedStatement.executeUpdate();
+        connection.close();
+        return result > 0;
+    }
+
+    public boolean changeProfile(Users user) throws SQLException, ClassNotFoundException {
+        Connection connection = databaseConnector.getConnection();
+        String query = "UPDATE Users SET username = ?, fullName = ?, gender = ?, phoneNumber = ?, workShift = ? WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, user.getUserName());
+        preparedStatement.setString(2, user.getFullName());
+        preparedStatement.setString(3, user.getGender());
+        preparedStatement.setString(4, user.getPhoneNumber());
+        preparedStatement.setInt(5, user.getShift());
+        preparedStatement.setInt(6, user.getId());
+        int result = preparedStatement.executeUpdate();
+        connection.close();
+        return result > 0;
+    }
+
+    public boolean changeRole(int id, int roleId) throws SQLException, ClassNotFoundException {
+        Connection connection = databaseConnector.getConnection();
+        String checkPermission = "SELECT r.roleName FROM Users u JOIN [Role] r ON r.id = u.roleId JOIN LastLogin ll ON ll.UserId = u.id WHERE ll.loginTime = (SELECT MAX(loginTime) FROM LastLogin) GROUP BY r.roleName";
+        PreparedStatement checkPermissionStatement = connection.prepareStatement(checkPermission);
+        ResultSet resultSet = checkPermissionStatement.executeQuery();
+        if (!resultSet.next() || !resultSet.getString("roleName").equals(roleEnum.ADMIN.toString())) {
+            connection.close();
+            return false;
+        }
+        String query = "UPDATE Users SET roleId = ? WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, roleId);
+        preparedStatement.setInt(2, id);
         int result = preparedStatement.executeUpdate();
         connection.close();
         return result > 0;
