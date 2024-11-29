@@ -2,6 +2,7 @@ package src.backend.ticket;
 
 import java.sql.*;
 import java.time.*;
+import java.util.*;
 
 import src.backend.databaseConnector.databaseConnector;
 import src.backend.enums.ticketTypeEnum;
@@ -125,6 +126,34 @@ public class TicketDAO {
             }
         }
         return false;
+    }
+
+    public boolean deleteOneTicket(int id) throws SQLException, ClassNotFoundException {
+        Connection connection = databaseConnector.getConnection();
+        String query = "DELETE FROM Ticket WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+        int result = preparedStatement.executeUpdate();
+        connection.close();
+        return result > 0;
+    }
+
+    public boolean deleteManyTickets(List<Integer> idToDeleteList) throws SQLException, ClassNotFoundException {
+        Connection connection = databaseConnector.getConnection();
+        String query = "DELETE FROM Ticket WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        for (int id : idToDeleteList) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.addBatch();
+        }
+        int[] results = preparedStatement.executeBatch();
+        connection.close();
+        for (int result : results) {
+            if (result <= 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static void main(String[] args) {
