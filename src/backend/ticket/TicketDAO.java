@@ -246,16 +246,4 @@ public class TicketDAO {
 
     }
 
-    public static void main(String[] args) {
-        TicketDAO ticketDAO = new TicketDAO();
-        try {
-            List<Ticket> tickets = ticketDAO.getManyTickets("29U1 497-92", null, Date.valueOf("2024-11-29"),
-                    Date.valueOf("2024-11-30"));
-            for (Ticket ticket : tickets) {
-                System.out.println(ticket.getEntryTime());
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 }
