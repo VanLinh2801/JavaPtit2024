@@ -130,7 +130,7 @@ public class TicketDAO {
     public static void main(String[] args) {
         TicketDAO ticketDAO = new TicketDAO();
         try {
-            Ticket ticket = new Ticket("29U1 497-92", vehicleTypeEnum.MOTORBIKE);
+            Ticket ticket = new Ticket("29U2 497-92", vehicleTypeEnum.MOTORBIKE);
             ticketDAO.addAndCalculatePriceForMonthlyTicket(ticket);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
