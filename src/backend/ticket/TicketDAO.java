@@ -85,9 +85,10 @@ public class TicketDAO {
 
     public boolean calculateDailyPrice(String plateNumber) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
-        String findTicket = "SELECT * FROM Ticket WHERE entryTime = (SELECT MAX(entryTime) FROM Ticket WHERE plateNumber = ?)";
+        String findTicket = "SELECT * FROM Ticket WHERE entryTime = (SELECT MAX(entryTime) FROM Ticket WHERE plateNumber = ?) AND ticketType = ?";
         PreparedStatement findTicketStatement = connection.prepareStatement(findTicket);
         findTicketStatement.setString(1, plateNumber);
+        findTicketStatement.setString(2, ticketTypeEnum.DAILY.toString());
         ResultSet findTicketResultSet = findTicketStatement.executeQuery();
         while (findTicketResultSet.next()) {
             Timestamp entryTime = findTicketResultSet.getTimestamp("entryTime");
@@ -211,6 +212,31 @@ public class TicketDAO {
 
         connection.close();
         return tickets;
+    }
+
+    public boolean extendMonthlyTicket(String plateNumber) throws SQLException, ClassNotFoundException {
+        Connection connection = databaseConnector.getConnection();
+        String findTicket = "SELECT * FROM Ticket WHERE entryTime = (SELECT MAX(entryTime) FROM Ticket WHERE plateNumber = ?) AND ticketType = ?";
+        PreparedStatement findTicketStatement = connection.prepareStatement(findTicket);
+        findTicketStatement.setString(1, plateNumber);
+        findTicketStatement.setString(2, ticketTypeEnum.MONTHLY.toString());
+        ResultSet findTicketResultSet = findTicketStatement.executeQuery();
+        while (findTicketResultSet.next()) {
+            Timestamp entryTime = new Timestamp(System.currentTimeMillis());
+            Timestamp exitTime = new Timestamp(
+                    entryTime.toLocalDateTime().plus(30, ChronoUnit.DAYS).toEpochSecond(ZoneOffset.UTC));
+            String extendMonthlyTicket = "UPDATE Ticket SET entryTime = ?, exitTime = ? WHERE entryTime = (SELECT MAX(entryTime) FROM Ticket WHERE plateNumber = ?)";
+            PreparedStatement extendMonthlyTicketStatement = connection.prepareStatement(extendMonthlyTicket);
+            extendMonthlyTicketStatement.setTimestamp(1, entryTime);
+            extendMonthlyTicketStatement.setTimestamp(2, exitTime);
+            extendMonthlyTicketStatement.setString(3, plateNumber);
+            int result = extendMonthlyTicketStatement.executeUpdate();
+            connection.close();
+            return result > 0;
+
+        }
+        return false;
+
     }
 
     public static void main(String[] args) {
