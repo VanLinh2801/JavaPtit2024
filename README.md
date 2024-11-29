@@ -72,4 +72,70 @@ Các thực thể cần quản lý: Vé, Xe cộ, Bảo vệ
   - Hiển thị thông tin bảo vệ.
   - Thêm, sửa, xóa thông tin bảo vệ.
   - Tìm kiếm bảo vệ theo ca làm việc.
+query:
+-- Table: Role
+CREATE TABLE Role (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    roleName VARCHAR(255) NOT NULL
+);
+
+-- Table: Users
+CREATE TABLE Users (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    username VARCHAR(255) NOT NULL,
+    fullName VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    gender VARCHAR(50) NOT NULL,
+    phoneNumber VARCHAR(15) NOT NULL,
+    workShift INT NOT NULL,
+    roleId INT NOT NULL,
+    FOREIGN KEY (roleId) REFERENCES Role(id)
+);
+
+-- Table: Ticket
+CREATE TABLE Ticket (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    ticketType VARCHAR(255) NOT NULL,
+    entryTime DATETIME NOT NULL,
+    exitTime DATETIME,
+    price DECIMAL(18, 2) NOT NULL,
+    plateNumber VARCHAR(50),
+    vehicleType VARCHAR(50) NOT NULL,
+    UserId INT NOT NULL,
+    FOREIGN KEY (UserId) REFERENCES Users(id)
+);
+
+-- Table: LastLogin
+CREATE TABLE LastLogin (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    loginTime DATETIME NOT NULL,
+    UserId INT NOT NULL,
+    FOREIGN KEY (UserId) REFERENCES Users(id)
+);
+
+-- Table: VehiclePrice
+CREATE TABLE VehiclePrice (
+    id INT PRIMARY KEY IDENTITY(1,1),
+    vehicleType VARCHAR(50),
+    monthlyPrice DECIMAL(10, 2),
+    morningPrice DECIMAL(10, 2),
+    afternoonPrice DECIMAL(10, 2),
+    nightPrice DECIMAL(10, 2),
+    updatedAt DATETIME
+);
+
+-- Assume the Admin role has an ID of 1 (adjust if necessary)
+INSERT INTO Role (roleName) VALUES 
+('ADMIN'), 
+('SECURITY');
+
+INSERT INTO Users (username, fullName, password, gender, phoneNumber, workShift, roleId) 
+VALUES 
+('admin', 'System Administrator', 'ABC@12345', 'Male', '1234567890', 1, 1);
+
+INSERT INTO VehiclePrice (vehicleType, monthlyPrice, morningPrice, afternoonPrice, nightPrice, updatedAt) VALUES
+('MOTORBIKE', 200000, 5000, 10000, 20000, getdate()),  -- Day price (6 AM - 6 PM) and Night price (6 PM - 11 PM)
+('BIKE', 100000, 3000, 6000, 10000, getdate()),
+('CAR', 2500000, 20000, 40000, 80000, getdate())
+
 
