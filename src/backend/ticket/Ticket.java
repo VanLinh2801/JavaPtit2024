@@ -18,9 +18,8 @@ public class Ticket {
     private vehicleTypeEnum vehicleType;
     private int UserId;
 
-    public Ticket(Date entryTime, String plateNumber,
+    public Ticket(String plateNumber,
             vehicleTypeEnum vehicleType) {
-        this.entryTime = entryTime;
         this.plateNumber = plateNumber;
         this.vehicleType = vehicleType;
     }
