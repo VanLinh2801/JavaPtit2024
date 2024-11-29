@@ -1,13 +1,14 @@
 package src.backend.ticket;
 
 import java.sql.*;
+import java.sql.Date;
 import java.time.*;
 import java.util.*;
 
 import src.backend.databaseConnector.databaseConnector;
 import src.backend.enums.ticketTypeEnum;
 import src.backend.enums.vehicleTypeEnum;
-import java.time.LocalDateTime;
+
 import java.time.temporal.ChronoUnit;
 
 public class TicketDAO {
@@ -156,11 +157,70 @@ public class TicketDAO {
         return true;
     }
 
+    public List<Ticket> getManyTickets(String plateNumber, vehicleTypeEnum vehicleType, Date startTimeFilter,
+            Date endTimeFilter) throws SQLException, ClassNotFoundException {
+        Connection connection = databaseConnector.getConnection();
+
+        // Base query
+        StringBuilder queryBuilder = new StringBuilder("SELECT * FROM Ticket WHERE 1=1");
+
+        // Add filters conditionally
+        List<Object> parameters = new ArrayList<>();
+        if (plateNumber != null && !plateNumber.isEmpty()) {
+            queryBuilder.append(" AND plateNumber = ?");
+            parameters.add(plateNumber);
+        }
+        if (vehicleType != null) {
+            queryBuilder.append(" AND vehicleType = ?");
+            parameters.add(vehicleType.toString());
+        }
+        if (startTimeFilter != null) {
+            queryBuilder.append(" AND entryTime >= ?");
+            parameters.add(startTimeFilter);
+        }
+        if (endTimeFilter != null) {
+            queryBuilder.append(" AND entryTime <= ?");
+            parameters.add(endTimeFilter);
+        }
+
+        // Prepare the statement with the dynamically built query
+        String query = queryBuilder.toString();
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+        // Set parameters dynamically
+        for (int i = 0; i < parameters.size(); i++) {
+            preparedStatement.setObject(i + 1, parameters.get(i));
+        }
+
+        // Execute the query and process the result set
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Ticket> tickets = new ArrayList<>();
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            ticketTypeEnum ticketType = ticketTypeEnum.valueOf(resultSet.getString("ticketType"));
+            Date entryTime = resultSet.getDate("entryTime");
+            Date exitTime = resultSet.getDate("exitTime");
+            double price = resultSet.getDouble("price");
+            String plateNumberResult = resultSet.getString("plateNumber");
+            vehicleTypeEnum vehicleTypeResult = vehicleTypeEnum.valueOf(resultSet.getString("vehicleType"));
+            int userId = resultSet.getInt("UserId");
+            Ticket ticket = new Ticket(id, ticketType, entryTime, exitTime, price, plateNumberResult, vehicleTypeResult,
+                    userId);
+            tickets.add(ticket);
+        }
+
+        connection.close();
+        return tickets;
+    }
+
     public static void main(String[] args) {
         TicketDAO ticketDAO = new TicketDAO();
         try {
-            Ticket ticket = new Ticket("29U2 497-92", vehicleTypeEnum.MOTORBIKE);
-            ticketDAO.addAndCalculatePriceForMonthlyTicket(ticket);
+            List<Ticket> tickets = ticketDAO.getManyTickets("29U1 497-92", null, Date.valueOf("2024-11-29"),
+                    Date.valueOf("2024-11-30"));
+            for (Ticket ticket : tickets) {
+                System.out.println(ticket.getEntryTime());
+            }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
