@@ -3,6 +3,7 @@ package src.backend.vehiclePrice;
 import src.backend.enums.vehicleTypeEnum;
 
 public class VehiclePrice {
+
     private int id;
     private vehicleTypeEnum vehicleType;
     private double monthlyPrice;

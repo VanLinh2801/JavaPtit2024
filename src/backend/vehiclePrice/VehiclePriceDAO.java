@@ -2,11 +2,22 @@ package src.backend.vehiclePrice;
 
 import src.backend.databaseConnector.databaseConnector;
 import src.backend.enums.vehicleTypeEnum;
+import src.backend.vehiclePrice.VehiclePrice;
 import java.sql.*;
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class VehiclePriceDAO {
+
+    // Connection con = databaseConnector.getConnection();
+    // PreparedStatement ps;
+    // Statement st;
+    // ResultSet rs;
+
     public List<VehiclePrice> getAllVehiclePrice() throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
         String query = "SELECT * FROM VehiclePrice";
@@ -28,6 +39,24 @@ public class VehiclePriceDAO {
         return vehiclePrices;
     }
 
+    public VehiclePrice getVehiclePrice(vehicleTypeEnum v) throws SQLException, ClassNotFoundException {
+        Connection connection = databaseConnector.getConnection();
+        String query = "SELECT * FROM VehiclePrice WHERE vehicleType = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, v.toString());
+        ResultSet result = preparedStatement.executeQuery();
+        if (result.next()) {
+            vehicleTypeEnum vehicleType = vehicleTypeEnum.valueOf(result.getString("vehicleType"));
+            double monthlyPrice = result.getDouble("monthlyPrice");
+            double morningPrice = result.getDouble("morningPrice");
+            double afternoonPrice = result.getDouble("afternoonPrice");
+            double nightPrice = result.getDouble("nightPrice");
+            return new VehiclePrice(vehicleType, monthlyPrice, morningPrice, afternoonPrice, nightPrice);
+        }
+        connection.close();
+        return null;
+    }
+
     public boolean updateVehiclePrice(vehicleTypeEnum vehicleType, double monthlyPrice, double morningPrice,
             double afternoonPrice, double nightPrice) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
@@ -41,5 +70,29 @@ public class VehiclePriceDAO {
         int result = preparedStatement.executeUpdate();
         connection.close();
         return result > 0;
+    }
+
+    public void getPrice(JTable table) throws SQLException, ClassNotFoundException {
+        String sql = "select vehicleType, morningPrice, afternoonPrice, nightPrice, monthlyPrice from VehiclePrice";
+        Connection con = databaseConnector.getConnection();
+        PreparedStatement ps;
+        ResultSet rs;
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            Object[] row;
+            while (rs.next()) {
+                row = new Object[5];
+                row[0] = rs.getString(1);
+                row[1] = rs.getDouble(2);
+                row[2] = rs.getDouble(3);
+                row[3] = rs.getDouble(4);
+                row[4] = rs.getDouble(5);
+                model.addRow(row);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(VehiclePriceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
