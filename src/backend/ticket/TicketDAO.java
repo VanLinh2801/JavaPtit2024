@@ -1,13 +1,13 @@
-package Dao;
+package src.backend.ticket;
 
 import java.sql.*;
 import java.sql.Date;
 import java.time.*;
 import java.util.*;
 
-import connection.databaseConnector;
-import enums.ticketTypeEnum;
-import enums.vehicleTypeEnum;
+import src.backend.databaseConnector.databaseConnector;
+import src.backend.enums.ticketTypeEnum;
+import src.backend.enums.vehicleTypeEnum;
 
 import java.time.temporal.ChronoUnit;
 import java.util.logging.Level;
@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class TicketDAO {
 
-    Connection con = databaseConnector.getConnection();
+    // Connection con = databaseConnector.getConnection();
     PreparedStatement ps;
     Statement st;
     ResultSet rs;
@@ -44,12 +44,11 @@ public class TicketDAO {
         return false;
     }
 
-    public boolean isPlateNumberExist(String bienSo) {
+    public boolean isPlateNumberExist(String bienSo) throws SQLException, ClassNotFoundException {
         String query = "SELECT 1 FROM Ticket WHERE plateNumber = ? AND ticketType = 'MONTHLY'";
         try (
                 Connection connection = databaseConnector.getConnection();
-                PreparedStatement ps = connection.prepareStatement(query)
-        ) {
+                PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, bienSo);
             try (ResultSet rs = ps.executeQuery()) {
                 return rs.next();
@@ -59,7 +58,6 @@ public class TicketDAO {
         }
         return false;
     }
-
 
     public boolean addAndCalculatePriceForMonthlyTicket(Ticket ticket) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
@@ -185,8 +183,8 @@ public class TicketDAO {
     }
 
     public List<Ticket> getManyTickets(String plateNumber, ticketTypeEnum ticketType, vehicleTypeEnum vehicleType,
-                                       Date startTimeFilter,
-                                       Date endTimeFilter) throws SQLException, ClassNotFoundException {
+            Date startTimeFilter,
+            Date endTimeFilter) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
 
         // Base query
@@ -272,29 +270,30 @@ public class TicketDAO {
 
     }
 
-//    public void searchTicket(JTable table, String bienSo, ){
-//        String sql = "select username, fullName, phoneNumber, roleId, workShift from users where concat(username, fullname, phoneNumber) like ? and RoleId = 2";
-//        try {
-//            ps = con.prepareStatement(sql);
-//            ps.setString(1, "%" + search + "%");
-//            rs = ps.executeQuery();
-//            DefaultTableModel model = (DefaultTableModel) table.getModel();
-//            Object[] row;
-//            while(rs.next()){
-//                row = new Object[6];
-//                row[0] = false;
-//                row[1] = rs.getString(1);
-//                row[2] = rs.getString(2);
-//                row[3] = rs.getString(3);
-//                row[4] = "Bảo vệ";
-//                int shift = rs.getInt(5);
-//                if(shift == 1) row[5] = "Sáng";
-//                else row[5] = "Tối";
-//                model.addRow(row);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
+    // public void searchTicket(JTable table, String bienSo, ){
+    // String sql = "select username, fullName, phoneNumber, roleId, workShift from
+    // users where concat(username, fullname, phoneNumber) like ? and RoleId = 2";
+    // try {
+    // ps = con.prepareStatement(sql);
+    // ps.setString(1, "%" + search + "%");
+    // rs = ps.executeQuery();
+    // DefaultTableModel model = (DefaultTableModel) table.getModel();
+    // Object[] row;
+    // while(rs.next()){
+    // row = new Object[6];
+    // row[0] = false;
+    // row[1] = rs.getString(1);
+    // row[2] = rs.getString(2);
+    // row[3] = rs.getString(3);
+    // row[4] = "Bảo vệ";
+    // int shift = rs.getInt(5);
+    // if(shift == 1) row[5] = "Sáng";
+    // else row[5] = "Tối";
+    // model.addRow(row);
+    // }
+    // } catch (SQLException ex) {
+    // Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+    // }
+    // }
 
 }

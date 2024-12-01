@@ -1,10 +1,10 @@
-package Dao;
+package src.backend.users;
 
 import java.sql.*;
 
-import connection.databaseConnector;
-import enums.roleEnum;
-import Dao.Users;
+import src.backend.databaseConnector.databaseConnector;
+import src.backend.enums.roleEnum;
+import src.backend.users.Users;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -12,11 +12,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class UserDAO {
-    Connection con = databaseConnector.getConnection();
-    PreparedStatement ps;
-    Statement st;
-    ResultSet rs;
-
     public static boolean login(String username, String password) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
         String query = "SELECT * FROM Users WHERE username = ? AND password = ?";
@@ -86,20 +81,24 @@ public class UserDAO {
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, username);
         ResultSet rs = preparedStatement.executeQuery();
-        if(rs.next()) return rs.getInt(1);
+        if (rs.next())
+            return rs.getInt(1);
         connection.close();
         return 0;
     }
 
-    public void getUsersValue(JTable table, String search){
+    public void getUsersValue(JTable table, String search) throws SQLException, ClassNotFoundException {
         String sql = "select username, fullName, phoneNumber, roleId, workShift from users where concat(username, fullname, phoneNumber) like ? and RoleId = 2";
+        Connection con = databaseConnector.getConnection();
+        PreparedStatement ps;
+        ResultSet rs;
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, "%" + search + "%");
             rs = ps.executeQuery();
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             Object[] row;
-            while(rs.next()){
+            while (rs.next()) {
                 row = new Object[6];
                 row[0] = false;
                 row[1] = rs.getString(1);
@@ -107,8 +106,10 @@ public class UserDAO {
                 row[3] = rs.getString(3);
                 row[4] = "Bảo vệ";
                 int shift = rs.getInt(5);
-                if(shift == 1) row[5] = "Sáng";
-                else row[5] = "Tối";
+                if (shift == 1)
+                    row[5] = "Sáng";
+                else
+                    row[5] = "Tối";
                 model.addRow(row);
             }
         } catch (SQLException ex) {
@@ -146,7 +147,7 @@ public class UserDAO {
         return result > 0;
     }
 
-    public static String getPassword(int id){
+    public static String getPassword(int id) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
         ResultSet result;
         String res = "";
@@ -156,14 +157,15 @@ public class UserDAO {
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
             result = preparedStatement.executeQuery();
-            if(result.next()) res = result.getString(1);
+            if (result.next())
+                res = result.getString(1);
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return res;
     }
 
-    public static boolean isPhoneExist(String phone, int id){
+    public static boolean isPhoneExist(String phone, int id) throws SQLException, ClassNotFoundException {
         try {
             Connection connection = databaseConnector.getConnection();
             String query = "Select * from users where phonenumber = ? and id != ?";
@@ -171,7 +173,8 @@ public class UserDAO {
             preparedStatement.setString(1, phone);
             preparedStatement.setInt(2, id);
             ResultSet result = preparedStatement.executeQuery();
-            if(result.next()) return true;
+            if (result.next())
+                return true;
             connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -179,14 +182,15 @@ public class UserDAO {
         return false;
     }
 
-    public static boolean isUsernameExist(String username){
+    public static boolean isUsernameExist(String username) throws SQLException, ClassNotFoundException {
         try {
             Connection connection = databaseConnector.getConnection();
             String query = "Select * from users where username = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, username);
             ResultSet result = preparedStatement.executeQuery();
-            if(result.next()) return true;
+            if (result.next())
+                return true;
             connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -194,13 +198,13 @@ public class UserDAO {
         return false;
     }
 
-    public static void updateUser(Users user) throws SQLException {
+    public static void updateUser(Users user) throws SQLException, ClassNotFoundException {
         String currentUserQuery = "SELECT * FROM LastLogin WHERE loginTime = (SELECT MAX(loginTime) FROM LastLogin)";
         String updateQuery = "UPDATE Users SET username = ?, fullName = ?, gender = ?, phoneNumber = ?, workShift = ? WHERE id = ?";
 
         try (Connection connection = databaseConnector.getConnection();
-             PreparedStatement currentUserStatement = connection.prepareStatement(currentUserQuery);
-             ResultSet currentUserResultSet = currentUserStatement.executeQuery()) {
+                PreparedStatement currentUserStatement = connection.prepareStatement(currentUserQuery);
+                ResultSet currentUserResultSet = currentUserStatement.executeQuery()) {
 
             if (currentUserResultSet.next()) {
                 int userId = currentUserResultSet.getInt("UserId");
@@ -214,12 +218,12 @@ public class UserDAO {
                     preparedStatement.setInt(6, userId); // Sử dụng userId thay vì user.getId()
 
                     int result = preparedStatement.executeUpdate();
-                    if(result > 0) JOptionPane.showMessageDialog(null, "Cập nhật thành công", "Thông báo", 2);
+                    if (result > 0)
+                        JOptionPane.showMessageDialog(null, "Cập nhật thành công", "Thông báo", 2);
                 }
             }
         }
     }
-
 
     public static boolean changeRole(int id, int roleId) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
@@ -239,13 +243,13 @@ public class UserDAO {
         return result > 0;
     }
 
-//    public static void main(String[] args) {
-//        UserDAO usersDAO = new UserDAO();
-//        try {
-//            System.out.println(usersDAO.login("admin", "Abc@12345"));
-//        } catch (SQLException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    // public static void main(String[] args) {
+    // UserDAO usersDAO = new UserDAO();
+    // try {
+    // System.out.println(usersDAO.login("admin", "Abc@12345"));
+    // } catch (SQLException | ClassNotFoundException e) {
+    // e.printStackTrace();
+    // }
+    // }
 
 }

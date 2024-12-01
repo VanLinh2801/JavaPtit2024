@@ -1,8 +1,8 @@
-package Dao;
+package src.backend.vehiclePrice;
 
-import enums.vehicleTypeEnum;
+import src.backend.enums.vehicleTypeEnum;
 
-public class vehiclePrice {
+public class VehiclePrice {
 
     private int id;
     private vehicleTypeEnum vehicleType;
@@ -11,8 +11,8 @@ public class vehiclePrice {
     private double afternoonPrice;
     private double nightPrice;
 
-    public vehiclePrice(vehicleTypeEnum vehicleType, double monthlyPrice, double morningPrice, double afternoonPrice,
-                        double nightPrice) {
+    public VehiclePrice(vehicleTypeEnum vehicleType, double monthlyPrice, double morningPrice, double afternoonPrice,
+            double nightPrice) {
         this.vehicleType = vehicleType;
         this.monthlyPrice = monthlyPrice;
         this.morningPrice = morningPrice;
@@ -20,8 +20,8 @@ public class vehiclePrice {
         this.nightPrice = nightPrice;
     }
 
-    public vehiclePrice(int id, vehicleTypeEnum vehicleType, double monthlyPrice, double morningPrice,
-                        double afternoonPrice, double nightPrice) {
+    public VehiclePrice(int id, vehicleTypeEnum vehicleType, double monthlyPrice, double morningPrice,
+            double afternoonPrice, double nightPrice) {
         this.id = id;
         this.vehicleType = vehicleType;
         this.monthlyPrice = monthlyPrice;
