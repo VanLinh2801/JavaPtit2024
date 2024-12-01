@@ -1,4 +1,4 @@
-package src.frontend.Admin;
+package Admin;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.logging.Level;
@@ -113,8 +113,9 @@ public class TicketInfo extends javax.swing.JFrame {
         });
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 22, -1));
 
-        jLabel5.setText("Icon");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setText("X");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 70));
 

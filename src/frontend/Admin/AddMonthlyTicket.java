@@ -1,16 +1,29 @@
-package src.frontend.Admin;
+package Admin;
 
+import Dao.Ticket;
+import Dao.TicketDAO;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
+import enums.vehicleTypeEnum;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class AddMonthlyTicket extends javax.swing.JFrame {
     int xx, xy;
+    TicketDAO ticket = new TicketDAO();
     public AddMonthlyTicket() {
         this.setUndecorated(true);
+        FlatLightLaf.setup();
+        UIManager.put("TextComponent.arc", 999);
+        UIManager.put("Button.arc", 999);
+        UIManager.put("Component.arc", 999);
+        System.setProperty("flatlaf.menuBarEmbbedded", "false");
         initComponents();
         this.setLocationRelativeTo(null);
+        jDateChooser1.setDate(new Date());
         this.setVisible(true);
     }
     @SuppressWarnings("unchecked")
@@ -77,6 +90,12 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Lưu");
         jButton1.setBorderPainted(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 90, 30));
 
         jButton2.setBackground(new java.awt.Color(255, 153, 102));
@@ -84,6 +103,12 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Xóa");
         jButton2.setBorderPainted(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 90, 30));
 
         jPanel2.setBackground(new java.awt.Color(255, 153, 102));
@@ -126,6 +151,12 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Hủy");
         jButton3.setBorderPainted(false);
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 300, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -145,7 +176,7 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
@@ -183,13 +214,47 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
         this.setLocation(x - xx, y - xy);
     }//GEN-LAST:event_formMouseDragged
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String bienSo = jTextField1.getText();
+        vehicleTypeEnum loaiXe;
+        if(jComboBox1.getSelectedItem().toString().equals("Ô tô")) loaiXe = vehicleTypeEnum.CAR;
+        else if(jComboBox1.getSelectedItem().toString().equals("Xe máy")) loaiXe = vehicleTypeEnum.MOTORBIKE;
+        else loaiXe = vehicleTypeEnum.BIKE;
+        Ticket t = new Ticket(bienSo, loaiXe);
+        if(bienSo.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Hãy nhập biển số", "Thông báo", 2);
+        }
+        else if(ticket.isPlateNumberExist(bienSo)){
+            JOptionPane.showMessageDialog(this, "Biển số đã được đăng ký", "Thông báo", 2);
+        }
+        else {
+            try {
+                boolean ok = ticket.addAndCalculatePriceForMonthlyTicket(t);
+                if (ok) {
+                    JOptionPane.showMessageDialog(this, "Đăng ký thành công", "Thông báo", 2);
+                }
+                AdminDashBoard.tableVeThang();
+            } catch (SQLException ex) {
+                Logger.getLogger(AddMonthlyTicket.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AddMonthlyTicket.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        jTextField1.setText("");
+        jComboBox1.setSelectedItem("Ô tô");
+        jDateChooser1.setDate(new Date());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FlatLightLaf.setup();
-                UIManager.put("TextComponent.arc", 999);
-                UIManager.put("Button.arc", 999);
-                System.setProperty("flatlaf.menuBarEmbbedded", "false");
                 new AddMonthlyTicket().setVisible(true);
             }
         });

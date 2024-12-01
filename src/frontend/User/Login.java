@@ -1,11 +1,19 @@
-package src.frontend.User;
+package User;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import connection.databaseConnector;
+import Admin.AdminDashBoard;
+import User.UserDashboard;
 
 public class Login extends javax.swing.JFrame {
     int xx, xy;
@@ -27,7 +35,7 @@ public class Login extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -115,28 +123,34 @@ public class Login extends javax.swing.JFrame {
         jLabel9.setText("Mật khẩu");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 170, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(255, 102, 51));
-        jButton2.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Đăng nhập");
-        jButton2.setBorderPainted(false);
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setBackground(new java.awt.Color(255, 102, 51));
+        jButton1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Đăng nhập");
+        jButton1.setBorderPainted(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 160, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 160, -1));
 
         jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jCheckBox1.setText("Lưu mật khẩu");
+        jCheckBox1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Quên mật khẩu?");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel1.setPreferredSize(new java.awt.Dimension(93, 25));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/password_hide.jpg"))); // NOI18N
@@ -166,9 +180,50 @@ public class Login extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jLabel6MouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private boolean isEmpty(){
+        if(jTextField1.getText().equals("Nhập tên người dùng...")){
+            JOptionPane.showMessageDialog(this, "Hãy nhập tên đăng nhập", "Thông báo", 2);
+            return false;
+        }
+        if(String.valueOf(jPasswordField1.getPassword()).toString().equals("Nhập mật khẩu...")){
+            JOptionPane.showMessageDialog(this, "Hãy nhập mật khẩu", "Thông báo", 2);
+            return false;
+        }
+        return true;
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(isEmpty()){
+            String username = jTextField1.getText();
+            String password = String.valueOf(jPasswordField1.getPassword());
+            try {
+                Connection con = databaseConnector.getConnection();
+                PreparedStatement ps;
+                ps = con.prepareStatement("select roleId from users where username = ? and password = ?");
+                ps.setString(1, username);
+                ps.setString(2, password);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int role = rs.getInt(1);
+                    if (role == 1){
+                        AdminDashBoard n = new AdminDashBoard();
+                        n.setVisible(true);
+                        n.Paneltask2.setVisible(true);
+                    }
+                    else{
+                        UserDashboard n = new UserDashboard();
+                        n.setVisible(true);
+                        n.Paneltask2.setVisible(true);
+                    }
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Mật khẩu hoặc tên đăng nhập không chính xác", "Đăng nhập thất bại", 2);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         for(double i = 0; i <= 1.0; i += 0.1){
@@ -240,6 +295,10 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setVisible(false);
     }//GEN-LAST:event_jLabel3MouseClicked
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        JOptionPane.showMessageDialog(this, "Vui lòng liên hệ với Admin để được cấp lại mật khẩu", "Quên mật khẩu", 2);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable(){
             public void run() {
@@ -253,7 +312,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

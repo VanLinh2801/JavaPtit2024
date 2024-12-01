@@ -1,8 +1,12 @@
-package src.frontend.Admin;
+package Admin;
 
+import Dao.UserDAO;
+import Dao.Users;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 public class AddUser extends javax.swing.JFrame {
@@ -12,6 +16,9 @@ public class AddUser extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        gtNam.setSelected(true);
+        dem.setSelected(true);
+        baoVe.setSelected(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -29,16 +36,16 @@ public class AddUser extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        tenDangNhap = new javax.swing.JTextField();
+        tenNguoiDung = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jTextField3 = new javax.swing.JTextField();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        gtNam = new javax.swing.JRadioButton();
+        gtNu = new javax.swing.JRadioButton();
+        sdt = new javax.swing.JTextField();
+        quanLy = new javax.swing.JRadioButton();
+        baoVe = new javax.swing.JRadioButton();
+        ngay = new javax.swing.JRadioButton();
+        dem = new javax.swing.JRadioButton();
         jLabel10 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -78,11 +85,11 @@ public class AddUser extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("TÊN NGƯỜI DÙNG");
+        jLabel2.setText("TÊN ĐĂNG NHẬP");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("HỌ VÀ TÊN");
+        jLabel3.setText("TÊN NGƯỜI DÙNG");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -105,47 +112,47 @@ public class AddUser extends javax.swing.JFrame {
         jLabel9.setText("CA LÀM VIỆC");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
 
-        jTextField1.setPreferredSize(new java.awt.Dimension(65, 30));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 340, -1));
+        tenDangNhap.setPreferredSize(new java.awt.Dimension(65, 30));
+        jPanel1.add(tenDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 340, -1));
 
-        jTextField2.setPreferredSize(new java.awt.Dimension(65, 30));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 340, -1));
+        tenNguoiDung.setPreferredSize(new java.awt.Dimension(65, 30));
+        jPanel1.add(tenNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 340, -1));
 
         jPasswordField1.setPreferredSize(new java.awt.Dimension(127, 30));
         jPanel1.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 340, -1));
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Nam");
-        jPanel1.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
+        gtNam.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(gtNam);
+        gtNam.setText("Nam");
+        jPanel1.add(gtNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, -1, -1));
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Nữ");
-        jPanel1.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
+        gtNu.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(gtNu);
+        gtNu.setText("Nữ");
+        jPanel1.add(gtNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
 
-        jTextField3.setPreferredSize(new java.awt.Dimension(65, 30));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 340, -1));
+        sdt.setPreferredSize(new java.awt.Dimension(65, 30));
+        jPanel1.add(sdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 340, -1));
 
-        jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup2.add(jRadioButton3);
-        jRadioButton3.setText("Quản lý");
-        jPanel1.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
+        quanLy.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup2.add(quanLy);
+        quanLy.setText("Quản lý");
+        jPanel1.add(quanLy, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
 
-        jRadioButton4.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup2.add(jRadioButton4);
-        jRadioButton4.setText("Bảo vệ");
-        jPanel1.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, -1, -1));
+        baoVe.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup2.add(baoVe);
+        baoVe.setText("Bảo vệ");
+        jPanel1.add(baoVe, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, -1, -1));
 
-        jRadioButton5.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup3.add(jRadioButton5);
-        jRadioButton5.setText("Ngày");
-        jPanel1.add(jRadioButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, -1, -1));
+        ngay.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup3.add(ngay);
+        ngay.setText("Ngày");
+        jPanel1.add(ngay, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, -1, -1));
 
-        jRadioButton6.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup3.add(jRadioButton6);
-        jRadioButton6.setText("Đêm");
-        jPanel1.add(jRadioButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, -1, -1));
+        dem.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup3.add(dem);
+        dem.setText("Đêm");
+        jPanel1.add(dem, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, -1, -1));
 
         jLabel10.setText("Icon");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, -1, -1));
@@ -155,6 +162,12 @@ public class AddUser extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Lưu");
         jButton1.setBorderPainted(false);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 80, -1));
 
         jButton2.setBackground(new java.awt.Color(255, 102, 51));
@@ -162,6 +175,12 @@ public class AddUser extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Hủy");
         jButton2.setBorderPainted(false);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 390, 80, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 51));
@@ -227,7 +246,7 @@ public class AddUser extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
@@ -240,6 +259,45 @@ public class AddUser extends javax.swing.JFrame {
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
     }//GEN-LAST:event_formMouseDragged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String username = tenDangNhap.getText();
+        String fullName = tenNguoiDung.getText();
+        String password = jPasswordField1.getPassword().toString();
+        String phone = sdt.getText();
+        String gt = "";
+        if(gtNam.isSelected()) gt = "Male";
+        else gt = "Female";
+        int workShift = 1;
+        if(dem.isSelected()) workShift = 2;
+        int role = 1;
+        if(baoVe.isSelected()) role = 2;
+        if(username.isEmpty() || fullName.isEmpty() || password.isEmpty() || phone.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ dữ liệu", "Thông báo", 2);
+        }
+        else if(UserDAO.isPhoneExist(phone, 0)){
+            JOptionPane.showMessageDialog(this, "Số điện thoại này đã được đăng ký", "Thông báo", 2);
+        }
+        else if(UserDAO.isUsernameExist(username)){
+            JOptionPane.showMessageDialog(this, "Tên người dùng đã tồn tại", "Thông báo", 2);
+        }
+        else{
+            Users user = new Users(username, password, fullName, gt, phone, workShift, role);
+            try {
+                UserDAO.addSecurityGuard(user);
+                JOptionPane.showMessageDialog(this, "Đăng ký thành công", "Thông báo", 2);
+                this.dispose();
+            } catch (SQLException ex) {
+                Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -254,9 +312,13 @@ public class AddUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton baoVe;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JRadioButton dem;
+    private javax.swing.JRadioButton gtNam;
+    private javax.swing.JRadioButton gtNu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -273,14 +335,10 @@ public class AddUser extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JRadioButton ngay;
+    private javax.swing.JRadioButton quanLy;
+    private javax.swing.JTextField sdt;
+    private javax.swing.JTextField tenDangNhap;
+    private javax.swing.JTextField tenNguoiDung;
     // End of variables declaration//GEN-END:variables
 }

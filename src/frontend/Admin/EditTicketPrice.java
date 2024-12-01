@@ -1,15 +1,27 @@
-package src.frontend.Admin;
+package Admin;
 
+import Dao.VehiclePriceDAO;
+import Dao.vehiclePrice;
 import com.formdev.flatlaf.FlatLightLaf;
+import enums.vehicleTypeEnum;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 public class EditTicketPrice extends javax.swing.JFrame {
     int xx, xy;
+    VehiclePriceDAO dao = new VehiclePriceDAO();
     public EditTicketPrice() {
         this.setUndecorated(true);
+        FlatLightLaf.setup();
+        UIManager.put("TextComponent.arc", 999);
+        UIManager.put("Button.arc", 999);
+        UIManager.put("Component.arc", 999);
+        System.setProperty("flatlaf.menuBarEmbbedded", "false");
         initComponents();
+        init(vehicleTypeEnum.CAR);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -27,13 +39,14 @@ public class EditTicketPrice extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -79,9 +92,19 @@ public class EditTicketPrice extends javax.swing.JFrame {
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
         jTextField2.setPreferredSize(new java.awt.Dimension(65, 30));
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
         jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 340, -1));
 
         jTextField3.setPreferredSize(new java.awt.Dimension(65, 30));
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField3KeyTyped(evt);
+            }
+        });
         jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 340, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 51));
@@ -108,17 +131,24 @@ public class EditTicketPrice extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 70));
 
-        jTextField4.setPreferredSize(new java.awt.Dimension(65, 30));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 340, -1));
-
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("22H - 6H");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
 
         jTextField5.setPreferredSize(new java.awt.Dimension(65, 30));
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField5KeyTyped(evt);
+            }
+        });
         jPanel1.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 340, -1));
 
         jTextField6.setPreferredSize(new java.awt.Dimension(65, 30));
+        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField6KeyTyped(evt);
+            }
+        });
         jPanel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 280, 340, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -130,14 +160,48 @@ public class EditTicketPrice extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Lưu");
         jButton1.setBorderPainted(false);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 80, -1));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, 80, -1));
 
         jButton2.setBackground(new java.awt.Color(255, 102, 51));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Hủy");
         jButton2.setBorderPainted(false);
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, 80, -1));
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, 80, -1));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
+        jComboBox1.setPreferredSize(new java.awt.Dimension(134, 30));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 340, -1));
+
+        jButton3.setBackground(new java.awt.Color(255, 102, 51));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
+        jButton3.setText("Xóa");
+        jButton3.setBorderPainted(false);
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 340, 80, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -192,13 +256,94 @@ public class EditTicketPrice extends javax.swing.JFrame {
         this.setLocation(x - xx, y - xy);
     }//GEN-LAST:event_formMouseDragged
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jComboBox1.setSelectedItem("Ô tô");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField2KeyTyped
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField3KeyTyped
+
+    private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField5KeyTyped
+
+    private void jTextField6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField6KeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String sang = jTextField2.getText();
+        String chieu = jTextField3.getText();
+        String toi = jTextField5.getText();
+        String thang = jTextField6.getText();
+        vehicleTypeEnum loaiXe;
+        if(jComboBox1.getSelectedItem().toString().equals("Ô tô")) loaiXe = vehicleTypeEnum.CAR;
+        else if(jComboBox1.getSelectedItem().toString().equals("Xe máy")) loaiXe = vehicleTypeEnum.MOTORBIKE;
+        else loaiXe = vehicleTypeEnum.BIKE;
+        if(sang.isEmpty() || chieu.isEmpty() || toi.isEmpty() || thang.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ dữ liệu", "Thông báo", 2);
+        }
+        else{
+            try {
+                boolean ok = dao.updateVehiclePrice(loaiXe, Double.parseDouble(thang), Double.parseDouble(sang) ,Double.parseDouble(chieu), Double.parseDouble(toi));
+                if(ok){
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công", "Thông báo", 2);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(EditTicketPrice.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(EditTicketPrice.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void init(vehicleTypeEnum loaiXe){
+        try {
+            vehiclePrice v = dao.getVehiclePrice(loaiXe);
+            jTextField2.setText(String.valueOf(v.getMorningPrice()));
+            jTextField3.setText(String.valueOf(v.getAfternoonPrice()));
+            jTextField5.setText(String.valueOf(v.getNightPrice()));
+            jTextField6.setText(String.valueOf(v.getMonthlyPrice()));
+        } catch (SQLException ex) {
+            Logger.getLogger(EditTicketPrice.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EditTicketPrice.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        vehicleTypeEnum loaiXe;
+        if(jComboBox1.getSelectedItem().toString().equals("Ô tô")) loaiXe = vehicleTypeEnum.CAR;
+        else if(jComboBox1.getSelectedItem().toString().equals("Xe máy")) loaiXe = vehicleTypeEnum.MOTORBIKE;
+        else loaiXe = vehicleTypeEnum.BIKE;
+        init(loaiXe);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FlatLightLaf.setup();
-                UIManager.put("TextComponent.arc", 999);
-                UIManager.put("Button.arc", 999);
-                System.setProperty("flatlaf.menuBarEmbbedded", "false");
                 new EditTicketPrice().setVisible(true);
             }
         });
@@ -207,6 +352,8 @@ public class EditTicketPrice extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -219,7 +366,6 @@ public class EditTicketPrice extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
