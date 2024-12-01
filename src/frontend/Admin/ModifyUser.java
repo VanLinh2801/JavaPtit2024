@@ -1,9 +1,10 @@
-package Admin;
+package src.frontend.Admin;
 
-import Dao.UserDAO;
-import Dao.Users;
+import src.backend.users.UserDAO;
+import src.backend.users.Users;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,6 +13,7 @@ import javax.swing.UIManager;
 
 public class ModifyUser extends javax.swing.JFrame {
     int xx, xy;
+
     public ModifyUser() {
         this.setUndecorated(true);
         FlatLightLaf.setup();
@@ -23,8 +25,10 @@ public class ModifyUser extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
+
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
@@ -171,7 +175,18 @@ public class ModifyUser extends javax.swing.JFrame {
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                try {
+                    jButton1ActionPerformed(evt);
+                } catch (HeadlessException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 90, 30));
@@ -250,36 +265,35 @@ public class ModifyUser extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 581,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel11MouseClicked
         System.exit(0);
-    }//GEN-LAST:event_jLabel11MouseClicked
+    }// GEN-LAST:event_jLabel11MouseClicked
 
-    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel1MouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
-    }//GEN-LAST:event_jPanel1MouseDragged
+    }// GEN-LAST:event_jPanel1MouseDragged
 
-    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel1MousePressed
         xx = evt.getX();
         xy = evt.getY();
-    }//GEN-LAST:event_jPanel1MousePressed
+    }// GEN-LAST:event_jPanel1MousePressed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        for(double i = 0; i <= 1.0; i += 0.1){
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
+        for (double i = 0; i <= 1.0; i += 0.1) {
             String s = "" + i;
             float f = Float.parseFloat(s);
             this.setOpacity(f);
@@ -289,79 +303,82 @@ public class ModifyUser extends javax.swing.JFrame {
                 Logger.getLogger(ModifyUser.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_formWindowOpened
+    }// GEN-LAST:event_formWindowOpened
 
-    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+    private void formMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMousePressed
         xx = evt.getX();
         xy = evt.getY();
-    }//GEN-LAST:event_formMousePressed
+    }// GEN-LAST:event_formMousePressed
 
-    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
-    }//GEN-LAST:event_formMouseDragged
+    }// GEN-LAST:event_formMouseDragged
 
-    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel12MouseClicked
         System.exit(0);
-    }//GEN-LAST:event_jLabel12MouseClicked
+    }// GEN-LAST:event_jLabel12MouseClicked
 
-    /private void init(){
+    private void init() {
         gtNam.setSelected(true);
         dem.setSelected(true);
         baoVe.setSelected(true);
     }
-    
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
         tenDangNhap.setText("");
         tenNguoiDung.setText("");
         sdt.setText("");
         jPasswordField1.setText("");
         init();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }// GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.dispose();;
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
+        this.dispose();
+        ;
+    }// GEN-LAST:event_jButton3ActionPerformed
 
-    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel13MouseClicked
         jPasswordField1.setFont(new Font("Segoe UI", Font.BOLD, 12));
         jPasswordField1.setEchoChar('*');
         jLabel10.setVisible(true);
         jLabel13.setVisible(false);
-    }//GEN-LAST:event_jLabel13MouseClicked
+    }// GEN-LAST:event_jLabel13MouseClicked
 
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel10MouseClicked
         jPasswordField1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         jPasswordField1.setEchoChar((char) 0);
         jLabel10.setVisible(false);
         jLabel13.setVisible(true);
-    }//GEN-LAST:event_jLabel10MouseClicked
+    }// GEN-LAST:event_jLabel10MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)
+            throws HeadlessException, ClassNotFoundException, SQLException {// GEN-FIRST:event_jButton1ActionPerformed
         String username = tenDangNhap.getText();
         String fullName = tenNguoiDung.getText();
         String password = jPasswordField1.getPassword().toString();
         String phone = sdt.getText();
         String gt = "";
-        if(gtNam.isSelected()) gt = "Male";
-        else gt = "Female";
+        if (gtNam.isSelected())
+            gt = "Male";
+        else
+            gt = "Female";
         int workShift = 1;
-        if(dem.isSelected()) workShift = 2;
+        if (dem.isSelected())
+            workShift = 2;
         int role = 1;
-        if(baoVe.isSelected()) role = 2;
-        if(username.isEmpty() || fullName.isEmpty() || password.isEmpty() || phone.isEmpty()){
+        if (baoVe.isSelected())
+            role = 2;
+        if (username.isEmpty() || fullName.isEmpty() || password.isEmpty() || phone.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ dữ liệu", "Thông báo", 2);
-        }
-        else if(UserDAO.isPhoneExist(phone, 0)){
+        } else if (UserDAO.isPhoneExist(phone, 0)) {
             JOptionPane.showMessageDialog(this, "Số điện thoại này đã được đăng ký", "Thông báo", 2);
-        }
-        else if(UserDAO.isUsernameExist(username)){
+        } else if (UserDAO.isUsernameExist(username)) {
             JOptionPane.showMessageDialog(this, "Tên người dùng đã tồn tại", "Thông báo", 2);
-        }
-        else{
+        } else {
             try {
-                /int id = UserDAO.getUserId(username);
+                int id = UserDAO.getUserId(username);
                 Users user = new Users(username, password, fullName, gt, phone, workShift, role);
                 try {
                     UserDAO.removeSecurityGuard(id);
@@ -377,7 +394,7 @@ public class ModifyUser extends javax.swing.JFrame {
                 Logger.getLogger(ModifyUser.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }// GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
