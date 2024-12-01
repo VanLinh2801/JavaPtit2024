@@ -1,7 +1,7 @@
-
-package src.backend.users;
+package Dao;
 
 public class Users {
+
     private int id;
     private String userName;
     private String password;
@@ -12,7 +12,7 @@ public class Users {
     private int roleId;
 
     public Users(int id, String userName, String password, String fullName, String gender, String phoneNumber,
-            int workShift) {
+                 int workShift) {
         this.id = id;
         this.userName = userName;
         this.password = password;
@@ -23,9 +23,19 @@ public class Users {
     }
 
     public Users(String userName, String password, String fullName, String gender, String phoneNumber,
-            int workShift) {
+                 int workShift, int role) {
         this.userName = userName;
         this.password = password;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.phoneNumber = phoneNumber;
+        this.workShift = workShift;
+        this.roleId = role;
+    }
+
+    public Users(String userName, String fullName, String gender, String phoneNumber,
+                 int workShift) {
+        this.userName = userName;
         this.fullName = fullName;
         this.gender = gender;
         this.phoneNumber = phoneNumber;

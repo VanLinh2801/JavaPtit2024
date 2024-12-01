@@ -1,14 +1,15 @@
-package src.backend.ticket;
+package Dao;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import src.backend.enums.ticketTypeEnum;
-import src.backend.enums.vehicleTypeEnum;
+import enums.ticketTypeEnum;
+import enums.vehicleTypeEnum;
 
 import java.util.Calendar;
 
 public class Ticket {
+
     private int id;
     private ticketTypeEnum ticketType;
     private Date entryTime;
@@ -19,13 +20,13 @@ public class Ticket {
     private int UserId;
 
     public Ticket(String plateNumber,
-            vehicleTypeEnum vehicleType) {
+                  vehicleTypeEnum vehicleType) {
         this.plateNumber = plateNumber;
         this.vehicleType = vehicleType;
     }
 
     public Ticket(int id, ticketTypeEnum ticketType, Date entryTime, Date exitTime, double price, String plateNumber,
-            vehicleTypeEnum vehicleType, int UserId) {
+                  vehicleTypeEnum vehicleType, int UserId) {
         this.id = id;
         this.ticketType = ticketType;
         this.entryTime = entryTime;
