@@ -18,7 +18,7 @@ public class ModifyTicket extends javax.swing.JFrame {
     int xx, xy;
     TicketDAO ticket = new TicketDAO();
     public static String b;
-    Timestamp time;
+    public Timestamp time;
 
     public ModifyTicket() {
         this.setUndecorated(true);

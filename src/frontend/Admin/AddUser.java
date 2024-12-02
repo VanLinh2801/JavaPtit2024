@@ -8,6 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import java.awt.Font;
+import java.awt.HeadlessException;
 
 public class AddUser extends javax.swing.JFrame {
     int xx, xy;
@@ -48,13 +50,14 @@ public class AddUser extends javax.swing.JFrame {
         baoVe = new javax.swing.JRadioButton();
         ngay = new javax.swing.JRadioButton();
         dem = new javax.swing.JRadioButton();
-        jLabel10 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -156,9 +159,6 @@ public class AddUser extends javax.swing.JFrame {
         dem.setText("Đêm");
         jPanel1.add(dem, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, -1, -1));
 
-        jLabel10.setText("Icon");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 180, -1, -1));
-
         jButton1.setBackground(new java.awt.Color(255, 102, 51));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -169,10 +169,10 @@ public class AddUser extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     jButton1ActionPerformed(evt);
-                } catch (ClassNotFoundException e) {
+                } catch (HeadlessException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
-                } catch (SQLException e) {
+                } catch (ClassNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
@@ -213,10 +213,28 @@ public class AddUser extends javax.swing.JFrame {
         });
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 22, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/add-user_white.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-user_white.png"))); // NOI18N
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 60));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/password_hide.jpg"))); // NOI18N
+        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 175, -1, -1));
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/password_show.jpg"))); // NOI18N
+        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 175, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -270,7 +288,8 @@ public class AddUser extends javax.swing.JFrame {
         this.setLocation(x - xx, y - xy);
     }// GEN-LAST:event_formMouseDragged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)
+            throws HeadlessException, ClassNotFoundException {// GEN-FIRST:event_jButton1ActionPerformed
         String username = tenDangNhap.getText();
         String fullName = tenNguoiDung.getText();
         char[] passwordChars = jPasswordField1.getPassword();
@@ -306,12 +325,34 @@ public class AddUser extends javax.swing.JFrame {
                 Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        AdminDashBoard.tableNguoiDung();
+        try {
+            AdminDashBoard.tableNguoiDung();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }// GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }// GEN-LAST:event_jButton2ActionPerformed
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel10MouseClicked
+        jPasswordField1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        jPasswordField1.setEchoChar((char) 0);
+        jLabel10.setVisible(false);
+        jLabel13.setVisible(true);
+    }// GEN-LAST:event_jLabel10MouseClicked
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel13MouseClicked
+        jPasswordField1.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        jPasswordField1.setEchoChar('*');
+        jLabel10.setVisible(true);
+        jLabel13.setVisible(false);
+    }// GEN-LAST:event_jLabel13MouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -338,6 +379,7 @@ public class AddUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

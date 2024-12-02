@@ -9,7 +9,6 @@ import com.formdev.flatlaf.IntelliJTheme;
 import com.formdev.flatlaf.ui.FlatBorder;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.HeadlessException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingConstants;
@@ -22,21 +21,26 @@ import src.backend.ticket.TicketDAO;
 import src.backend.users.Users;
 import src.backend.vehiclePrice.VehiclePriceDAO;
 import src.backend.users.UserDAO;
+import src.frontend.User.Login;
 import src.backend.enums.ticketTypeEnum;
 import src.backend.enums.vehicleTypeEnum;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import jdk.jfr.Timestamp;
 
 public class AdminDashBoard extends javax.swing.JFrame {
+
     Color notSelect = new Color(240, 240, 240);
     Color select = new Color(255, 255, 255);
     Color barNotSelect = new Color(225, 225, 225);
     Color barSelect = new Color(51, 153, 255);
     Color downSelect = new Color(204, 255, 255);
     Color notSelectText = new Color(153, 153, 153);
+    Color warning = new Color(255, 51, 51);
+    Color ok = new Color(102, 255, 51);
     int xx, xy;
     Font font1 = new Font("Segoe UI", Font.PLAIN, 18);
     Font font2 = new Font("Segoe UI", Font.BOLD, 18);
@@ -64,6 +68,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         tableVeLuot();
         tableVeThang();
         this.setLocationRelativeTo(null);
+        log();
         this.setVisible(true);
         tongVe();
     }
@@ -76,6 +81,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanelWindow = new javax.swing.JPanel();
         jPanelBar = new javax.swing.JPanel();
+        jLabel110 = new javax.swing.JLabel();
+        jLabel111 = new javax.swing.JLabel();
+        jLabel112 = new javax.swing.JLabel();
+        ten = new javax.swing.JLabel();
         jPanelTask = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
@@ -86,6 +95,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         Panel3text = new javax.swing.JLabel();
         jLabel79 = new javax.swing.JLabel();
+        jLabel106 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Panel4text = new javax.swing.JLabel();
         jLabel77 = new javax.swing.JLabel();
@@ -136,8 +146,6 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPanel35 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
-        thongBaoLanVao = new javax.swing.JTextField();
-        thongBaoLanRa = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         gioVaoLanVao = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
@@ -152,8 +160,6 @@ public class AdminDashBoard extends javax.swing.JFrame {
         ngayRa = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
         loaiXeLanRa = new javax.swing.JComboBox<>();
-        ngayVaoLanRa = new javax.swing.JTextField();
-        jLabel30 = new javax.swing.JLabel();
         clearLanVao = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
         jLabel89 = new javax.swing.JLabel();
@@ -166,10 +172,12 @@ public class AdminDashBoard extends javax.swing.JFrame {
         tinhTien = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         jLabel91 = new javax.swing.JLabel();
-        gioVaoLanRa = new javax.swing.JTextField();
-        jLabel35 = new javax.swing.JLabel();
         gioRa = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        thongBaoLanRa = new javax.swing.JTextField();
+        jPanel10 = new javax.swing.JPanel();
+        thongBaoLanVao = new javax.swing.JTextField();
         Paneltask3 = new javax.swing.JPanel();
         PanelTieuDe3 = new javax.swing.JPanel();
         Tieude3 = new javax.swing.JLabel();
@@ -249,15 +257,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Paneltask7 = new javax.swing.JPanel();
         chucNang7 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        jPanel31 = new javax.swing.JPanel();
-        jLabel101 = new javax.swing.JLabel();
-        jPanel32 = new javax.swing.JPanel();
-        jLabel100 = new javax.swing.JLabel();
-        jPanel39 = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
         jPanel40 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
+        jLabel101 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
+        jPanel39 = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel100 = new javax.swing.JLabel();
         quanLyNguoiDung = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
@@ -288,20 +294,19 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jPanel51 = new javax.swing.JPanel();
         jPanel70 = new javax.swing.JPanel();
         jLabel87 = new javax.swing.JLabel();
+        jLabel109 = new javax.swing.JLabel();
         jPanel73 = new javax.swing.JPanel();
         jPanel76 = new javax.swing.JPanel();
         Paneltask8 = new javax.swing.JPanel();
         chucNang8 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jPanel27 = new javax.swing.JPanel();
-        jLabel103 = new javax.swing.JLabel();
-        jPanel28 = new javax.swing.JPanel();
-        jLabel102 = new javax.swing.JLabel();
+        name = new javax.swing.JLabel();
         task8_thongTin = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel102 = new javax.swing.JLabel();
         task8_doiMatKhau = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel103 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         thongTin = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -335,8 +340,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         capNhatMatKhau = new javax.swing.JPanel();
         jLabel50 = new javax.swing.JLabel();
+        jLabel107 = new javax.swing.JLabel();
         xoaMatKhau = new javax.swing.JPanel();
         jLabel51 = new javax.swing.JLabel();
+        jLabel108 = new javax.swing.JLabel();
         jLabel66 = new javax.swing.JLabel();
         jLabel70 = new javax.swing.JLabel();
         jLabel71 = new javax.swing.JLabel();
@@ -366,15 +373,47 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jPanelWindow.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelBar.setBackground(new java.awt.Color(255, 102, 51));
+        jPanelBar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanelBarLayout = new javax.swing.GroupLayout(jPanelBar);
-        jPanelBar.setLayout(jPanelBarLayout);
-        jPanelBarLayout.setHorizontalGroup(
-                jPanelBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1111, Short.MAX_VALUE));
-        jPanelBarLayout.setVerticalGroup(
-                jPanelBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 50, Short.MAX_VALUE));
+        jLabel110.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel110.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel110.setText("Đăng xuất");
+        jLabel110.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel110.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel110MouseClicked(evt);
+            }
+        });
+        jPanelBar.add(jLabel110, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 15, -1, -1));
+
+        jLabel111.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/logout.png"))); // NOI18N
+        jLabel111.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel111.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel111MouseClicked(evt);
+            }
+        });
+        jPanelBar.add(jLabel111, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 15, -1, -1));
+
+        jLabel112.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user_1.png"))); // NOI18N
+        jLabel112.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel112.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel112MouseClicked(evt);
+            }
+        });
+        jPanelBar.add(jLabel112, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 15, -1, -1));
+
+        ten.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        ten.setForeground(new java.awt.Color(255, 255, 255));
+        ten.setText("Nguyen Van Linh");
+        ten.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ten.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tenMouseClicked(evt);
+            }
+        });
+        jPanelBar.add(ten, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 15, -1, -1));
 
         jPanelWindow.add(jPanelBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1111, 50));
 
@@ -421,10 +460,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel2text.setText("VÀO RA");
         jPanel2.add(Panel2text, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 40, -1, -1));
 
-        jLabel83.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/in and out.png"))); // NOI18N
+        jLabel83.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/in and out.png"))); // NOI18N
         jPanel2.add(jLabel83, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 10, -1, -1));
 
-        jLabel90.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/in and out _blue.png"))); // NOI18N
+        jLabel90.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/in and out _blue.png"))); // NOI18N
         jPanel2.add(jLabel90, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 10, -1, -1));
 
         jPanelTask.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 10, -1, -1));
@@ -443,8 +482,11 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel3text.setText("VÉ THÁNG");
         jPanel3.add(Panel3text, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 40, -1, -1));
 
-        jLabel79.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/monthlyticket.png"))); // NOI18N
+        jLabel79.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ve╠ü tha╠üng.png"))); // NOI18N
         jPanel3.add(jLabel79, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 10, -1, -1));
+
+        jLabel106.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ve╠ü tha╠üng _blue.png"))); // NOI18N
+        jPanel3.add(jLabel106, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 10, -1, -1));
 
         jPanelTask.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 10, -1, -1));
 
@@ -462,10 +504,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel4text.setText("VÉ LƯỢT");
         jPanel4.add(Panel4text, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 40, -1, -1));
 
-        jLabel77.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/ticket.png"))); // NOI18N
+        jLabel77.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ticket.png"))); // NOI18N
         jPanel4.add(jLabel77, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 10, -1, -1));
 
-        jLabel78.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/ticket _blue.png"))); // NOI18N
+        jLabel78.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ticket _blue.png"))); // NOI18N
         jPanel4.add(jLabel78, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 10, -1, -1));
 
         jPanelTask.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 10, -1, -1));
@@ -484,11 +526,11 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel5text.setText("TÌM KIẾM XE");
         JPanel5.add(Panel5text, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 40, -1, -1));
 
-        jLabel68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/search (2).png"))); // NOI18N
+        jLabel68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search (2).png"))); // NOI18N
         jLabel68.setToolTipText("");
         JPanel5.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
 
-        jLabel76.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/search_blue.png"))); // NOI18N
+        jLabel76.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search_blue.png"))); // NOI18N
         jLabel76.setToolTipText("");
         JPanel5.add(jLabel76, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
 
@@ -508,10 +550,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel6text.setText("THỐNG KÊ");
         jPanel6.add(Panel6text, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 40, -1, -1));
 
-        jLabel62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/statistics.png"))); // NOI18N
+        jLabel62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/tho╠é╠üng ke╠é.png"))); // NOI18N
         jPanel6.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 10, -1, -1));
 
-        jLabel63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/statistics_blue.png"))); // NOI18N
+        jLabel63.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/tho╠é╠üng ke╠é _blue.png"))); // NOI18N
         jPanel6.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 10, -1, -1));
 
         jPanelTask.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(492, 10, -1, -1));
@@ -522,10 +564,6 @@ public class AdminDashBoard extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel7MouseClicked(evt);
             }
-
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanel7MouseEntered(evt);
-            }
         });
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -534,10 +572,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel8text.setText("HỆ THỐNG");
         jPanel7.add(Panel8text, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 40, -1, -1));
 
-        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/system.png"))); // NOI18N
+        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/system.png"))); // NOI18N
         jPanel7.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 10, -1, -1));
 
-        jLabel59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/system_blue.png"))); // NOI18N
+        jLabel59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/system_blue.png"))); // NOI18N
         jPanel7.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 10, -1, -1));
 
         jPanelTask.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 10, -1, -1));
@@ -556,10 +594,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel9text.setText("NGƯỜI DÙNG");
         jPanel8.add(Panel9text, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 40, -1, -1));
 
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/user.png"))); // NOI18N
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user.png"))); // NOI18N
         jPanel8.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 10, -1, -1));
 
-        jLabel58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/user_blue.png"))); // NOI18N
+        jLabel58.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user_blue.png"))); // NOI18N
         jPanel8.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
 
         jPanelTask.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 10, -1, -1));
@@ -917,7 +955,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGap(0, 350, Short.MAX_VALUE));
 
-        Paneltask2.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(555, 80, -1, -1));
+        Paneltask2.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(528, 80, -1, -1));
 
         jPanel34.setBackground(new java.awt.Color(255, 102, 51));
         jPanel34.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -925,7 +963,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("LÀN RA");
-        jPanel34.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, -1, -1));
+        jPanel34.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         Paneltask2.add(jPanel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 450, 80, 40));
 
@@ -936,24 +974,18 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel23.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("LÀN VÀO");
-        jPanel35.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 12, -1, -1));
+        jPanel35.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         Paneltask2.add(jPanel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, -1));
 
-        thongBaoLanVao.setEditable(false);
-        thongBaoLanVao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Paneltask2.add(thongBaoLanVao, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, 330, 40));
-
-        thongBaoLanRa.setEditable(false);
-        thongBaoLanRa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Paneltask2.add(thongBaoLanRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 450, 330, 40));
-
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Loại xe");
         Paneltask2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
 
         gioVaoLanVao.setEditable(false);
         Paneltask2.add(gioVaoLanVao, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 320, 30));
 
+        jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel24.setText("Giờ vào");
         Paneltask2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
 
@@ -961,40 +993,51 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
         loaiXeLanVao.setPreferredSize(new java.awt.Dimension(62, 30));
         Paneltask2.add(loaiXeLanVao, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 320, -1));
+
+        bienSoLanRa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                bienSoLanRaFocusGained(evt);
+            }
+        });
         Paneltask2.add(bienSoLanRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 100, 320, 30));
 
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel25.setText("Biển số");
         Paneltask2.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, -1, -1));
 
         ngayVaoLanVao.setEditable(false);
         Paneltask2.add(ngayVaoLanVao, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 320, 30));
 
+        jLabel26.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel26.setText("Ngày vào");
         Paneltask2.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
+
+        bienSoLanVao.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                bienSoLanVaoFocusGained(evt);
+            }
+        });
         Paneltask2.add(bienSoLanVao, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 320, 30));
 
+        jLabel27.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel27.setText("Biển số");
         Paneltask2.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, -1));
 
+        jLabel28.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel28.setText("Loại xe");
         Paneltask2.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, -1, -1));
 
         ngayRa.setEditable(false);
-        Paneltask2.add(ngayRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 320, 140, 30));
+        Paneltask2.add(ngayRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 250, 320, 30));
 
+        jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel29.setText("Ngày ra");
-        Paneltask2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, -1, -1));
+        Paneltask2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, 230, -1));
 
         loaiXeLanRa.setModel(
                 new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
         loaiXeLanRa.setPreferredSize(new java.awt.Dimension(62, 30));
         Paneltask2.add(loaiXeLanRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 180, 320, -1));
-
-        ngayVaoLanRa.setEditable(false);
-        Paneltask2.add(ngayVaoLanRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 250, 140, 30));
-
-        jLabel30.setText("Ngày vào");
-        Paneltask2.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, -1, -1));
 
         clearLanVao.setBackground(new java.awt.Color(255, 102, 51));
         clearLanVao.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1006,12 +1049,12 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         clearLanVao.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel32.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel32.setText("Xóa");
-        clearLanVao.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 14, -1, -1));
+        jLabel32.setText("XÓA");
+        clearLanVao.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
 
-        jLabel89.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/delete.png"))); // NOI18N
+        jLabel89.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete.png"))); // NOI18N
         jLabel89.setToolTipText("");
         clearLanVao.add(jLabel89, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, -1, -1));
 
@@ -1035,12 +1078,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         luuLanVao.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel31.setBackground(new java.awt.Color(255, 51, 51));
+        jLabel31.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel31.setText("Lưu");
-        luuLanVao.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 14, -1, -1));
+        jLabel31.setText("LƯU");
+        luuLanVao.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
 
-        jLabel88.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/diskette.png"))); // NOI18N
+        jLabel88.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/diskette.png"))); // NOI18N
         luuLanVao.add(jLabel88, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, -1, -1));
 
         Paneltask2.add(luuLanVao, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 90, 40));
@@ -1055,12 +1099,12 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         clearLanRa.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel34.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel34.setText("Xóa");
-        clearLanRa.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 14, -1, -1));
+        jLabel34.setText("XÓA");
+        clearLanRa.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
 
-        jLabel92.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/delete.png"))); // NOI18N
+        jLabel92.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete.png"))); // NOI18N
         clearLanRa.add(jLabel92, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 8, -1, -1));
 
         Paneltask2.add(clearLanRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 380, 90, 40));
@@ -1083,27 +1127,70 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         tinhTien.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel33.setText("Tính tiền");
-        tinhTien.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 14, -1, -1));
+        jLabel33.setText("TÍNH TIỀN");
+        tinhTien.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
-        jLabel91.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/money.png"))); // NOI18N
-        tinhTien.add(jLabel91, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 8, -1, -1));
+        jLabel91.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/money.png"))); // NOI18N
+        tinhTien.add(jLabel91, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        Paneltask2.add(tinhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 380, 100, 40));
-
-        gioVaoLanRa.setEditable(false);
-        Paneltask2.add(gioVaoLanRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 250, 140, 30));
-
-        jLabel35.setText("Giờ vào");
-        Paneltask2.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 230, -1, -1));
+        Paneltask2.add(tinhTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 380, 120, 40));
 
         gioRa.setEditable(false);
-        Paneltask2.add(gioRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 320, 140, 30));
+        Paneltask2.add(gioRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 320, 320, 30));
 
+        jLabel36.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel36.setText("Giờ ra");
-        Paneltask2.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 300, -1, -1));
+        Paneltask2.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, 220, -1));
+
+        jPanel5.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        thongBaoLanRa.setEditable(false);
+        thongBaoLanRa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        thongBaoLanRa.setBorder(null);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(63, 63, 63)
+                                .addComponent(thongBaoLanRa, javax.swing.GroupLayout.PREFERRED_SIZE, 180,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(77, Short.MAX_VALUE)));
+        jPanel5Layout.setVerticalGroup(
+                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(thongBaoLanRa, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)));
+
+        Paneltask2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 450, 320, 40));
+
+        jPanel10.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        thongBaoLanVao.setEditable(false);
+        thongBaoLanVao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        thongBaoLanVao.setBorder(null);
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+                jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(thongBaoLanVao, javax.swing.GroupLayout.PREFERRED_SIZE, 190,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(74, Short.MAX_VALUE)));
+        jPanel10Layout.setVerticalGroup(
+                jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(thongBaoLanVao, javax.swing.GroupLayout.PREFERRED_SIZE, 40,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)));
+
+        Paneltask2.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, 320, 40));
 
         jPanelWindow.add(Paneltask2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, -1, -1));
 
@@ -1122,8 +1209,8 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         Paneltask3.add(PanelTieuDe3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        Search3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Search3.setText("Tìm kiếm:");
+        Search3.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        Search3.setText("Tìm kiếm theo biển số:");
         Paneltask3.add(Search3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
         search3text.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1139,7 +1226,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 }
             }
         });
-        Paneltask3.add(search3text, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 95, 160, 30));
+        Paneltask3.add(search3text, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 280, 30));
 
         chucNangPanel3.setBackground(new java.awt.Color(255, 255, 255));
         chucNangPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -1174,12 +1261,12 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         giaHanVeThang.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 10, 60, -1));
 
-        jLabel96.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/refresh.png"))); // NOI18N
+        jLabel96.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/refresh.png"))); // NOI18N
         giaHanVeThang.add(jLabel96, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 7, -1, -1));
 
         chucNangPanel3.add(giaHanVeThang, new org.netbeans.lib.awtextra.AbsoluteConstraints(267, 1, -1, -1));
 
-        jPanel13.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel13.setBackground(new java.awt.Color(255, 153, 102));
         jPanel13.setPreferredSize(new java.awt.Dimension(2, 37));
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
@@ -1216,7 +1303,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel2.setPreferredSize(new java.awt.Dimension(52, 16));
         xoaVeThang.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 10, 30, -1));
 
-        jLabel94.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/delete.png"))); // NOI18N
+        jLabel94.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete.png"))); // NOI18N
         xoaVeThang.add(jLabel94, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 7, -1, -1));
 
         chucNangPanel3.add(xoaVeThang, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 1, -1, -1));
@@ -1244,12 +1331,12 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel3.setPreferredSize(new java.awt.Dimension(52, 16));
         suaVeThang.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 10, 30, -1));
 
-        jLabel95.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/edit.png"))); // NOI18N
+        jLabel95.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/edit.png"))); // NOI18N
         suaVeThang.add(jLabel95, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 7, -1, -1));
 
         chucNangPanel3.add(suaVeThang, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 1, -1, -1));
 
-        jPanel16.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel16.setBackground(new java.awt.Color(255, 153, 102));
         jPanel16.setPreferredSize(new java.awt.Dimension(100, 2));
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
@@ -1263,7 +1350,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         chucNangPanel3.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 38, -1, -1));
 
-        jPanel17.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel17.setBackground(new java.awt.Color(255, 153, 102));
         jPanel17.setPreferredSize(new java.awt.Dimension(2, 37));
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
@@ -1277,7 +1364,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         chucNangPanel3.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 1, -1, -1));
 
-        jPanel18.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel18.setBackground(new java.awt.Color(255, 153, 102));
         jPanel18.setPreferredSize(new java.awt.Dimension(2, 37));
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
@@ -1306,12 +1393,12 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(52, 16));
         dangKyVeThang.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 70, -1));
 
-        jLabel93.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/notes.png"))); // NOI18N
+        jLabel93.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/notes.png"))); // NOI18N
         dangKyVeThang.add(jLabel93, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 7, -1, -1));
 
         chucNangPanel3.add(dangKyVeThang, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, -1, -1));
 
-        jPanel20.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel20.setBackground(new java.awt.Color(255, 153, 102));
         jPanel20.setPreferredSize(new java.awt.Dimension(80, 2));
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
@@ -1325,7 +1412,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         chucNangPanel3.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 38, -1, -1));
 
-        jPanel21.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel21.setBackground(new java.awt.Color(255, 153, 102));
         jPanel21.setPreferredSize(new java.awt.Dimension(80, 2));
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
@@ -1339,7 +1426,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         chucNangPanel3.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 38, -1, -1));
 
-        jPanel22.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel22.setBackground(new java.awt.Color(255, 153, 102));
         jPanel22.setForeground(new java.awt.Color(255, 255, 255));
         jPanel22.setPreferredSize(new java.awt.Dimension(92, 2));
 
@@ -1354,7 +1441,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         chucNangPanel3.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(267, 38, -1, -1));
 
-        Paneltask3.add(chucNangPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
+        Paneltask3.add(chucNangPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 90, -1, -1));
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -1383,8 +1470,15 @@ public class AdminDashBoard extends javax.swing.JFrame {
         JTableHeader header = bangVeThang.getTableHeader();
         header.setFont(new Font("Segoe UI", Font.BOLD, 16));
         header.setBackground(Color.WHITE);
-        DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) header.getDefaultRenderer();
-        renderer.setHorizontalAlignment(SwingConstants.CENTER);
+        DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) header.getDefaultRenderer();
+        headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        for (int i = 0; i < bangVeThang.getColumnCount(); i++) {
+            bangVeThang.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
+        bangVeThang.setFont(new Font("Segoe UI", Font.PLAIN, 14)); // Đặt font chữ cho bảng
+        bangVeThang.setRowHeight(30);
         jScrollPane1.setViewportView(bangVeThang);
 
         Paneltask3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 1030, 280));
@@ -1435,17 +1529,27 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 return canEdit[columnIndex];
             }
         });
-        JTableHeader header5 = bangVeLuot.getTableHeader();
-        header5.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        header5.setBackground(Color.WHITE);
-        DefaultTableCellRenderer renderer5 = (DefaultTableCellRenderer) header.getDefaultRenderer();
-        renderer5.setHorizontalAlignment(SwingConstants.CENTER);
+        JTableHeader header2 = bangVeLuot.getTableHeader();
+        header2.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        header2.setBackground(Color.WHITE);
+        DefaultTableCellRenderer headerRenderer2 = (DefaultTableCellRenderer) header2.getDefaultRenderer();
+        headerRenderer2.setHorizontalAlignment(SwingConstants.CENTER);
+
+        DefaultTableCellRenderer centerRenderer2 = new DefaultTableCellRenderer();
+        centerRenderer2.setHorizontalAlignment(SwingConstants.CENTER);
+
+        for (int i = 0; i < bangVeLuot.getColumnCount(); i++) {
+            bangVeLuot.getColumnModel().getColumn(i).setCellRenderer(centerRenderer2);
+        }
+
+        bangVeLuot.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        bangVeLuot.setRowHeight(30);
         jScrollPane5.setViewportView(bangVeLuot);
 
         Paneltask4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 1030, 280));
 
-        Search4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Search4.setText("Tìm kiếm:");
+        Search4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        Search4.setText("Tìm kiếm theo biển số:");
         Paneltask4.add(Search4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
         search3text1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -1461,7 +1565,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 }
             }
         });
-        Paneltask4.add(search3text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 95, 160, 30));
+        Paneltask4.add(search3text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 280, 30));
 
         jPanel50.setBackground(new java.awt.Color(255, 255, 255));
         jPanel50.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -1491,12 +1595,12 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel67.setPreferredSize(new java.awt.Dimension(52, 16));
         xoaVeLuot.add(jLabel67, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 10, 30, -1));
 
-        jLabel97.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/delete.png"))); // NOI18N
+        jLabel97.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete.png"))); // NOI18N
         xoaVeLuot.add(jLabel97, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 7, -1, -1));
 
         jPanel50.add(xoaVeLuot, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, -1, -1));
 
-        jPanel71.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel71.setBackground(new java.awt.Color(255, 153, 102));
         jPanel71.setPreferredSize(new java.awt.Dimension(2, 37));
 
         javax.swing.GroupLayout jPanel71Layout = new javax.swing.GroupLayout(jPanel71);
@@ -1510,7 +1614,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         jPanel50.add(jPanel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 1, -1, -1));
 
-        jPanel74.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel74.setBackground(new java.awt.Color(255, 153, 102));
         jPanel74.setPreferredSize(new java.awt.Dimension(80, 2));
 
         javax.swing.GroupLayout jPanel74Layout = new javax.swing.GroupLayout(jPanel74);
@@ -1524,7 +1628,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         jPanel50.add(jPanel74, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 38, -1, -1));
 
-        Paneltask4.add(jPanel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
+        Paneltask4.add(jPanel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(987, 90, -1, -1));
 
         PanelTieuDe4.setBackground(new java.awt.Color(255, 255, 255));
         PanelTieuDe4.setPreferredSize(new java.awt.Dimension(1110, 60));
@@ -1560,12 +1664,15 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Paneltask5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         Paneltask5.add(timKiemBienSo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 170, 320, 30));
 
+        jLabel69.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel69.setText("Biển số");
         Paneltask5.add(jLabel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, -1, -1));
 
+        jLabel75.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel75.setText("Loại xe");
         Paneltask5.add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, -1, -1));
 
+        jLabel86.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel86.setText("Loại vé");
         Paneltask5.add(jLabel86, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
 
@@ -1589,11 +1696,21 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 return canEdit[columnIndex];
             }
         });
-        JTableHeader header6 = bangTimKiem.getTableHeader();
-        header6.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        header6.setBackground(Color.WHITE);
-        DefaultTableCellRenderer renderer6 = (DefaultTableCellRenderer) header.getDefaultRenderer();
-        renderer6.setHorizontalAlignment(SwingConstants.CENTER);
+        JTableHeader header3 = bangTimKiem.getTableHeader();
+        header3.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        header3.setBackground(Color.WHITE);
+        DefaultTableCellRenderer headerRenderer3 = (DefaultTableCellRenderer) header3.getDefaultRenderer();
+        headerRenderer3.setHorizontalAlignment(SwingConstants.CENTER);
+
+        DefaultTableCellRenderer centerRenderer3 = new DefaultTableCellRenderer();
+        centerRenderer3.setHorizontalAlignment(SwingConstants.CENTER);
+
+        for (int i = 0; i < bangTimKiem.getColumnCount(); i++) {
+            bangTimKiem.getColumnModel().getColumn(i).setCellRenderer(centerRenderer3);
+        }
+
+        bangTimKiem.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        bangTimKiem.setRowHeight(30);
         jScrollPane6.setViewportView(bangTimKiem);
 
         Paneltask5.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 540, 380));
@@ -1682,7 +1799,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jPanel26.add(thongKeNgayRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, -1, -1));
 
         thongKeLoaiXe.setModel(new javax.swing.DefaultComboBoxModel<>(
-                new String[] { "Tất cả loại xe", "Ô tô", "Xe máy", "Xe đạp điện, xe đạp" }));
+                new String[] { "Tất cả loại xe", "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
         thongKeLoaiXe.setPreferredSize(new java.awt.Dimension(90, 30));
         jPanel26.add(thongKeLoaiXe, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 80, 110, -1));
 
@@ -1706,11 +1823,21 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 return canEdit[columnIndex];
             }
         });
-        JTableHeader header2 = bangThongKe.getTableHeader();
-        header2.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        header2.setBackground(Color.WHITE);
-        DefaultTableCellRenderer renderer2 = (DefaultTableCellRenderer) header.getDefaultRenderer();
-        renderer2.setHorizontalAlignment(SwingConstants.CENTER);
+        JTableHeader header4 = bangThongKe.getTableHeader();
+        header4.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        header4.setBackground(Color.WHITE);
+        DefaultTableCellRenderer headerRenderer4 = (DefaultTableCellRenderer) header4.getDefaultRenderer();
+        headerRenderer4.setHorizontalAlignment(SwingConstants.CENTER);
+
+        DefaultTableCellRenderer centerRenderer4 = new DefaultTableCellRenderer();
+        centerRenderer4.setHorizontalAlignment(SwingConstants.CENTER);
+
+        for (int i = 0; i < bangThongKe.getColumnCount(); i++) {
+            bangThongKe.getColumnModel().getColumn(i).setCellRenderer(centerRenderer4);
+        }
+
+        bangThongKe.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        bangThongKe.setRowHeight(30);
         jScrollPane2.setViewportView(bangThongKe);
 
         jPanel26.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 1040, 340));
@@ -1746,61 +1873,17 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Paneltask7.setBackground(new java.awt.Color(255, 255, 255));
         Paneltask7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        chucNang7.setBackground(new java.awt.Color(245, 245, 245));
+        chucNang7.setBackground(new java.awt.Color(255, 204, 153));
         chucNang7.setPreferredSize(new java.awt.Dimension(280, 510));
         chucNang7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel16.setText("ADMIN");
-        chucNang7.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, -1, -1));
-
-        jPanel31.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel101.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/credit-card.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
-        jPanel31.setLayout(jPanel31Layout);
-        jPanel31Layout.setHorizontalGroup(
-                jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel101, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE));
-        jPanel31Layout.setVerticalGroup(
-                jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel101, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE));
-
-        chucNang7.add(jPanel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 30, 30));
-
-        jPanel32.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel100.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/user.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
-        jPanel32.setLayout(jPanel32Layout);
-        jPanel32Layout.setHorizontalGroup(
-                jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel100, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE));
-        jPanel32Layout.setVerticalGroup(
-                jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel100, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE));
-
-        chucNang7.add(jPanel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 30, 30));
-
-        jPanel39.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel39.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel39.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel39MouseClicked(evt);
-            }
-        });
-        jPanel39.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel17.setText("Quản lý người dùng");
-        jPanel39.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, -1));
-
-        chucNang7.add(jPanel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 180, 30));
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel16.setText("QUẢN TRỊ VIÊN");
+        chucNang7.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
 
         jPanel40.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel40.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel40 = new CustomRoundedPanel(50, 50);
         jPanel40.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel40MouseClicked(evt);
@@ -1808,13 +1891,37 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         jPanel40.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel37.setText("Quản lý giá vé");
-        jPanel40.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, -1));
+        jLabel37.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel37.setText("QUẢN LÝ GIÁ VÉ");
+        jPanel40.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 15, 130, -1));
 
-        chucNang7.add(jPanel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 180, 30));
+        jLabel101.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/credit-card.png"))); // NOI18N
+        jPanel40.add(jLabel101, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 28, 28));
 
-        jLabel38.setText("ICON");
-        chucNang7.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
+        chucNang7.add(jPanel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 230, 50));
+
+        jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel38.setText("icon");
+        chucNang7.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, -1, -1));
+
+        jPanel39.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel39.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel39 = new CustomRoundedPanel(50, 50);
+        jPanel39.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel39MouseClicked(evt);
+            }
+        });
+        jPanel39.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel17.setText("QUẢN LÝ NGƯỜI DÙNG");
+        jPanel39.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 15, 160, -1));
+
+        jLabel100.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user.png"))); // NOI18N
+        jPanel39.add(jLabel100, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 28, 28));
+
+        chucNang7.add(jPanel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 230, 50));
 
         Paneltask7.add(chucNang7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 510));
 
@@ -1830,16 +1937,16 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel40.setText("DANH SÁCH NGƯỜI DÙNG");
         quanLyNguoiDung.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
 
-        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/user.png"))); // NOI18N
+        jLabel41.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user.png"))); // NOI18N
         quanLyNguoiDung.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
 
         chucNangQuanLyNguoiDung.setBackground(new java.awt.Color(255, 255, 255));
         chucNangQuanLyNguoiDung
                 .setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        chucNangQuanLyNguoiDung.setPreferredSize(new java.awt.Dimension(360, 40));
+        chucNangQuanLyNguoiDung.setPreferredSize(new java.awt.Dimension(266, 40));
         chucNangQuanLyNguoiDung.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel45.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel45.setBackground(new java.awt.Color(255, 153, 102));
         jPanel45.setPreferredSize(new java.awt.Dimension(2, 37));
 
         javax.swing.GroupLayout jPanel45Layout = new javax.swing.GroupLayout(jPanel45);
@@ -1875,7 +1982,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel53.setPreferredSize(new java.awt.Dimension(52, 16));
         xoaNguoiDung.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 10, 30, -1));
 
-        jLabel46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/delete.png"))); // NOI18N
+        jLabel46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete.png"))); // NOI18N
         xoaNguoiDung.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 7, -1, -1));
 
         chucNangQuanLyNguoiDung.add(xoaNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 1, -1, -1));
@@ -1902,12 +2009,12 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel54.setPreferredSize(new java.awt.Dimension(52, 16));
         suaNguoiDung.add(jLabel54, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 10, 30, -1));
 
-        jLabel99.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/edit.png"))); // NOI18N
+        jLabel99.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/edit.png"))); // NOI18N
         suaNguoiDung.add(jLabel99, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 7, -1, -1));
 
-        chucNangQuanLyNguoiDung.add(suaNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 1, -1, -1));
+        chucNangQuanLyNguoiDung.add(suaNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 1, 80, -1));
 
-        jPanel48.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel48.setBackground(new java.awt.Color(255, 153, 102));
         jPanel48.setPreferredSize(new java.awt.Dimension(100, 2));
 
         javax.swing.GroupLayout jPanel48Layout = new javax.swing.GroupLayout(jPanel48);
@@ -1921,7 +2028,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         chucNangQuanLyNguoiDung.add(jPanel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 38, -1, -1));
 
-        jPanel49.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel49.setBackground(new java.awt.Color(255, 153, 102));
         jPanel49.setPreferredSize(new java.awt.Dimension(2, 37));
 
         javax.swing.GroupLayout jPanel49Layout = new javax.swing.GroupLayout(jPanel49);
@@ -1949,12 +2056,12 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel55.setPreferredSize(new java.awt.Dimension(52, 16));
         themNguoiDung.add(jLabel55, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 40, -1));
 
-        jLabel98.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/add-user.png"))); // NOI18N
+        jLabel98.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-user.png"))); // NOI18N
         themNguoiDung.add(jLabel98, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 7, -1, -1));
 
         chucNangQuanLyNguoiDung.add(themNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, -1, -1));
 
-        jPanel52.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel52.setBackground(new java.awt.Color(255, 153, 102));
         jPanel52.setPreferredSize(new java.awt.Dimension(80, 2));
 
         javax.swing.GroupLayout jPanel52Layout = new javax.swing.GroupLayout(jPanel52);
@@ -1968,7 +2075,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         chucNangQuanLyNguoiDung.add(jPanel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 38, -1, -1));
 
-        jPanel53.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel53.setBackground(new java.awt.Color(255, 153, 102));
         jPanel53.setPreferredSize(new java.awt.Dimension(80, 2));
 
         javax.swing.GroupLayout jPanel53Layout = new javax.swing.GroupLayout(jPanel53);
@@ -1983,7 +2090,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         chucNangQuanLyNguoiDung.add(jPanel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 38, -1, -1));
 
         quanLyNguoiDung.add(chucNangQuanLyNguoiDung,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 90, 270, -1));
+                new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 90, -1, -1));
 
         bangNguoiDung.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][] {
@@ -2000,11 +2107,21 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 return canEdit[columnIndex];
             }
         });
-        JTableHeader header1 = bangNguoiDung.getTableHeader();
-        header1.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        header1.setBackground(Color.WHITE);
-        DefaultTableCellRenderer renderer1 = (DefaultTableCellRenderer) header.getDefaultRenderer();
-        renderer1.setHorizontalAlignment(SwingConstants.CENTER);
+        JTableHeader header5 = bangNguoiDung.getTableHeader();
+        header5.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        header5.setBackground(Color.WHITE);
+        DefaultTableCellRenderer headerRenderer5 = (DefaultTableCellRenderer) header5.getDefaultRenderer();
+        headerRenderer5.setHorizontalAlignment(SwingConstants.CENTER);
+
+        DefaultTableCellRenderer centerRenderer5 = new DefaultTableCellRenderer();
+        centerRenderer5.setHorizontalAlignment(SwingConstants.CENTER);
+
+        for (int i = 0; i < bangNguoiDung.getColumnCount(); i++) {
+            bangNguoiDung.getColumnModel().getColumn(i).setCellRenderer(centerRenderer5);
+        }
+
+        bangNguoiDung.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        bangNguoiDung.setRowHeight(30);
         jScrollPane3.setViewportView(bangNguoiDung);
         if (bangNguoiDung.getColumnModel().getColumnCount() > 0) {
             bangNguoiDung.getColumnModel().getColumn(0).setMinWidth(10);
@@ -2020,7 +2137,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         Paneltask7.add(quanLyNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, -1, -1));
 
-        bangGiaVe.setBackground(new java.awt.Color(204, 204, 255));
+        bangGiaVe.setBackground(new java.awt.Color(255, 255, 255));
         bangGiaVe.setPreferredSize(new java.awt.Dimension(830, 510));
         bangGiaVe.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -2032,8 +2149,8 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel43.setText("BẢNG GIÁ VÉ");
         bangGiaVe.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
 
-        jLabel44.setText("ICON");
-        bangGiaVe.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
+        jLabel44.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/notes.png"))); // NOI18N
+        bangGiaVe.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
 
         giaVe.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][] {
@@ -2050,11 +2167,21 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 return canEdit[columnIndex];
             }
         });
-        JTableHeader header8 = giaVe.getTableHeader();
-        header8.setFont(new Font("Segoe UI", Font.BOLD, 16));
-        header8.setBackground(Color.WHITE);
-        DefaultTableCellRenderer renderer8 = (DefaultTableCellRenderer) header.getDefaultRenderer();
-        renderer8.setHorizontalAlignment(SwingConstants.CENTER);
+        JTableHeader header6 = giaVe.getTableHeader();
+        header6.setFont(new Font("Segoe UI", Font.BOLD, 16));
+        header6.setBackground(Color.WHITE);
+        DefaultTableCellRenderer headerRenderer6 = (DefaultTableCellRenderer) header6.getDefaultRenderer();
+        headerRenderer6.setHorizontalAlignment(SwingConstants.CENTER);
+
+        DefaultTableCellRenderer centerRenderer6 = new DefaultTableCellRenderer();
+        centerRenderer6.setHorizontalAlignment(SwingConstants.CENTER);
+
+        for (int i = 0; i < giaVe.getColumnCount(); i++) {
+            giaVe.getColumnModel().getColumn(i).setCellRenderer(centerRenderer6);
+        }
+
+        giaVe.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        giaVe.setRowHeight(30);
         jScrollPane4.setViewportView(giaVe);
 
         bangGiaVe.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 750, 290));
@@ -2079,9 +2206,12 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel87.setPreferredSize(new java.awt.Dimension(52, 16));
         jPanel70.add(jLabel87, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 10, 30, -1));
 
+        jLabel109.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/edit.png"))); // NOI18N
+        jPanel70.add(jLabel109, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 5, -1, -1));
+
         jPanel51.add(jPanel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, -1, -1));
 
-        jPanel73.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel73.setBackground(new java.awt.Color(255, 153, 102));
         jPanel73.setPreferredSize(new java.awt.Dimension(2, 37));
 
         javax.swing.GroupLayout jPanel73Layout = new javax.swing.GroupLayout(jPanel73);
@@ -2095,7 +2225,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         jPanel51.add(jPanel73, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 1, -1, -1));
 
-        jPanel76.setBackground(new java.awt.Color(51, 153, 255));
+        jPanel76.setBackground(new java.awt.Color(255, 153, 102));
         jPanel76.setPreferredSize(new java.awt.Dimension(80, 2));
 
         javax.swing.GroupLayout jPanel76Layout = new javax.swing.GroupLayout(jPanel76);
@@ -2109,7 +2239,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         jPanel51.add(jPanel76, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 38, -1, -1));
 
-        bangGiaVe.add(jPanel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
+        bangGiaVe.add(jPanel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(717, 90, -1, -1));
 
         Paneltask7.add(bangGiaVe, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, -1, -1));
 
@@ -2118,53 +2248,18 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Paneltask8.setBackground(new java.awt.Color(255, 255, 255));
         Paneltask8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        chucNang8.setBackground(new java.awt.Color(245, 245, 245));
+        chucNang8.setBackground(new java.awt.Color(255, 204, 153));
         chucNang8.setPreferredSize(new java.awt.Dimension(280, 510));
         chucNang8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel7.setText("ADMIN");
-        chucNang8.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, -1, -1));
-
-        jPanel27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel103.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/key.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
-        jPanel27.setLayout(jPanel27Layout);
-        jPanel27Layout.setHorizontalGroup(
-                jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel27Layout.createSequentialGroup()
-                                .addComponent(jLabel103, javax.swing.GroupLayout.PREFERRED_SIZE, 30,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)));
-        jPanel27Layout.setVerticalGroup(
-                jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel103, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE));
-
-        chucNang8.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 30, 30));
-
-        jPanel28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel102.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/user.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
-        jPanel28.setLayout(jPanel28Layout);
-        jPanel28Layout.setHorizontalGroup(
-                jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel28Layout.createSequentialGroup()
-                                .addComponent(jLabel102, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap()));
-        jPanel28Layout.setVerticalGroup(
-                jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel102, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE));
-
-        chucNang8.add(jPanel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 30, 30));
+        name.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        name.setForeground(new java.awt.Color(255, 255, 255));
+        name.setText("ADMIN");
+        chucNang8.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
 
         task8_thongTin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         task8_thongTin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        task8_thongTin = new CustomRoundedPanel(50, 50);
         task8_thongTin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 task8_thongTinMouseClicked(evt);
@@ -2172,13 +2267,18 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         task8_thongTin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel14.setText("Thông tin");
-        task8_thongTin.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, -1));
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel14.setText("THÔNG TIN");
+        task8_thongTin.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, 90, -1));
 
-        chucNang8.add(task8_thongTin, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 180, 30));
+        jLabel102.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user.png"))); // NOI18N
+        task8_thongTin.add(jLabel102, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, 28));
+
+        chucNang8.add(task8_thongTin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 230, 50));
 
         task8_doiMatKhau.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         task8_doiMatKhau.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        task8_doiMatKhau = new CustomRoundedPanel(50, 50);
         task8_doiMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 task8_doiMatKhauMouseClicked(evt);
@@ -2186,13 +2286,18 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         task8_doiMatKhau.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel15.setText("Đổi mật khẩu");
-        task8_doiMatKhau.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, -1));
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setText("ĐỔI MẬT KHẨU");
+        task8_doiMatKhau.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 15, 110, -1));
 
-        chucNang8.add(task8_doiMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 180, 30));
+        jLabel103.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/key.png"))); // NOI18N
+        task8_doiMatKhau.add(jLabel103, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 30, 28));
 
-        jLabel10.setText("ICON");
-        chucNang8.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
+        chucNang8.add(task8_doiMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 230, 50));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel7.setText("ICON");
+        chucNang8.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
 
         Paneltask8.add(chucNang8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -2208,7 +2313,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel9.setText("THÔNG TIN NGƯỜI DÙNG");
         thongTin.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/user.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user.png"))); // NOI18N
         thongTin.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
 
         capNhatNguoiDung.setBackground(new java.awt.Color(255, 102, 51));
@@ -2217,9 +2322,6 @@ public class AdminDashBoard extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 try {
                     capNhatNguoiDungMouseClicked(evt);
-                } catch (HeadlessException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
                 } catch (ClassNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -2229,14 +2331,15 @@ public class AdminDashBoard extends javax.swing.JFrame {
         capNhatNguoiDung.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel48.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel48.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel48.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel48.setText("Cập nhật thông tin");
+        jLabel48.setText("CẬP NHẬT");
         capNhatNguoiDung.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 12, -1, -1));
 
-        jLabel104.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/diskette.png"))); // NOI18N
+        jLabel104.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/diskette.png"))); // NOI18N
         capNhatNguoiDung.add(jLabel104, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 8, -1, -1));
 
-        thongTin.add(capNhatNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 160, 40));
+        thongTin.add(capNhatNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 120, 40));
 
         clearNguoiDung.setBackground(new java.awt.Color(255, 102, 51));
         clearNguoiDung = new CustomRoundedPanel(50, 50);
@@ -2247,11 +2350,12 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         clearNguoiDung.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel49.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel49.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel49.setText("Xóa");
+        jLabel49.setText("XÓA");
         clearNguoiDung.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 12, -1, -1));
 
-        jLabel105.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/delete copy 2.png"))); // NOI18N
+        jLabel105.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete copy 2.png"))); // NOI18N
         clearNguoiDung.add(jLabel105, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 8, -1, -1));
 
         thongTin.add(clearNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, 90, 40));
@@ -2261,6 +2365,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         thongTin.add(jLabel80, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
 
         tenDangNhap.setEditable(false);
+        tenDangNhap.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tenDangNhap.setPreferredSize(new java.awt.Dimension(65, 30));
         thongTin.add(tenDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 310, -1));
 
@@ -2268,9 +2373,11 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel81.setText("Tên người dùng");
         thongTin.add(jLabel81, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
 
+        tenNguoiDung.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tenNguoiDung.setPreferredSize(new java.awt.Dimension(65, 30));
         thongTin.add(tenNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 240, 310, -1));
 
+        sdt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         sdt.setPreferredSize(new java.awt.Dimension(65, 30));
         thongTin.add(sdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 310, -1));
 
@@ -2283,6 +2390,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         thongTin.add(jLabel84, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 210, -1, -1));
 
         chucVu.setEditable(false);
+        chucVu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         chucVu.setPreferredSize(new java.awt.Dimension(65, 30));
         thongTin.add(chucVu, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 170, 310, -1));
 
@@ -2304,7 +2412,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         Paneltask8.add(thongTin, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 0, -1, -1));
 
-        doiMatKhau.setBackground(new java.awt.Color(204, 204, 255));
+        doiMatKhau.setBackground(new java.awt.Color(255, 255, 255));
         doiMatKhau.setPreferredSize(new java.awt.Dimension(830, 510));
         doiMatKhau.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -2316,16 +2424,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel13.setText("ĐỔI MẬT KHẨU");
         doiMatKhau.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
 
-        jLabel18.setText("ICON");
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/key.png"))); // NOI18N
         doiMatKhau.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
-
-        matKhauCu.setBackground(new java.awt.Color(204, 204, 204));
         doiMatKhau.add(matKhauCu, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 580, 30));
-
-        matKhauMoi.setBackground(new java.awt.Color(204, 204, 204));
         doiMatKhau.add(matKhauMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 580, 30));
-
-        xacNhanMatKhau.setBackground(new java.awt.Color(204, 204, 204));
         doiMatKhau.add(xacNhanMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 580, 30));
 
         jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -2340,6 +2442,8 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel22.setText("Mật khẩu mới");
         doiMatKhau.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, -1, -1));
 
+        capNhatMatKhau.setForeground(new java.awt.Color(255, 255, 255));
+        capNhatMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         capNhatMatKhau = new CustomRoundedPanel(50, 50);
         capNhatMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2356,11 +2460,18 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         capNhatMatKhau.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel50.setText("Cập nhật mật khẩu");
-        capNhatMatKhau.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+        jLabel50.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel50.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel50.setText("CẬP NHẬT");
+        capNhatMatKhau.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 12, -1, -1));
 
-        doiMatKhau.add(capNhatMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, 160, 40));
+        jLabel107.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/diskette.png"))); // NOI18N
+        capNhatMatKhau.add(jLabel107, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
+        doiMatKhau.add(capNhatMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 390, 130, 40));
+
+        xoaMatKhau.setForeground(new java.awt.Color(255, 255, 255));
+        xoaMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         xoaMatKhau = new CustomRoundedPanel(50, 50);
         xoaMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2369,12 +2480,17 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         xoaMatKhau.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel51.setText("Xóa");
-        xoaMatKhau.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+        jLabel51.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel51.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel51.setText("XÓA");
+        xoaMatKhau.add(jLabel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 12, -1, -1));
+
+        jLabel108.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete.png"))); // NOI18N
+        xoaMatKhau.add(jLabel108, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         doiMatKhau.add(xoaMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 390, 90, 40));
 
-        jLabel66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/password_hide.jpg"))); // NOI18N
+        jLabel66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/password_hide.jpg"))); // NOI18N
         jLabel66.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel66.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2383,7 +2499,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         doiMatKhau.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 175, -1, -1));
 
-        jLabel70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/password_show.jpg"))); // NOI18N
+        jLabel70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/password_show.jpg"))); // NOI18N
         jLabel70.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel70.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2392,7 +2508,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         doiMatKhau.add(jLabel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 175, -1, -1));
 
-        jLabel71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/password_hide.jpg"))); // NOI18N
+        jLabel71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/password_hide.jpg"))); // NOI18N
         jLabel71.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel71.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2401,7 +2517,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         doiMatKhau.add(jLabel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 255, -1, -1));
 
-        jLabel72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/password_show.jpg"))); // NOI18N
+        jLabel72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/password_show.jpg"))); // NOI18N
         jLabel72.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel72.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2410,7 +2526,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         doiMatKhau.add(jLabel72, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 255, -1, -1));
 
-        jLabel73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/password_hide.jpg"))); // NOI18N
+        jLabel73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/password_hide.jpg"))); // NOI18N
         jLabel73.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel73.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2419,7 +2535,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         doiMatKhau.add(jLabel73, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 335, -1, -1));
 
-        jLabel74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/password_show.jpg"))); // NOI18N
+        jLabel74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/password_show.jpg"))); // NOI18N
         jLabel74.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel74.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2436,6 +2552,63 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void log() {
+        init();
+        initText();
+        initTask();
+        initIconAdmin();
+        jPanel2.setBackground(select);
+        jPanel2u.setBackground(barSelect);
+        jPanel1s.setBackground(barSelect);
+        jPanel2s.setBackground(barSelect);
+        jPanel1d.setBackground(barSelect);
+        jPanel3d.setBackground(barSelect);
+        jPanel4d.setBackground(barSelect);
+        jPanel5d.setBackground(barSelect);
+        jPanel6d.setBackground(barSelect);
+        jPanel7d.setBackground(barSelect);
+        jPanel8d.setBackground(barSelect);
+        jPanel9d.setBackground(barSelect);
+        Panel2text.setFont(font2);
+        Panel2text.setForeground(barSelect);
+        Paneltask2.setVisible(true);
+        jLabel83.setVisible(false);
+        jLabel90.setVisible(true);
+        Paneltask2.setVisible(true);
+        Paneltask3.setVisible(false);
+        Paneltask4.setVisible(false);
+        Paneltask5.setVisible(false);
+        Paneltask6.setVisible(false);
+        Paneltask7.setVisible(false);
+        Paneltask8.setVisible(false);
+    }
+
+    public void ThongTin() {
+        init();
+        initText();
+        initTask();
+        initIconAdmin();
+        jPanel8.setBackground(select);
+        jPanel8u.setBackground(barSelect);
+        jPanel7s.setBackground(barSelect);
+        jPanel8s.setBackground(barSelect);
+        jPanel1d.setBackground(barSelect);
+        jPanel2d.setBackground(barSelect);
+        jPanel3d.setBackground(barSelect);
+        jPanel4d.setBackground(barSelect);
+        jPanel5d.setBackground(barSelect);
+        jPanel6d.setBackground(barSelect);
+        jPanel7d.setBackground(barSelect);
+        jPanel9d.setBackground(barSelect);
+        Panel9text.setFont(font2);
+        Panel9text.setForeground(barSelect);
+        Paneltask8.setVisible(true);
+        jLabel21.setVisible(false);
+        jLabel58.setVisible(true);
+        thongTin.setVisible(true);
+        doiMatKhau.setVisible(false);
+    }
 
     public static void tableNguoiDung() throws ClassNotFoundException, SQLException {
         model5 = new DefaultTableModel(
@@ -2466,36 +2639,40 @@ public class AdminDashBoard extends javax.swing.JFrame {
         java.sql.Date endTime = new java.sql.Date(end.getTime());
         String loaiXe = thongKeLoaiXe.getSelectedItem().toString();
         vehicleTypeEnum xe = null;
-        if (loaiXe.equals("Ô tô"))
+        if (loaiXe.equals("Ô tô")) {
             xe = vehicleTypeEnum.CAR;
-        else if (loaiXe.equals("Xe máy"))
+        } else if (loaiXe.equals("Xe máy")) {
             xe = vehicleTypeEnum.MOTORBIKE;
-        else if (loaiXe.equals("Xe đạp, xe đạp điện"))
+        } else if (loaiXe.equals("Xe đạp, xe đạp điện")) {
             xe = vehicleTypeEnum.BIKE;
+        }
         String loaiVe = thongKeLoaiVe.getSelectedItem().toString();
         ticketTypeEnum ve = null;
-        if (loaiVe.equals("Vé tháng"))
+        if (loaiVe.equals("Vé tháng")) {
             ve = ticketTypeEnum.MONTHLY;
-        else if (loaiVe.equals("Vé lượt"))
+        } else if (loaiVe.equals("Vé lượt")) {
             ve = ticketTypeEnum.DAILY;
+        }
         sta.calculateStatistic(bangThongKe, startTime, endTime, ve, xe);
-        model6 = (DefaultTableModel) giaVe.getModel();
+        model4 = (DefaultTableModel) bangThongKe.getModel();
     }
 
     private void tableTimKiem() throws ClassNotFoundException, SQLException {
         String bienSo = timKiemBienSo.getText();
         String loaiVe = "";
-        if (timKiemLoaiVe.getSelectedItem().toString().equals("Vé tháng"))
+        if (timKiemLoaiVe.getSelectedItem().toString().equals("Vé tháng")) {
             loaiVe = "MONTHLY";
-        else if (timKiemLoaiVe.getSelectedItem().toString().equals("Vé lượt"))
+        } else if (timKiemLoaiVe.getSelectedItem().toString().equals("Vé lượt")) {
             loaiVe = "DAILY";
+        }
         String loaiXe = "";
-        if (timKiemLoaiXe.getSelectedItem().toString().equals("Ô tô"))
+        if (timKiemLoaiXe.getSelectedItem().toString().equals("Ô tô")) {
             loaiXe = "CAR";
-        else if (timKiemLoaiXe.getSelectedItem().toString().equals("Xe máy"))
+        } else if (timKiemLoaiXe.getSelectedItem().toString().equals("Xe máy")) {
             loaiXe = "MOTORBIKE";
-        else if (timKiemLoaiXe.getSelectedItem().toString().equals("Xe đạp, xe đạp điện"))
+        } else if (timKiemLoaiXe.getSelectedItem().toString().equals("Xe đạp, xe đạp điện")) {
             loaiXe = "BIKE";
+        }
         ticketDao.searchTicket(bangTimKiem, bienSo, loaiVe, loaiXe);
         model3 = (DefaultTableModel) bangTimKiem.getModel();
     }
@@ -2557,11 +2734,6 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel90.setVisible(true);
     }// GEN-LAST:event_jPanel2MouseClicked
 
-    private void initIcon() {
-        jLabel83.setVisible(true);
-        jLabel90.setVisible(false);
-    }
-
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel3MouseClicked
         init();
         initText();
@@ -2582,6 +2754,8 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel3text.setFont(font2);
         Panel3text.setForeground(barSelect);
         Paneltask3.setVisible(true);
+        jLabel79.setVisible(false);
+        jLabel106.setVisible(true);
     }// GEN-LAST:event_jPanel3MouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel4MouseClicked
@@ -2693,6 +2867,8 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel78.setVisible(false);
         jLabel83.setVisible(true);
         jLabel90.setVisible(false);
+        jLabel79.setVisible(true);
+        jLabel106.setVisible(false);
     }
 
     private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel8MouseClicked
@@ -2717,6 +2893,8 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Paneltask8.setVisible(true);
         jLabel21.setVisible(false);
         jLabel58.setVisible(true);
+        thongTin.setVisible(true);
+        doiMatKhau.setVisible(false);
     }// GEN-LAST:event_jPanel8MouseClicked
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseDragged
@@ -2733,6 +2911,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private void task8_thongTinMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_task8_thongTinMouseClicked
         thongTin.setVisible(true);
         doiMatKhau.setVisible(false);
+        initThongTin();
     }// GEN-LAST:event_task8_thongTinMouseClicked
 
     private void task8_doiMatKhauMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_task8_doiMatKhauMouseClicked
@@ -2778,8 +2957,6 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private void clearLanRaMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_clearLanRaMouseClicked
         bienSoLanRa.setText("");
         loaiXeLanRa.setSelectedItem("Ô tô");
-        ngayVaoLanRa.setText("");
-        gioVaoLanRa.setText("");
         ngayRa.setText("");
         gioRa.setText("");
         thongBaoLanRa.setText("");
@@ -2789,19 +2966,23 @@ public class AdminDashBoard extends javax.swing.JFrame {
         String bienSo = bienSoLanVao.getText();
         String x = loaiXeLanVao.getSelectedItem().toString();
         vehicleTypeEnum loaiXe;
-        if (x.equals("Ô tô"))
+        if (x.equals("Ô tô")) {
             loaiXe = vehicleTypeEnum.CAR;
-        else if (x.equals("Xe máy"))
+        } else if (x.equals("Xe máy")) {
             loaiXe = vehicleTypeEnum.MOTORBIKE;
-        else
+        } else {
             loaiXe = vehicleTypeEnum.BIKE;
-        if (bienSo.isEmpty())
+        }
+        if (bienSo.isEmpty()) {
+            thongBaoLanVao.setForeground(warning);
             thongBaoLanVao.setText("Hãy nhập biển số");
-        else if (ticketDao.isMonthlyTicket(bienSo))
+        } else if (ticketDao.isMonthlyTicket(bienSo)) {
+            thongBaoLanVao.setForeground(ok);
             thongBaoLanVao.setText("Vé tháng");
-        else if (ticketDao.isInside(bienSo))
+        } else if (ticketDao.isInside(bienSo)) {
+            thongBaoLanVao.setForeground(warning);
             thongBaoLanVao.setText("Biển số đã tồn tại");
-        else {
+        } else {
             Ticket t = new Ticket(bienSo, loaiXe);
             try {
                 ticketDao.addDailyTicket(t);
@@ -2810,6 +2991,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
             }
+            thongBaoLanVao.setForeground(ok);
             thongBaoLanVao.setText("Thành công");
         }
         tableVeLuot();
@@ -2820,8 +3002,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         sdt.setText("");
     }// GEN-LAST:event_clearNguoiDungMouseClicked
 
-    private void capNhatNguoiDungMouseClicked(java.awt.event.MouseEvent evt)
-            throws HeadlessException, ClassNotFoundException {// GEN-FIRST:event_capNhatNguoiDungMouseClicked
+    private void capNhatNguoiDungMouseClicked(java.awt.event.MouseEvent evt) throws ClassNotFoundException {// GEN-FIRST:event_capNhatNguoiDungMouseClicked
         String phoneNumber = sdt.getText();
         if (tenNguoiDung.getText().isEmpty() || sdt.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ dữ liệu", "Thông báo", 2);
@@ -2955,25 +3136,27 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 j = i;
             }
         }
-        if (c != 1)
+        if (c != 1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn người dùng bạn muốn sửa", "Thông báo",
                     JOptionPane.WARNING_MESSAGE);
-        else {
+        } else {
             ModifyUser n = new ModifyUser();
             n.tenDangNhap.setText(model.getValueAt(j, 1).toString());
             n.tenNguoiDung.setText(model.getValueAt(j, 2).toString());
             n.sdt.setText(model.getValueAt(j, 3).toString());
             String gt = model.getValueAt(j, 4).toString();
             String shift = model.getValueAt(j, 1).toString();
-            if (gt.equals("Nam"))
+            if (gt.equals("Nam")) {
                 n.gtNam.setSelected(true);
-            else
+            } else {
                 n.gtNu.setSelected(true);
+            }
             n.baoVe.setSelected(true);
-            if (shift.equals("Đêm"))
+            if (shift.equals("Đêm")) {
                 n.dem.setSelected(true);
-            else
+            } else {
                 n.ngay.setSelected(true);
+            }
             n.setVisible(true);
             n.jPasswordField1.setText(userDao.getPassword2(model.getValueAt(j, 1).toString()));
             n.old = model.getValueAt(j, 1).toString();
@@ -3110,9 +3293,9 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 j = i;
             }
         }
-        if (c != 1)
+        if (c != 1) {
             JOptionPane.showMessageDialog(this, "Hãy chọn vé bạn muốn sửa", "Thông báo", JOptionPane.WARNING_MESSAGE);
-        else {
+        } else {
             ModifyTicket n = new ModifyTicket();
             n.jTextField1.setText(model.getValueAt(j, 1).toString());
             n.jComboBox1.setSelectedItem(model.getValueAt(j, 4));
@@ -3180,23 +3363,28 @@ public class AdminDashBoard extends javax.swing.JFrame {
         String bienSo = bienSoLanRa.getText();
         String x = loaiXeLanRa.getSelectedItem().toString();
         vehicleTypeEnum loaiXe;
-        if (x.equals("Ô tô"))
+        if (x.equals("Ô tô")) {
             loaiXe = vehicleTypeEnum.CAR;
-        else if (x.equals("Xe máy"))
+        } else if (x.equals("Xe máy")) {
             loaiXe = vehicleTypeEnum.MOTORBIKE;
-        else
+        } else {
             loaiXe = vehicleTypeEnum.BIKE;
+        }
         ticketDao.changeTicketType();
 
-        if (bienSo.isEmpty())
+        if (bienSo.isEmpty()) {
+            thongBaoLanRa.setForeground(warning);
             thongBaoLanRa.setText("Hãy nhập biển số");
-        else if (ticketDao.isMonthlyTicket(bienSo))
+        } else if (ticketDao.isMonthlyTicket(bienSo)) {
+            thongBaoLanRa.setForeground(ok);
             thongBaoLanRa.setText("Vé tháng");
-        else if (!ticketDao.isPlateNumberExist2(bienSo))
+        } else if (!ticketDao.isPlateNumberExist2(bienSo)) {
+            thongBaoLanRa.setForeground(warning);
             thongBaoLanRa.setText("Vé không tồn tại");
-        else {
+        } else {
             try {
                 ticketDao.calculateDailyPrice(bienSo);
+                thongBaoLanRa.setForeground(ok);
                 thongBaoLanRa.setText(String.valueOf(ticketDao.getPrice(bienSo)));
             } catch (SQLException ex) {
                 Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
@@ -3204,11 +3392,12 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        model4.setRowCount(0);
         tableVeLuot();
     }// GEN-LAST:event_tinhTienMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
+        model4 = (DefaultTableModel) bangThongKe.getModel();
+        model4.setRowCount(0);
         if (thongKeNgayVao.getDate() == null || thongKeNgayRa.getDate() == null)
             JOptionPane.showMessageDialog(this, "Hãy chọn ngày bạn muốn thống kê", "Thông báo", 2);
         else {
@@ -3222,9 +3411,71 @@ public class AdminDashBoard extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_jButton3ActionPerformed
 
-    private void jPanel7MouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel7MouseEntered
-        // TODO add your handling code here:
-    }// GEN-LAST:event_jPanel7MouseEntered
+    private void jLabel110MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel110MouseClicked
+        int a = JOptionPane.showOptionDialog(
+                null,
+                "Bạn có muốn đăng xuất này không?",
+                "Thông báo",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new Object[] { "Có", "Hủy" },
+                "Hủy");
+        if (a == 0) {
+            src.frontend.User.Login n = new Login();
+            n.setLocationRelativeTo(null);
+            n.setVisible(true);
+            this.dispose();
+        }
+    }// GEN-LAST:event_jLabel110MouseClicked
+
+    private void jLabel111MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel111MouseClicked
+        int a = JOptionPane.showOptionDialog(
+                null,
+                "Bạn có muốn đăng xuất này không?",
+                "Thông báo",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new Object[] { "Có", "Hủy" },
+                "Hủy");
+        if (a == 0) {
+            src.frontend.User.Login n = new Login();
+            n.setLocationRelativeTo(null);
+            n.setVisible(true);
+            this.dispose();
+        }
+    }// GEN-LAST:event_jLabel111MouseClicked
+
+    private void tenMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_tenMouseClicked
+        ThongTin();
+    }// GEN-LAST:event_tenMouseClicked
+
+    private void jLabel112MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel112MouseClicked
+        ThongTin();
+    }// GEN-LAST:event_jLabel112MouseClicked
+
+    private void bienSoLanVaoFocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_bienSoLanVaoFocusGained
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date today = new Date();
+        String formattedDate = dateFormat.format(today);
+        ngayVaoLanVao.setText(formattedDate);
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        Date now = new Date();
+        String formattedTime = timeFormat.format(now);
+        gioVaoLanVao.setText(formattedTime);
+    }// GEN-LAST:event_bienSoLanVaoFocusGained
+
+    private void bienSoLanRaFocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_bienSoLanRaFocusGained
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date today = new Date();
+        String formattedDate = dateFormat.format(today);
+        ngayRa.setText(formattedDate);
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        Date now = new Date();
+        String formattedTime = timeFormat.format(now);
+        gioRa.setText(formattedTime);
+    }// GEN-LAST:event_bienSoLanRaFocusGained
 
     private void init() {
         jPanel1.setBackground(notSelect);
@@ -3300,10 +3551,6 @@ public class AdminDashBoard extends javax.swing.JFrame {
         tenDangNhap.setText(u.getUserName());
         tenNguoiDung.setText(u.getFullName());
         sdt.setText(u.getPhoneNumber());
-        // int c = u.getShift();
-        // if(c == 1) caLam.setText("Sáng");
-        // else if(c == 2) caLam.setText("Chiều");
-        // else caLam.setText("Tối");
         String gt = u.getGender();
         if (gt.toLowerCase().trim().equals("male")) {
             gtNam.setSelected(true);
@@ -3389,7 +3636,6 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel giaHanVeThang;
     public static javax.swing.JTable giaVe;
     private javax.swing.JTextField gioRa;
-    private javax.swing.JTextField gioVaoLanRa;
     private javax.swing.JTextField gioVaoLanVao;
     private javax.swing.JRadioButton gtNam;
     private javax.swing.JRadioButton gtNu;
@@ -3397,14 +3643,20 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
     private javax.swing.JLabel jLabel101;
     private javax.swing.JLabel jLabel102;
     private javax.swing.JLabel jLabel103;
     private javax.swing.JLabel jLabel104;
     private javax.swing.JLabel jLabel105;
+    private javax.swing.JLabel jLabel106;
+    private javax.swing.JLabel jLabel107;
+    private javax.swing.JLabel jLabel108;
+    private javax.swing.JLabel jLabel109;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel110;
+    private javax.swing.JLabel jLabel111;
+    private javax.swing.JLabel jLabel112;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -3425,12 +3677,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
@@ -3501,32 +3751,29 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel97;
     private javax.swing.JLabel jLabel98;
     private javax.swing.JLabel jLabel99;
-    private javax.swing.JPanel jPanel1;
+    public static javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
     private javax.swing.JPanel jPanel1d;
-    private javax.swing.JPanel jPanel1s;
+    public static javax.swing.JPanel jPanel1s;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel26;
-    private javax.swing.JPanel jPanel27;
-    private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel2d;
-    private javax.swing.JPanel jPanel2s;
+    public static javax.swing.JPanel jPanel2s;
     private javax.swing.JPanel jPanel2u;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel31;
-    private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel35;
     private javax.swing.JPanel jPanel39;
     private javax.swing.JPanel jPanel3d;
-    private javax.swing.JPanel jPanel3s;
+    public static javax.swing.JPanel jPanel3s;
     private javax.swing.JPanel jPanel3u;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel40;
@@ -3536,6 +3783,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4d;
     private javax.swing.JPanel jPanel4s;
     private javax.swing.JPanel jPanel4u;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel50;
     private javax.swing.JPanel jPanel51;
     private javax.swing.JPanel jPanel52;
@@ -3576,8 +3824,8 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel luuLanVao;
     private javax.swing.JPasswordField matKhauCu;
     private javax.swing.JPasswordField matKhauMoi;
+    public static javax.swing.JLabel name;
     private javax.swing.JTextField ngayRa;
-    private javax.swing.JTextField ngayVaoLanRa;
     private javax.swing.JTextField ngayVaoLanVao;
     private javax.swing.JPanel quanLyNguoiDung;
     private javax.swing.JTextField sdt;
@@ -3587,6 +3835,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel suaVeThang;
     private javax.swing.JPanel task8_doiMatKhau;
     private javax.swing.JPanel task8_thongTin;
+    public static javax.swing.JLabel ten;
     private javax.swing.JTextField tenDangNhap;
     private javax.swing.JTextField tenNguoiDung;
     private javax.swing.JPanel themNguoiDung;

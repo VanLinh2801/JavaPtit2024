@@ -9,8 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import src.backend.enums.vehicleTypeEnum;
-
-import java.awt.HeadlessException;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.Timestamp;
@@ -86,9 +84,6 @@ public class ModifyDailyTicket extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     jButton1ActionPerformed(evt);
-                } catch (HeadlessException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
                 } catch (ClassNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -171,8 +166,7 @@ public class ModifyDailyTicket extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)
-            throws HeadlessException, ClassNotFoundException, SQLException {// GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_jButton1ActionPerformed
         String bienSo = jTextField1.getText();
         vehicleTypeEnum loaiXe;
         if (jComboBox1.getSelectedItem().toString().equals("Ô tô"))

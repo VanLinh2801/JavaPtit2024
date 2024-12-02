@@ -376,7 +376,7 @@ public class ModifyUser extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Tên người dùng đã tồn tại", "Thông báo", 2);
         } else {
             Users user = new Users(username, password, fullName, gt, phone, workShift, role);
-            u.upDate(username, fullName, phone, gt, role, workShift, gt, old);
+            u.upDate(username, fullName, phone, gt, role, workShift, password, old);
             JOptionPane.showMessageDialog(this, "Cập nhật thành công", "Thông báo", 2);
             this.dispose();
         }

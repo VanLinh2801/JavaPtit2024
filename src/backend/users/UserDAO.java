@@ -83,7 +83,7 @@ public class UserDAO {
 
     public static int getUserId(String username) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
-        String query = "Select id fro users where username = ?";
+        String query = "Select id from users where username = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, username);
         ResultSet rs = preparedStatement.executeQuery();
@@ -91,6 +91,18 @@ public class UserDAO {
             return rs.getInt(1);
         connection.close();
         return 0;
+    }
+
+    public static String getFullName(String username) throws SQLException, ClassNotFoundException {
+        Connection connection = databaseConnector.getConnection();
+        String query = "Select fullName from users where username = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, username);
+        ResultSet rs = preparedStatement.executeQuery();
+        if (rs.next())
+            return rs.getString(1);
+        connection.close();
+        return "";
     }
 
     public void getUsersValue(JTable table, String search) throws ClassNotFoundException, SQLException {
@@ -147,7 +159,6 @@ public class UserDAO {
     }
 
     public boolean delete(String username) throws ClassNotFoundException, SQLException {
-        Connection con = databaseConnector.getConnection();
         int x = JOptionPane.showOptionDialog(
                 null,
                 "Bạn có chắc chắn xóa người dùng này không?",
@@ -157,6 +168,7 @@ public class UserDAO {
                 null,
                 new Object[] { "Xóa", "Hủy" },
                 "Hủy");
+        Connection con = databaseConnector.getConnection();
         if (x == JOptionPane.OK_OPTION) {
             String sql = "delete from users where username = ?";
             try {
