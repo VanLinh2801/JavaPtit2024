@@ -1,4 +1,7 @@
-
+# Quản lý bãi đỗ xe
+---
+Link báo cáo: https://docs.google.com/document/d/1I_KthIkkYzksk3W6GJOJou9JO26tVRqQ/edit?usp=sharing&ouid=103665712743104293226&rtpof=true&sd=true
+---
 # I. Yêu cầu dự án
 
 - Tài liệu này nhằm mục đích thiết kế chi tiết phần mềm **Quản lý bãi đỗ xe**. Phần mềm đáp ứng nhu cầu quản lý vé xe, xe cộ và nhân viên bảo vệ trong bãi đỗ. Bằng việc tự động hóa các thao tác, phần mềm giúp cho việc quản lý thông tin xe và vé trở nên dễ dàng, hiệu quả hơn.
