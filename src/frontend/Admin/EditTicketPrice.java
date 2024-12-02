@@ -1,9 +1,9 @@
-package src.frontend.Admin;
+package Admin;
 
-import src.backend.vehiclePrice.VehiclePriceDAO;
-import src.backend.vehiclePrice.VehiclePrice;
+import Dao.VehiclePriceDAO;
+import Dao.vehiclePrice;
 import com.formdev.flatlaf.FlatLightLaf;
-import src.backend.enums.vehicleTypeEnum;
+import enums.vehicleTypeEnum;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +13,6 @@ import javax.swing.UIManager;
 public class EditTicketPrice extends javax.swing.JFrame {
     int xx, xy;
     VehiclePriceDAO dao = new VehiclePriceDAO();
-
     public EditTicketPrice() {
         this.setUndecorated(true);
         FlatLightLaf.setup();
@@ -26,10 +25,8 @@ public class EditTicketPrice extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -129,10 +126,10 @@ public class EditTicketPrice extends javax.swing.JFrame {
         });
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 22, -1));
 
-        jLabel5.setText("Icon");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/browser (1).png"))); // NOI18N
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 70));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 60));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("22H - 6H");
@@ -166,15 +163,7 @@ public class EditTicketPrice extends javax.swing.JFrame {
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    jButton1ActionPerformed(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                jButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, 80, -1));
@@ -192,8 +181,7 @@ public class EditTicketPrice extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, 80, -1));
 
-        jComboBox1.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
         jComboBox1.setPreferredSize(new java.awt.Dimension(134, 30));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,34 +206,34 @@ public class EditTicketPrice extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 581,
-                                javax.swing.GroupLayout.PREFERRED_SIZE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 392,
-                                javax.swing.GroupLayout.PREFERRED_SIZE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel11MouseClicked
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         this.dispose();
-    }// GEN-LAST:event_jLabel11MouseClicked
+    }//GEN-LAST:event_jLabel11MouseClicked
 
-    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel1MouseDragged
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
-    }// GEN-LAST:event_jPanel1MouseDragged
+    }//GEN-LAST:event_jPanel1MouseDragged
 
-    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel1MousePressed
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         xx = evt.getX();
         xy = evt.getY();
-    }// GEN-LAST:event_jPanel1MousePressed
+    }//GEN-LAST:event_jPanel1MousePressed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
-        for (double i = 0; i <= 1.0; i += 0.1) {
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        for(double i = 0; i <= 1.0; i += 0.1){
             String s = "" + i;
             float f = Float.parseFloat(s);
             this.setOpacity(f);
@@ -255,74 +243,71 @@ public class EditTicketPrice extends javax.swing.JFrame {
                 Logger.getLogger(EditTicketPrice.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }// GEN-LAST:event_formWindowOpened
+    }//GEN-LAST:event_formWindowOpened
 
-    private void formMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMousePressed
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         xx = evt.getX();
         xy = evt.getY();
-    }// GEN-LAST:event_formMousePressed
+    }//GEN-LAST:event_formMousePressed
 
-    private void formMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseDragged
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
-    }// GEN-LAST:event_formMouseDragged
+    }//GEN-LAST:event_formMouseDragged
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
-    }// GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         jComboBox1.setSelectedItem("Ô tô");
         jTextField2.setText("");
         jTextField3.setText("");
         jTextField5.setText("");
         jTextField6.setText("");
-    }// GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextField2KeyTyped
-        if (!Character.isDigit(evt.getKeyChar())) {
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
             evt.consume();
         }
-    }// GEN-LAST:event_jTextField2KeyTyped
+    }//GEN-LAST:event_jTextField2KeyTyped
 
-    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextField3KeyTyped
-        if (!Character.isDigit(evt.getKeyChar())) {
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
             evt.consume();
         }
-    }// GEN-LAST:event_jTextField3KeyTyped
+    }//GEN-LAST:event_jTextField3KeyTyped
 
-    private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextField5KeyTyped
-        if (!Character.isDigit(evt.getKeyChar())) {
+    private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
             evt.consume();
         }
-    }// GEN-LAST:event_jTextField5KeyTyped
+    }//GEN-LAST:event_jTextField5KeyTyped
 
-    private void jTextField6KeyTyped(java.awt.event.KeyEvent evt) {// GEN-FIRST:event_jTextField6KeyTyped
-        if (!Character.isDigit(evt.getKeyChar())) {
+    private void jTextField6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
             evt.consume();
         }
-    }// GEN-LAST:event_jTextField6KeyTyped
+    }//GEN-LAST:event_jTextField6KeyTyped
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String sang = jTextField2.getText();
         String chieu = jTextField3.getText();
         String toi = jTextField5.getText();
         String thang = jTextField6.getText();
         vehicleTypeEnum loaiXe;
-        if (jComboBox1.getSelectedItem().toString().equals("Ô tô"))
-            loaiXe = vehicleTypeEnum.CAR;
-        else if (jComboBox1.getSelectedItem().toString().equals("Xe máy"))
-            loaiXe = vehicleTypeEnum.MOTORBIKE;
-        else
-            loaiXe = vehicleTypeEnum.BIKE;
-        if (sang.isEmpty() || chieu.isEmpty() || toi.isEmpty() || thang.isEmpty()) {
+        if(jComboBox1.getSelectedItem().toString().equals("Ô tô")) loaiXe = vehicleTypeEnum.CAR;
+        else if(jComboBox1.getSelectedItem().toString().equals("Xe máy")) loaiXe = vehicleTypeEnum.MOTORBIKE;
+        else loaiXe = vehicleTypeEnum.BIKE;
+        if(sang.isEmpty() || chieu.isEmpty() || toi.isEmpty() || thang.isEmpty()){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ dữ liệu", "Thông báo", 2);
-        } else {
+        }
+        else{
             try {
-                boolean ok = dao.updateVehiclePrice(loaiXe, Double.parseDouble(thang), Double.parseDouble(sang),
-                        Double.parseDouble(chieu), Double.parseDouble(toi));
-                if (ok) {
+                boolean ok = dao.updateVehiclePrice(loaiXe, Double.parseDouble(thang), Double.parseDouble(sang) ,Double.parseDouble(chieu), Double.parseDouble(toi));
+                if(ok){
                     JOptionPane.showMessageDialog(this, "Cập nhật thành công", "Thông báo", 2);
                 }
             } catch (SQLException ex) {
@@ -332,11 +317,11 @@ public class EditTicketPrice extends javax.swing.JFrame {
             }
         }
         AdminDashBoard.tableBangGia();
-    }// GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void init(vehicleTypeEnum loaiXe) {
+    private void init(vehicleTypeEnum loaiXe){
         try {
-            VehiclePrice v = dao.getVehiclePrice(loaiXe);
+            vehiclePrice v = dao.getVehiclePrice(loaiXe);
             jTextField2.setText(String.valueOf(v.getMorningPrice()));
             jTextField3.setText(String.valueOf(v.getAfternoonPrice()));
             jTextField5.setText(String.valueOf(v.getNightPrice()));
@@ -347,17 +332,14 @@ public class EditTicketPrice extends javax.swing.JFrame {
             Logger.getLogger(EditTicketPrice.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBox1ActionPerformed
+    
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         vehicleTypeEnum loaiXe;
-        if (jComboBox1.getSelectedItem().toString().equals("Ô tô"))
-            loaiXe = vehicleTypeEnum.CAR;
-        else if (jComboBox1.getSelectedItem().toString().equals("Xe máy"))
-            loaiXe = vehicleTypeEnum.MOTORBIKE;
-        else
-            loaiXe = vehicleTypeEnum.BIKE;
+        if(jComboBox1.getSelectedItem().toString().equals("Ô tô")) loaiXe = vehicleTypeEnum.CAR;
+        else if(jComboBox1.getSelectedItem().toString().equals("Xe máy")) loaiXe = vehicleTypeEnum.MOTORBIKE;
+        else loaiXe = vehicleTypeEnum.BIKE;
         init(loaiXe);
-    }// GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

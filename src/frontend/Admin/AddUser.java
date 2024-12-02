@@ -1,10 +1,8 @@
-package src.frontend.Admin;
+package Admin;
 
-import src.backend.users.UserDAO;
-import src.backend.users.Users;
+import Dao.UserDAO;
+import Dao.Users;
 import com.formdev.flatlaf.FlatLightLaf;
-
-import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +11,6 @@ import javax.swing.UIManager;
 
 public class AddUser extends javax.swing.JFrame {
     int xx, xy;
-
     public AddUser() {
         this.setUndecorated(true);
         initComponents();
@@ -25,8 +22,7 @@ public class AddUser extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
@@ -169,18 +165,7 @@ public class AddUser extends javax.swing.JFrame {
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    jButton1ActionPerformed(evt);
-                } catch (HeadlessException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                jButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 80, -1));
@@ -199,6 +184,7 @@ public class AddUser extends javax.swing.JFrame {
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 390, 80, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 51));
+        jPanel2.setMinimumSize(new java.awt.Dimension(582, 44));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -217,37 +203,38 @@ public class AddUser extends javax.swing.JFrame {
         });
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 22, -1));
 
-        jLabel5.setText("Icon");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, -1));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-user_white.png"))); // NOI18N
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 70));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 581,
-                                javax.swing.GroupLayout.PREFERRED_SIZE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel1MousePressed
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         xx = evt.getX();
         xy = evt.getY();
-    }// GEN-LAST:event_jPanel1MousePressed
+    }//GEN-LAST:event_jPanel1MousePressed
 
-    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel1MouseDragged
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
-    }// GEN-LAST:event_jPanel1MouseDragged
+    }//GEN-LAST:event_jPanel1MouseDragged
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
-        for (double i = 0; i <= 1.0; i += 0.1) {
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        for(double i = 0; i <= 1.0; i += 0.1){
             String s = "" + i;
             float f = Float.parseFloat(s);
             this.setOpacity(f);
@@ -257,25 +244,24 @@ public class AddUser extends javax.swing.JFrame {
                 Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }// GEN-LAST:event_formWindowOpened
+    }//GEN-LAST:event_formWindowOpened
 
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel11MouseClicked
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         this.dispose();
-    }// GEN-LAST:event_jLabel11MouseClicked
+    }//GEN-LAST:event_jLabel11MouseClicked
 
-    private void formMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMousePressed
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         xx = evt.getX();
         xy = evt.getY();
-    }// GEN-LAST:event_formMousePressed
+    }//GEN-LAST:event_formMousePressed
 
-    private void formMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseDragged
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
-    }// GEN-LAST:event_formMouseDragged
+    }//GEN-LAST:event_formMouseDragged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)
-            throws HeadlessException, ClassNotFoundException, SQLException {// GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String username = tenDangNhap.getText();
         String fullName = tenNguoiDung.getText();
         char[] passwordChars = jPasswordField1.getPassword();
@@ -283,23 +269,22 @@ public class AddUser extends javax.swing.JFrame {
         System.out.println(password);
         String phone = sdt.getText();
         String gt = "";
-        if (gtNam.isSelected())
-            gt = "Male";
-        else
-            gt = "Female";
+        if(gtNam.isSelected()) gt = "Male";
+        else gt = "Female";
         int workShift = 1;
-        if (dem.isSelected())
-            workShift = 2;
+        if(dem.isSelected()) workShift = 2;
         int role = 1;
-        if (baoVe.isSelected())
-            role = 2;
-        if (username.isEmpty() || fullName.isEmpty() || password.isEmpty() || phone.isEmpty()) {
+        if(baoVe.isSelected()) role = 2;
+        if(username.isEmpty() || fullName.isEmpty() || password.isEmpty() || phone.isEmpty()){
             JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ dữ liệu", "Thông báo", 2);
-        } else if (UserDAO.isPhoneExist(phone, 0)) {
+        }
+        else if(UserDAO.isPhoneExist(phone, 0)){
             JOptionPane.showMessageDialog(this, "Số điện thoại này đã được đăng ký", "Thông báo", 2);
-        } else if (UserDAO.isUsernameExist(username)) {
+        }
+        else if(UserDAO.isUsernameExist(username)){
             JOptionPane.showMessageDialog(this, "Tên người dùng đã tồn tại", "Thông báo", 2);
-        } else {
+        }
+        else{
             Users user = new Users(username, password, fullName, gt, phone, workShift, role);
             try {
                 UserDAO.addSecurityGuard(user);
@@ -312,11 +297,11 @@ public class AddUser extends javax.swing.JFrame {
             }
         }
         AdminDashBoard.tableNguoiDung();
-    }// GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
-    }// GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

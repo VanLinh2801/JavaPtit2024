@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class databaseConnector {
     private static final String URL = "jdbc:sqlserver://localhost:1433;databaseName=BTL_OOP;encrypt=true;trustServerCertificate=true";
     private static final String USER = "sa";
-    private static final String PASSWORD = "Nguyenngocnhat2004";
+    private static final String PASSWORD = "Nhn2101@";
 
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
         // Load the SQL Server JDBC driver (this step is optional in newer JDBC

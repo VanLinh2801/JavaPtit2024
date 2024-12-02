@@ -1,4 +1,4 @@
-package src.frontend.Admin;
+package Admin;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.logging.Level;
@@ -7,7 +7,6 @@ import javax.swing.UIManager;
 
 public class TicketInfo extends javax.swing.JFrame {
     int xx, xy;
-
     public TicketInfo() {
         this.setUndecorated(true);
         initComponents();
@@ -16,8 +15,7 @@ public class TicketInfo extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -116,10 +114,10 @@ public class TicketInfo extends javax.swing.JFrame {
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 22, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel5.setText("X");
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/info.png"))); // NOI18N
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 70));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 60));
 
         jTextField4.setPreferredSize(new java.awt.Dimension(65, 30));
         jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 340, -1));
@@ -148,34 +146,34 @@ public class TicketInfo extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 581,
-                                javax.swing.GroupLayout.PREFERRED_SIZE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 433,
-                                javax.swing.GroupLayout.PREFERRED_SIZE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel11MouseClicked
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         System.exit(0);
-    }// GEN-LAST:event_jLabel11MouseClicked
+    }//GEN-LAST:event_jLabel11MouseClicked
 
-    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel1MouseDragged
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
-    }// GEN-LAST:event_jPanel1MouseDragged
+    }//GEN-LAST:event_jPanel1MouseDragged
 
-    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel1MousePressed
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         xx = evt.getX();
         xy = evt.getY();
-    }// GEN-LAST:event_jPanel1MousePressed
+    }//GEN-LAST:event_jPanel1MousePressed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
-        for (double i = 0; i <= 1.0; i += 0.1) {
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+       for(double i = 0; i <= 1.0; i += 0.1){
             String s = "" + i;
             float f = Float.parseFloat(s);
             this.setOpacity(f);
@@ -185,18 +183,18 @@ public class TicketInfo extends javax.swing.JFrame {
                 Logger.getLogger(TicketInfo.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }// GEN-LAST:event_formWindowOpened
+    }//GEN-LAST:event_formWindowOpened
 
-    private void formMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMousePressed
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         xx = evt.getX();
         xy = evt.getY();
-    }// GEN-LAST:event_formMousePressed
+    }//GEN-LAST:event_formMousePressed
 
-    private void formMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseDragged
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
-    }// GEN-LAST:event_formMouseDragged
+    }//GEN-LAST:event_formMouseDragged
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

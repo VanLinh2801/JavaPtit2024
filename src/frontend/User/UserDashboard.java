@@ -1,6 +1,6 @@
-package src.frontend.User;
+package User;
 
-import src.frontend.Admin.AdminDashBoard;
+import Admin.AdminDashBoard;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.awt.Font;
@@ -17,13 +17,12 @@ public class UserDashboard extends javax.swing.JFrame {
     Color select = new Color(255, 255, 255);
     Color barNotSelect = new Color(225, 225, 225);
     Color barSelect = new Color(51, 153, 255);
-    Color downSelect = new Color(204, 255, 255);
+    Color downSelect = new Color(204,255,255);
     Color notSelectText = new Color(153, 153, 153);
     int xx, xy;
     Font font1 = new Font("Segoe UI", Font.PLAIN, 18);
     Font font2 = new Font("Segoe UI", Font.BOLD, 18);
     public String role;
-
     public UserDashboard() {
         this.setUndecorated(true);
         initComponents();
@@ -31,10 +30,8 @@ public class UserDashboard extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanelWindow = new javax.swing.JPanel();
@@ -264,11 +261,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanelBarLayout = new javax.swing.GroupLayout(jPanelBar);
         jPanelBar.setLayout(jPanelBarLayout);
         jPanelBarLayout.setHorizontalGroup(
-                jPanelBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1111, Short.MAX_VALUE));
+            jPanelBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1111, Short.MAX_VALUE)
+        );
         jPanelBarLayout.setVerticalGroup(
-                jPanelBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 50, Short.MAX_VALUE));
+            jPanelBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
 
         jPanelWindow.add(jPanelBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1111, 50));
 
@@ -280,11 +279,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 80, Short.MAX_VALUE));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 10, -1, -1));
 
@@ -293,11 +294,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
-                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 382, Short.MAX_VALUE));
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 382, Short.MAX_VALUE)
+        );
         jPanel9Layout.setVerticalGroup(
-                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(726, 10, -1, -1));
 
@@ -403,11 +406,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1sLayout = new javax.swing.GroupLayout(jPanel1s);
         jPanel1s.setLayout(jPanel1sLayout);
         jPanel1sLayout.setHorizontalGroup(
-                jPanel1sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel1sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel1sLayout.setVerticalGroup(
-                jPanel1sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel1sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel1s, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 10, -1, -1));
 
@@ -417,11 +422,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel2sLayout = new javax.swing.GroupLayout(jPanel2s);
         jPanel2s.setLayout(jPanel2sLayout);
         jPanel2sLayout.setHorizontalGroup(
-                jPanel2sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel2sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel2sLayout.setVerticalGroup(
-                jPanel2sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel2sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel2s, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 10, -1, -1));
 
@@ -431,11 +438,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel3sLayout = new javax.swing.GroupLayout(jPanel3s);
         jPanel3s.setLayout(jPanel3sLayout);
         jPanel3sLayout.setHorizontalGroup(
-                jPanel3sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel3sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel3sLayout.setVerticalGroup(
-                jPanel3sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel3sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel3s, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 10, -1, -1));
 
@@ -445,11 +454,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel4sLayout = new javax.swing.GroupLayout(jPanel4s);
         jPanel4s.setLayout(jPanel4sLayout);
         jPanel4sLayout.setHorizontalGroup(
-                jPanel4sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel4sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel4sLayout.setVerticalGroup(
-                jPanel4sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel4sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel4s, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 10, -1, -1));
 
@@ -459,11 +470,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel5sLayout = new javax.swing.GroupLayout(jPanel5s);
         jPanel5s.setLayout(jPanel5sLayout);
         jPanel5sLayout.setHorizontalGroup(
-                jPanel5sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel5sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel5sLayout.setVerticalGroup(
-                jPanel5sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel5sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel5s, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, -1));
 
@@ -473,11 +486,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel6sLayout = new javax.swing.GroupLayout(jPanel6s);
         jPanel6s.setLayout(jPanel6sLayout);
         jPanel6sLayout.setHorizontalGroup(
-                jPanel6sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel6sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel6sLayout.setVerticalGroup(
-                jPanel6sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel6sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel6s, new org.netbeans.lib.awtextra.AbsoluteConstraints(592, 10, -1, -1));
 
@@ -487,11 +502,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel8sLayout = new javax.swing.GroupLayout(jPanel8s);
         jPanel8s.setLayout(jPanel8sLayout);
         jPanel8sLayout.setHorizontalGroup(
-                jPanel8sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel8sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel8sLayout.setVerticalGroup(
-                jPanel8sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel8sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel8s, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 10, -1, -1));
 
@@ -501,11 +518,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel2uLayout = new javax.swing.GroupLayout(jPanel2u);
         jPanel2u.setLayout(jPanel2uLayout);
         jPanel2uLayout.setHorizontalGroup(
-                jPanel2uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 90, Short.MAX_VALUE));
+            jPanel2uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 90, Short.MAX_VALUE)
+        );
         jPanel2uLayout.setVerticalGroup(
-                jPanel2uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 3, Short.MAX_VALUE));
+            jPanel2uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel2u, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 7, -1, -1));
 
@@ -515,11 +534,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel3uLayout = new javax.swing.GroupLayout(jPanel3u);
         jPanel3u.setLayout(jPanel3uLayout);
         jPanel3uLayout.setHorizontalGroup(
-                jPanel3uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 100, Short.MAX_VALUE));
+            jPanel3uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
         jPanel3uLayout.setVerticalGroup(
-                jPanel3uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 3, Short.MAX_VALUE));
+            jPanel3uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel3u, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 7, -1, -1));
 
@@ -529,11 +550,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel4uLayout = new javax.swing.GroupLayout(jPanel4u);
         jPanel4u.setLayout(jPanel4uLayout);
         jPanel4uLayout.setHorizontalGroup(
-                jPanel4uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 90, Short.MAX_VALUE));
+            jPanel4uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 90, Short.MAX_VALUE)
+        );
         jPanel4uLayout.setVerticalGroup(
-                jPanel4uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 3, Short.MAX_VALUE));
+            jPanel4uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel4u, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 7, -1, -1));
 
@@ -543,11 +566,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel5uLayout = new javax.swing.GroupLayout(jPanel5u);
         jPanel5u.setLayout(jPanel5uLayout);
         jPanel5uLayout.setHorizontalGroup(
-                jPanel5uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 120, Short.MAX_VALUE));
+            jPanel5uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 120, Short.MAX_VALUE)
+        );
         jPanel5uLayout.setVerticalGroup(
-                jPanel5uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 3, Short.MAX_VALUE));
+            jPanel5uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel5u, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 7, -1, -1));
 
@@ -557,11 +582,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel6uLayout = new javax.swing.GroupLayout(jPanel6u);
         jPanel6u.setLayout(jPanel6uLayout);
         jPanel6uLayout.setHorizontalGroup(
-                jPanel6uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 100, Short.MAX_VALUE));
+            jPanel6uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
         jPanel6uLayout.setVerticalGroup(
-                jPanel6uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 3, Short.MAX_VALUE));
+            jPanel6uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel6u, new org.netbeans.lib.awtextra.AbsoluteConstraints(492, 7, -1, -1));
 
@@ -571,11 +598,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel8uLayout = new javax.swing.GroupLayout(jPanel8u);
         jPanel8u.setLayout(jPanel8uLayout);
         jPanel8uLayout.setHorizontalGroup(
-                jPanel8uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 130, Short.MAX_VALUE));
+            jPanel8uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 130, Short.MAX_VALUE)
+        );
         jPanel8uLayout.setVerticalGroup(
-                jPanel8uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 3, Short.MAX_VALUE));
+            jPanel8uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel8u, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 7, -1, -1));
 
@@ -585,11 +614,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1dLayout = new javax.swing.GroupLayout(jPanel1d);
         jPanel1d.setLayout(jPanel1dLayout);
         jPanel1dLayout.setHorizontalGroup(
-                jPanel1dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 82, Short.MAX_VALUE));
+            jPanel1dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 82, Short.MAX_VALUE)
+        );
         jPanel1dLayout.setVerticalGroup(
-                jPanel1dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel1dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel1d, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 87, -1, -1));
 
@@ -599,11 +630,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel2dLayout = new javax.swing.GroupLayout(jPanel2d);
         jPanel2d.setLayout(jPanel2dLayout);
         jPanel2dLayout.setHorizontalGroup(
-                jPanel2dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 92, Short.MAX_VALUE));
+            jPanel2dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 92, Short.MAX_VALUE)
+        );
         jPanel2dLayout.setVerticalGroup(
-                jPanel2dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel2dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel2d, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 87, -1, -1));
 
@@ -613,11 +646,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel3dLayout = new javax.swing.GroupLayout(jPanel3d);
         jPanel3d.setLayout(jPanel3dLayout);
         jPanel3dLayout.setHorizontalGroup(
-                jPanel3dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 104, Short.MAX_VALUE));
+            jPanel3dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 104, Short.MAX_VALUE)
+        );
         jPanel3dLayout.setVerticalGroup(
-                jPanel3dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel3dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel3d, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 87, -1, -1));
 
@@ -627,11 +662,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel4dLayout = new javax.swing.GroupLayout(jPanel4d);
         jPanel4d.setLayout(jPanel4dLayout);
         jPanel4dLayout.setHorizontalGroup(
-                jPanel4dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 94, Short.MAX_VALUE));
+            jPanel4dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 94, Short.MAX_VALUE)
+        );
         jPanel4dLayout.setVerticalGroup(
-                jPanel4dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel4dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel4d, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 87, -1, -1));
 
@@ -641,11 +678,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel5dLayout = new javax.swing.GroupLayout(jPanel5d);
         jPanel5d.setLayout(jPanel5dLayout);
         jPanel5dLayout.setHorizontalGroup(
-                jPanel5dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 124, Short.MAX_VALUE));
+            jPanel5dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 124, Short.MAX_VALUE)
+        );
         jPanel5dLayout.setVerticalGroup(
-                jPanel5dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel5dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel5d, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 87, -1, -1));
 
@@ -655,11 +694,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel6dLayout = new javax.swing.GroupLayout(jPanel6d);
         jPanel6d.setLayout(jPanel6dLayout);
         jPanel6dLayout.setHorizontalGroup(
-                jPanel6dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 104, Short.MAX_VALUE));
+            jPanel6dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 104, Short.MAX_VALUE)
+        );
         jPanel6dLayout.setVerticalGroup(
-                jPanel6dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel6dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel6d, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 87, -1, -1));
 
@@ -669,11 +710,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel8dLayout = new javax.swing.GroupLayout(jPanel8d);
         jPanel8d.setLayout(jPanel8dLayout);
         jPanel8dLayout.setHorizontalGroup(
-                jPanel8dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 134, Short.MAX_VALUE));
+            jPanel8dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 134, Short.MAX_VALUE)
+        );
         jPanel8dLayout.setVerticalGroup(
-                jPanel8dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel8dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel8d, new org.netbeans.lib.awtextra.AbsoluteConstraints(592, 87, -1, -1));
 
@@ -683,11 +726,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel9dLayout = new javax.swing.GroupLayout(jPanel9d);
         jPanel9d.setLayout(jPanel9dLayout);
         jPanel9dLayout.setHorizontalGroup(
-                jPanel9dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 384, Short.MAX_VALUE));
+            jPanel9dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 384, Short.MAX_VALUE)
+        );
         jPanel9dLayout.setVerticalGroup(
-                jPanel9dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel9dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel9d, new org.netbeans.lib.awtextra.AbsoluteConstraints(726, 87, -1, -1));
 
@@ -702,11 +747,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
-                jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1, Short.MAX_VALUE));
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1, Short.MAX_VALUE)
+        );
         jPanel24Layout.setVerticalGroup(
-                jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 350, Short.MAX_VALUE));
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 350, Short.MAX_VALUE)
+        );
 
         Paneltask2.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(555, 80, -1, -1));
 
@@ -746,8 +793,7 @@ public class UserDashboard extends javax.swing.JFrame {
         jLabel24.setText("Giờ vào");
         Paneltask2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
 
-        loaiXeLanVao.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
+        loaiXeLanVao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
         loaiXeLanVao.setPreferredSize(new java.awt.Dimension(62, 30));
         Paneltask2.add(loaiXeLanVao, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 320, -1));
         Paneltask2.add(bienSoLanRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 100, 320, 30));
@@ -774,8 +820,7 @@ public class UserDashboard extends javax.swing.JFrame {
         jLabel29.setText("Ngày ra");
         Paneltask2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, -1, -1));
 
-        loaiXeLanRa.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
+        loaiXeLanRa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
         loaiXeLanRa.setPreferredSize(new java.awt.Dimension(62, 30));
         Paneltask2.add(loaiXeLanRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 180, 320, -1));
 
@@ -837,11 +882,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
-                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1110, Short.MAX_VALUE));
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1110, Short.MAX_VALUE)
+        );
         jPanel5Layout.setVerticalGroup(
-                jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1, Short.MAX_VALUE));
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1, Short.MAX_VALUE)
+        );
 
         Paneltask3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, -1));
 
@@ -878,11 +925,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
-                jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel13Layout.setVerticalGroup(
-                jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 37, Short.MAX_VALUE));
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 37, Short.MAX_VALUE)
+        );
 
         chucNangPanel3.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 1, -1, -1));
 
@@ -916,11 +965,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
-                jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 100, Short.MAX_VALUE));
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
         jPanel16Layout.setVerticalGroup(
-                jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         chucNangPanel3.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 38, -1, -1));
 
@@ -930,11 +981,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
-                jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel17Layout.setVerticalGroup(
-                jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 37, Short.MAX_VALUE));
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 37, Short.MAX_VALUE)
+        );
 
         chucNangPanel3.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 1, -1, -1));
 
@@ -944,11 +997,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
-                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel18Layout.setVerticalGroup(
-                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 37, Short.MAX_VALUE));
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 37, Short.MAX_VALUE)
+        );
 
         chucNangPanel3.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 1, -1, -1));
 
@@ -970,11 +1025,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
-                jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 80, Short.MAX_VALUE));
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
         jPanel20Layout.setVerticalGroup(
-                jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         chucNangPanel3.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 38, -1, -1));
 
@@ -984,11 +1041,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
-                jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 80, Short.MAX_VALUE));
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
         jPanel21Layout.setVerticalGroup(
-                jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         chucNangPanel3.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 38, -1, -1));
 
@@ -999,11 +1058,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
-                jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 92, Short.MAX_VALUE));
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 92, Short.MAX_VALUE)
+        );
         jPanel22Layout.setVerticalGroup(
-                jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         chucNangPanel3.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(267, 38, -1, -1));
 
@@ -1014,18 +1075,19 @@ public class UserDashboard extends javax.swing.JFrame {
 
         bangVeThang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bangVeThang.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+            new Object [][] {
 
-                },
-                new String[] {
-                        "Chọn", "Mã Thẻ", "Biển Số", "Chủ Xe", "Ngày Kích Hoạt", "Ngày Hết Hạn", "Loại Xe", "Giá Vé"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    true, false, false, false, false, false, false, false
+            },
+            new String [] {
+                "Chọn", "Mã Thẻ", "Biển Số", "Chủ Xe", "Ngày Kích Hoạt", "Ngày Hết Hạn", "Loại Xe", "Giá Vé"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         JTableHeader header = bangVeThang.getTableHeader();
@@ -1061,11 +1123,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
         jPanel23Layout.setHorizontalGroup(
-                jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1110, Short.MAX_VALUE));
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1110, Short.MAX_VALUE)
+        );
         jPanel23Layout.setVerticalGroup(
-                jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1, Short.MAX_VALUE));
+            jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1, Short.MAX_VALUE)
+        );
 
         Paneltask4.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, -1, -1));
 
@@ -1079,18 +1143,19 @@ public class UserDashboard extends javax.swing.JFrame {
 
         jTable5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+            new Object [][] {
 
-                },
-                new String[] {
-                        "Chọn", "Mã Thẻ", "Biển Số", "Thời Gian Vào", "Loại Xe"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    true, false, false, false, false
+            },
+            new String [] {
+                "Chọn", "Mã Thẻ", "Biển Số", "Thời Gian Vào", "Loại Xe"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         JTableHeader header5 = jTable5.getTableHeader();
@@ -1142,11 +1207,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel71Layout = new javax.swing.GroupLayout(jPanel71);
         jPanel71.setLayout(jPanel71Layout);
         jPanel71Layout.setHorizontalGroup(
-                jPanel71Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel71Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel71Layout.setVerticalGroup(
-                jPanel71Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 37, Short.MAX_VALUE));
+            jPanel71Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 37, Short.MAX_VALUE)
+        );
 
         jPanel50.add(jPanel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 1, -1, -1));
 
@@ -1156,11 +1223,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel74Layout = new javax.swing.GroupLayout(jPanel74);
         jPanel74.setLayout(jPanel74Layout);
         jPanel74Layout.setHorizontalGroup(
-                jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 80, Short.MAX_VALUE));
+            jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
         jPanel74Layout.setVerticalGroup(
-                jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanel50.add(jPanel74, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 38, -1, -1));
 
@@ -1170,11 +1239,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel75Layout = new javax.swing.GroupLayout(jPanel75);
         jPanel75.setLayout(jPanel75Layout);
         jPanel75Layout.setHorizontalGroup(
-                jPanel75Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 80, Short.MAX_VALUE));
+            jPanel75Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
         jPanel75Layout.setVerticalGroup(
-                jPanel75Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel75Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanel50.add(jPanel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 38, -1, -1));
 
@@ -1219,32 +1290,31 @@ public class UserDashboard extends javax.swing.JFrame {
         jLabel75.setText("Loại xe");
         Paneltask5.add(jLabel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
 
-        loaiXeLanRa1.setModel(new javax.swing.DefaultComboBoxModel<>(
-                new String[] { "Tất cả loại xe", "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
+        loaiXeLanRa1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả loại xe", "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
         loaiXeLanRa1.setPreferredSize(new java.awt.Dimension(62, 30));
         Paneltask5.add(loaiXeLanRa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, 320, -1));
 
         jLabel86.setText("Loại vé");
         Paneltask5.add(jLabel86, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
-        loaiXeLanRa2.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả loại vé", "Vé lượt", "Vé tháng" }));
+        loaiXeLanRa2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả loại vé", "Vé lượt", "Vé tháng" }));
         loaiXeLanRa2.setPreferredSize(new java.awt.Dimension(62, 30));
         Paneltask5.add(loaiXeLanRa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 320, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+            new Object [][] {
 
-                },
-                new String[] {
-                        "Biển số", "Loại vé", "Loại xe"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    false, false, false
+            },
+            new String [] {
+                "Biển số", "Loại vé", "Loại xe"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         JTableHeader header6 = jTable1.getTableHeader();
@@ -1282,8 +1352,7 @@ public class UserDashboard extends javax.swing.JFrame {
         jDateChooser4.setPreferredSize(new java.awt.Dimension(83, 30));
         Paneltask5.add(jDateChooser4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 120, -1));
 
-        loaiXeLanRa3.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên 1", "Nhân viên 2", "Nhân viên 3" }));
+        loaiXeLanRa3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên 1", "Nhân viên 2", "Nhân viên 3" }));
         loaiXeLanRa3.setPreferredSize(new java.awt.Dimension(62, 30));
         Paneltask5.add(loaiXeLanRa3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, 120, -1));
 
@@ -1293,8 +1362,7 @@ public class UserDashboard extends javax.swing.JFrame {
         jLabel79.setText("Nhân viên vào");
         Paneltask5.add(jLabel79, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
 
-        loaiXeLanRa4.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên 1", "Nhân viên 2", "Nhân viên 3" }));
+        loaiXeLanRa4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên 1", "Nhân viên 2", "Nhân viên 3" }));
         loaiXeLanRa4.setPreferredSize(new java.awt.Dimension(62, 30));
         Paneltask5.add(loaiXeLanRa4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 120, -1));
 
@@ -1303,11 +1371,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
-                jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1, Short.MAX_VALUE));
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1, Short.MAX_VALUE)
+        );
         jPanel7Layout.setVerticalGroup(
-                jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 400, Short.MAX_VALUE));
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
 
         Paneltask5.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, -1, -1));
 
@@ -1347,29 +1417,28 @@ public class UserDashboard extends javax.swing.JFrame {
         jDateChooser2.setPreferredSize(new java.awt.Dimension(160, 30));
         jPanel26.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, -1, -1));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(
-                new String[] { "Tất cả loại xe", "Ô tô", "Xe máy", "Xe đạp điện, xe đạp" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả loại xe", "Ô tô", "Xe máy", "Xe đạp điện, xe đạp" }));
         jComboBox3.setPreferredSize(new java.awt.Dimension(90, 30));
         jPanel26.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 80, 110, -1));
 
-        jComboBox4.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả loại vé", "Vé tháng", "Vé lượt" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả loại vé", "Vé tháng", "Vé lượt" }));
         jComboBox4.setPreferredSize(new java.awt.Dimension(90, 30));
         jPanel26.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 80, 120, -1));
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+            new Object [][] {
 
-                },
-                new String[] {
-                        "Loại vé", "Loại xe", "Tồn đầu kỳ", "Vào trong kỳ", "Ra trong kỳ", "Tồn cuối kỳ", "Tổng tiền"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    false, false, false, false, false, false, false
+            },
+            new String [] {
+                "Loại vé", "Loại xe", "Tồn đầu kỳ", "Vào trong kỳ", "Ra trong kỳ", "Tồn cuối kỳ", "Tổng tiền"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         JTableHeader header2 = jTable4.getTableHeader();
@@ -1401,11 +1470,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
         jPanel27Layout.setHorizontalGroup(
-                jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 28, Short.MAX_VALUE));
+            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
         jPanel27Layout.setVerticalGroup(
-                jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 28, Short.MAX_VALUE));
+            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
 
         chucNang8.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 30, 30));
 
@@ -1414,11 +1485,13 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
         jPanel28.setLayout(jPanel28Layout);
         jPanel28Layout.setHorizontalGroup(
-                jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 28, Short.MAX_VALUE));
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
         jPanel28Layout.setVerticalGroup(
-                jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 28, Short.MAX_VALUE));
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
 
         chucNang8.add(jPanel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 30, 30));
 
@@ -1595,30 +1668,28 @@ public class UserDashboard extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1111, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jPanelWindow, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1111, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanelWindow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 660, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jPanelWindow, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 660, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanelWindow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel2MouseClicked
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         init();
         initText();
         initTask();
@@ -1636,9 +1707,9 @@ public class UserDashboard extends javax.swing.JFrame {
         Panel2text.setFont(font2);
         Panel2text.setForeground(barSelect);
         Paneltask2.setVisible(true);
-    }// GEN-LAST:event_jPanel2MouseClicked
+    }//GEN-LAST:event_jPanel2MouseClicked
 
-    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel3MouseClicked
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
         init();
         initText();
         initTask();
@@ -1656,9 +1727,9 @@ public class UserDashboard extends javax.swing.JFrame {
         Panel3text.setFont(font2);
         Panel3text.setForeground(barSelect);
         Paneltask3.setVisible(true);
-    }// GEN-LAST:event_jPanel3MouseClicked
+    }//GEN-LAST:event_jPanel3MouseClicked
 
-    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel4MouseClicked
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
         init();
         initText();
         initTask();
@@ -1676,9 +1747,9 @@ public class UserDashboard extends javax.swing.JFrame {
         Panel4text.setFont(font2);
         Panel4text.setForeground(barSelect);
         Paneltask4.setVisible(true);
-    }// GEN-LAST:event_jPanel4MouseClicked
+    }//GEN-LAST:event_jPanel4MouseClicked
 
-    private void JPanel5MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_JPanel5MouseClicked
+    private void JPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPanel5MouseClicked
         init();
         initText();
         initTask();
@@ -1696,9 +1767,9 @@ public class UserDashboard extends javax.swing.JFrame {
         Panel5text.setFont(font2);
         Panel5text.setForeground(barSelect);
         Paneltask5.setVisible(true);
-    }// GEN-LAST:event_JPanel5MouseClicked
+    }//GEN-LAST:event_JPanel5MouseClicked
 
-    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel6MouseClicked
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
         init();
         initText();
         initTask();
@@ -1716,9 +1787,9 @@ public class UserDashboard extends javax.swing.JFrame {
         Panel6text.setFont(font2);
         Panel6text.setForeground(barSelect);
         Paneltask6.setVisible(true);
-    }// GEN-LAST:event_jPanel6MouseClicked
+    }//GEN-LAST:event_jPanel6MouseClicked
 
-    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel8MouseClicked
+    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
         init();
         initText();
         initTask();
@@ -1736,20 +1807,20 @@ public class UserDashboard extends javax.swing.JFrame {
         Panel9text.setFont(font2);
         Panel9text.setForeground(barSelect);
         Paneltask8.setVisible(true);
-    }// GEN-LAST:event_jPanel8MouseClicked
+    }//GEN-LAST:event_jPanel8MouseClicked
 
-    private void task8_thongTinMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_task8_thongTinMouseClicked
+    private void task8_thongTinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_task8_thongTinMouseClicked
         thongTin.setVisible(true);
         doiMatKhau.setVisible(false);
-    }// GEN-LAST:event_task8_thongTinMouseClicked
+    }//GEN-LAST:event_task8_thongTinMouseClicked
 
-    private void task8_doiMatKhauMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_task8_doiMatKhauMouseClicked
+    private void task8_doiMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_task8_doiMatKhauMouseClicked
         doiMatKhau.setVisible(true);
         thongTin.setVisible(false);
-    }// GEN-LAST:event_task8_doiMatKhauMouseClicked
+    }//GEN-LAST:event_task8_doiMatKhauMouseClicked
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
-        for (double i = 0; i <= 1.0; i += 0.1) {
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        for(double i = 0; i <= 1.0; i += 0.1){
             String s = "" + i;
             float f = Float.parseFloat(s);
             this.setOpacity(f);
@@ -1759,20 +1830,20 @@ public class UserDashboard extends javax.swing.JFrame {
                 Logger.getLogger(UserDashboard.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }// GEN-LAST:event_formWindowOpened
+    }//GEN-LAST:event_formWindowOpened
 
-    private void formMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMousePressed
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         xx = evt.getX();
         xy = evt.getY();
-    }// GEN-LAST:event_formMousePressed
+    }//GEN-LAST:event_formMousePressed
 
-    private void formMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseDragged
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
-    }// GEN-LAST:event_formMouseDragged
+    }//GEN-LAST:event_formMouseDragged
 
-    private void init() {
+        private void init(){
         jPanel1.setBackground(notSelect);
         jPanel2.setBackground(notSelect);
         jPanel3.setBackground(notSelect);
@@ -1802,8 +1873,8 @@ public class UserDashboard extends javax.swing.JFrame {
         jPanel6d.setBackground(barNotSelect);
         jPanel8d.setBackground(barNotSelect);
     }
-
-    private void initText() {
+        
+    private void initText(){
         Panel2text.setForeground(notSelectText);
         Panel3text.setForeground(notSelectText);
         Panel4text.setForeground(notSelectText);
@@ -1818,8 +1889,8 @@ public class UserDashboard extends javax.swing.JFrame {
         Panel6text.setFont(font1);
         Panel9text.setFont(font1);
     }
-
-    private void initTask() {
+    
+    private void initTask(){
         Paneltask2.setVisible(false);
         Paneltask3.setVisible(false);
         Paneltask4.setVisible(false);
@@ -1827,7 +1898,7 @@ public class UserDashboard extends javax.swing.JFrame {
         Paneltask6.setVisible(false);
         Paneltask8.setVisible(false);
     }
-
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
