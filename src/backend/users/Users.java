@@ -94,4 +94,8 @@ public class Users {
         this.workShift = workShift;
     }
 
+    public int getRole() {
+        return roleId;
+    }
+
 }

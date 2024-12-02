@@ -12,6 +12,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class UserDAO {
+    // Connection con = databaseConnector.getConnection();
+    PreparedStatement ps;
+    Statement st;
+    ResultSet rs;
+
     public static boolean login(String username, String password) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
         String query = "SELECT * FROM Users WHERE username = ? AND password = ?";
@@ -62,7 +67,7 @@ public class UserDAO {
 
     public static boolean addSecurityGuard(Users user) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
-        String query = "INSERT INTO Users (username, password, fullName, gender, phoneNumber, workShift,roleId) VALUES (?, ?, ?, ?, ?, ?,2)";
+        String query = "INSERT INTO Users (username, password, fullName, gender, phoneNumber, workShift,roleId) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, user.getUserName());
         preparedStatement.setString(2, user.getPassword());
@@ -70,6 +75,7 @@ public class UserDAO {
         preparedStatement.setString(4, user.getGender());
         preparedStatement.setString(5, user.getPhoneNumber());
         preparedStatement.setInt(6, user.getShift());
+        preparedStatement.setInt(7, user.getRole());
         int result = preparedStatement.executeUpdate();
         connection.close();
         return result > 0;
@@ -87,11 +93,9 @@ public class UserDAO {
         return 0;
     }
 
-    public void getUsersValue(JTable table, String search) throws SQLException, ClassNotFoundException {
-        String sql = "select username, fullName, phoneNumber, roleId, workShift from users where concat(username, fullname, phoneNumber) like ? and RoleId = 2";
+    public void getUsersValue(JTable table, String search) throws ClassNotFoundException, SQLException {
+        String sql = "select username, fullName, phoneNumber, gender, workShift from users where concat(username, fullname, phoneNumber) like ? and RoleId = 2";
         Connection con = databaseConnector.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, "%" + search + "%");
@@ -104,7 +108,11 @@ public class UserDAO {
                 row[1] = rs.getString(1);
                 row[2] = rs.getString(2);
                 row[3] = rs.getString(3);
-                row[4] = "Bảo vệ";
+                String gt = rs.getString(4);
+                if (gt.equals("Male"))
+                    row[4] = "Nam";
+                else
+                    row[4] = "Nữ";
                 int shift = rs.getInt(5);
                 if (shift == 1)
                     row[5] = "Sáng";
@@ -115,6 +123,51 @@ public class UserDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void upDate(String username, String fullName, String phone, String gender, int role, int shift, String pass,
+            String old) throws ClassNotFoundException, SQLException {
+        String sql = "Update Users Set username = ?, fullName = ?, phoneNumber = ?, gender = ?, roleId = ?, workShift = ?, password = ? where username = ?";
+        Connection con = databaseConnector.getConnection();
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, fullName);
+            ps.setString(3, phone);
+            ps.setString(4, gender);
+            ps.setInt(5, role);
+            ps.setInt(6, shift);
+            ps.setString(7, pass);
+            ps.setString(8, old);
+            if (ps.executeUpdate() > 0)
+                return;
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public boolean delete(String username) throws ClassNotFoundException, SQLException {
+        Connection con = databaseConnector.getConnection();
+        int x = JOptionPane.showOptionDialog(
+                null,
+                "Bạn có chắc chắn xóa người dùng này không?",
+                "Thông báo",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new Object[] { "Xóa", "Hủy" },
+                "Hủy");
+        if (x == JOptionPane.OK_OPTION) {
+            String sql = "delete from users where username = ?";
+            try {
+                ps = con.prepareStatement(sql);
+                ps.setString(1, username);
+                return ps.executeUpdate() > 0;
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return false;
     }
 
     public static boolean removeSecurityGuard(int id) throws SQLException, ClassNotFoundException {
@@ -147,7 +200,7 @@ public class UserDAO {
         return result > 0;
     }
 
-    public static String getPassword(int id) throws SQLException, ClassNotFoundException {
+    public static String getPassword(int id) throws ClassNotFoundException, SQLException {
         Connection connection = databaseConnector.getConnection();
         ResultSet result;
         String res = "";
@@ -165,7 +218,25 @@ public class UserDAO {
         return res;
     }
 
-    public static boolean isPhoneExist(String phone, int id) throws SQLException, ClassNotFoundException {
+    public static String getPassword2(String username) throws ClassNotFoundException, SQLException {
+        Connection connection = databaseConnector.getConnection();
+        ResultSet result;
+        String res = "";
+        String query = "Select password from users where username = ?";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            result = preparedStatement.executeQuery();
+            if (result.next())
+                res = result.getString(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return res;
+    }
+
+    public static boolean isPhoneExist(String phone, int id) throws ClassNotFoundException {
         try {
             Connection connection = databaseConnector.getConnection();
             String query = "Select * from users where phonenumber = ? and id != ?";
@@ -182,7 +253,7 @@ public class UserDAO {
         return false;
     }
 
-    public static boolean isUsernameExist(String username) throws SQLException, ClassNotFoundException {
+    public static boolean isUsernameExist(String username) throws ClassNotFoundException {
         try {
             Connection connection = databaseConnector.getConnection();
             String query = "Select * from users where username = ?";
