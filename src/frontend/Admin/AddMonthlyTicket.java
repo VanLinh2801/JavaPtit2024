@@ -143,7 +143,7 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
         });
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 0, 22, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/credit-card_white.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/credit-card_white.png"))); // NOI18N
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 60));
@@ -235,6 +235,7 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)
             throws HeadlessException, ClassNotFoundException {// GEN-FIRST:event_jButton1ActionPerformed
         String bienSo = jTextField1.getText();
+        System.out.println(bienSo);
         vehicleTypeEnum loaiXe;
         if (jComboBox1.getSelectedItem().toString().equals("Ô tô"))
             loaiXe = vehicleTypeEnum.CAR;
