@@ -1,13 +1,14 @@
-package src.frontend.Admin;
+package Admin;
 
-import src.frontend.Custom.CustomRoundedPanel;
+import Customer.CustomRoundedPanel;
+import Dao.StatisticDAO;
+import Dao.Ticket;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.IntelliJTheme;
 import com.formdev.flatlaf.ui.FlatBorder;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.HeadlessException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingConstants;
@@ -16,34 +17,35 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
-
+import Dao.TicketDAO;
+import Dao.Users;
+import Dao.VehiclePriceDAO;
+import Dao.UserDAO;
+import enums.ticketTypeEnum;
+import enums.vehicleTypeEnum;
 import java.sql.SQLException;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import jdk.jfr.Timestamp;
-import src.backend.ticket.TicketDAO;
-import src.backend.users.UserDAO;
-import src.backend.users.Users;
-import src.backend.vehiclePrice.VehiclePriceDAO;
 
 public class AdminDashBoard extends javax.swing.JFrame {
     Color notSelect = new Color(240, 240, 240);
     Color select = new Color(255, 255, 255);
     Color barNotSelect = new Color(225, 225, 225);
     Color barSelect = new Color(51, 153, 255);
-    Color downSelect = new Color(204, 255, 255);
+    Color downSelect = new Color(204,255,255);
     Color notSelectText = new Color(153, 153, 153);
     int xx, xy;
     Font font1 = new Font("Segoe UI", Font.PLAIN, 18);
     Font font2 = new Font("Segoe UI", Font.BOLD, 18);
     Users u;
-    UserDAO userDao = new UserDAO();
-    VehiclePriceDAO vehicle = new VehiclePriceDAO();
+    static UserDAO userDao = new UserDAO();
+    static VehiclePriceDAO vehicle = new VehiclePriceDAO();
+    static StatisticDAO sta = new StatisticDAO();
     public static TicketDAO ticketDao = new TicketDAO();
-    DefaultTableModel model2, model3, model4, model5, model6;
-    public static DefaultTableModel model1;
-
-    public AdminDashBoard() throws ClassNotFoundException, SQLException {
+    public static DefaultTableModel model1, model2, model3, model4, model5, model6;
+    public AdminDashBoard() {
         try {
             u = UserDAO.getProfile();
         } catch (SQLException ex) {
@@ -61,11 +63,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
         tableVeThang();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        tongVe();
     }
-
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
@@ -187,17 +188,14 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jPanel50 = new javax.swing.JPanel();
         xoaVeLuot = new javax.swing.JPanel();
         jLabel67 = new javax.swing.JLabel();
-        jPanel69 = new javax.swing.JPanel();
-        jLabel68 = new javax.swing.JLabel();
         jPanel71 = new javax.swing.JPanel();
         jPanel74 = new javax.swing.JPanel();
-        jPanel75 = new javax.swing.JPanel();
         PanelTieuDe4 = new javax.swing.JPanel();
         Tieude5 = new javax.swing.JLabel();
         jLabel60 = new javax.swing.JLabel();
         jLabel61 = new javax.swing.JLabel();
-        jLabel62 = new javax.swing.JLabel();
-        jLabel63 = new javax.swing.JLabel();
+        tongVeLuot = new javax.swing.JLabel();
+        dangChonVeLuot = new javax.swing.JLabel();
         Paneltask5 = new javax.swing.JPanel();
         timKiemBienSo = new javax.swing.JTextField();
         jLabel69 = new javax.swing.JLabel();
@@ -217,12 +215,12 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel52 = new javax.swing.JLabel();
         jLabel64 = new javax.swing.JLabel();
         jLabel65 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        thongKeNgayVao = new com.toedter.calendar.JDateChooser();
+        thongKeNgayRa = new com.toedter.calendar.JDateChooser();
+        thongKeLoaiXe = new javax.swing.JComboBox<>();
+        thongKeLoaiVe = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        bangThongKe = new javax.swing.JTable();
         PanelTieuDe6 = new javax.swing.JPanel();
         Tieude8 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
@@ -264,15 +262,8 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jPanel51 = new javax.swing.JPanel();
         jPanel70 = new javax.swing.JPanel();
         jLabel87 = new javax.swing.JLabel();
-        jPanel72 = new javax.swing.JPanel();
-        jLabel88 = new javax.swing.JLabel();
         jPanel73 = new javax.swing.JPanel();
         jPanel76 = new javax.swing.JPanel();
-        jPanel77 = new javax.swing.JPanel();
-        jPanel78 = new javax.swing.JPanel();
-        jLabel89 = new javax.swing.JLabel();
-        jPanel79 = new javax.swing.JPanel();
-        jPanel80 = new javax.swing.JPanel();
         Paneltask8 = new javax.swing.JPanel();
         chucNang8 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -349,11 +340,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanelBarLayout = new javax.swing.GroupLayout(jPanelBar);
         jPanelBar.setLayout(jPanelBarLayout);
         jPanelBarLayout.setHorizontalGroup(
-                jPanelBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1111, Short.MAX_VALUE));
+            jPanelBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1111, Short.MAX_VALUE)
+        );
         jPanelBarLayout.setVerticalGroup(
-                jPanelBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 50, Short.MAX_VALUE));
+            jPanelBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
 
         jPanelWindow.add(jPanelBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1111, 50));
 
@@ -365,11 +358,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 80, Short.MAX_VALUE));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 10, -1, -1));
 
@@ -378,11 +373,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
-                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 280, Short.MAX_VALUE));
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 280, Short.MAX_VALUE)
+        );
         jPanel9Layout.setVerticalGroup(
-                jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(828, 10, -1, -1));
 
@@ -390,15 +387,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jPanel2.setPreferredSize(new java.awt.Dimension(90, 77));
         jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    jPanel2MouseClicked(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                jPanel2MouseClicked(evt);
             }
         });
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -420,15 +409,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jPanel3.setPreferredSize(new java.awt.Dimension(100, 77));
         jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    jPanel3MouseClicked(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                jPanel3MouseClicked(evt);
             }
         });
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -444,15 +425,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jPanel4.setPreferredSize(new java.awt.Dimension(90, 77));
         jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    jPanel4MouseClicked(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                jPanel4MouseClicked(evt);
             }
         });
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -468,15 +441,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         JPanel5.setPreferredSize(new java.awt.Dimension(120, 77));
         JPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    JPanel5MouseClicked(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                JPanel5MouseClicked(evt);
             }
         });
         JPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -492,15 +457,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jPanel6.setPreferredSize(new java.awt.Dimension(100, 77));
         jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    jPanel6MouseClicked(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                jPanel6MouseClicked(evt);
             }
         });
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -516,15 +473,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jPanel7.setPreferredSize(new java.awt.Dimension(100, 77));
         jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    jPanel7MouseClicked(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                jPanel7MouseClicked(evt);
             }
         });
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -540,15 +489,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jPanel8.setPreferredSize(new java.awt.Dimension(130, 77));
         jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    jPanel8MouseClicked(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                jPanel8MouseClicked(evt);
             }
         });
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -572,11 +513,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1sLayout = new javax.swing.GroupLayout(jPanel1s);
         jPanel1s.setLayout(jPanel1sLayout);
         jPanel1sLayout.setHorizontalGroup(
-                jPanel1sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel1sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel1sLayout.setVerticalGroup(
-                jPanel1sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel1sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel1s, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 10, -1, -1));
 
@@ -586,11 +529,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel2sLayout = new javax.swing.GroupLayout(jPanel2s);
         jPanel2s.setLayout(jPanel2sLayout);
         jPanel2sLayout.setHorizontalGroup(
-                jPanel2sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel2sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel2sLayout.setVerticalGroup(
-                jPanel2sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel2sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel2s, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 10, -1, -1));
 
@@ -600,11 +545,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel3sLayout = new javax.swing.GroupLayout(jPanel3s);
         jPanel3s.setLayout(jPanel3sLayout);
         jPanel3sLayout.setHorizontalGroup(
-                jPanel3sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel3sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel3sLayout.setVerticalGroup(
-                jPanel3sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel3sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel3s, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 10, -1, -1));
 
@@ -614,11 +561,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel4sLayout = new javax.swing.GroupLayout(jPanel4s);
         jPanel4s.setLayout(jPanel4sLayout);
         jPanel4sLayout.setHorizontalGroup(
-                jPanel4sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel4sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel4sLayout.setVerticalGroup(
-                jPanel4sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel4sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel4s, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 10, -1, -1));
 
@@ -628,11 +577,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel5sLayout = new javax.swing.GroupLayout(jPanel5s);
         jPanel5s.setLayout(jPanel5sLayout);
         jPanel5sLayout.setHorizontalGroup(
-                jPanel5sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel5sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel5sLayout.setVerticalGroup(
-                jPanel5sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel5sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel5s, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, -1));
 
@@ -642,11 +593,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel6sLayout = new javax.swing.GroupLayout(jPanel6s);
         jPanel6s.setLayout(jPanel6sLayout);
         jPanel6sLayout.setHorizontalGroup(
-                jPanel6sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel6sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel6sLayout.setVerticalGroup(
-                jPanel6sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel6sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel6s, new org.netbeans.lib.awtextra.AbsoluteConstraints(592, 10, -1, -1));
 
@@ -656,11 +609,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel7sLayout = new javax.swing.GroupLayout(jPanel7s);
         jPanel7s.setLayout(jPanel7sLayout);
         jPanel7sLayout.setHorizontalGroup(
-                jPanel7sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel7sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel7sLayout.setVerticalGroup(
-                jPanel7sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel7sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel7s, new org.netbeans.lib.awtextra.AbsoluteConstraints(694, 10, -1, -1));
 
@@ -670,11 +625,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel8sLayout = new javax.swing.GroupLayout(jPanel8s);
         jPanel8s.setLayout(jPanel8sLayout);
         jPanel8sLayout.setHorizontalGroup(
-                jPanel8sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel8sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel8sLayout.setVerticalGroup(
-                jPanel8sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 77, Short.MAX_VALUE));
+            jPanel8sLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 77, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel8s, new org.netbeans.lib.awtextra.AbsoluteConstraints(826, 10, -1, -1));
 
@@ -684,11 +641,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel2uLayout = new javax.swing.GroupLayout(jPanel2u);
         jPanel2u.setLayout(jPanel2uLayout);
         jPanel2uLayout.setHorizontalGroup(
-                jPanel2uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 90, Short.MAX_VALUE));
+            jPanel2uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 90, Short.MAX_VALUE)
+        );
         jPanel2uLayout.setVerticalGroup(
-                jPanel2uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 3, Short.MAX_VALUE));
+            jPanel2uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel2u, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 7, -1, -1));
 
@@ -698,11 +657,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel3uLayout = new javax.swing.GroupLayout(jPanel3u);
         jPanel3u.setLayout(jPanel3uLayout);
         jPanel3uLayout.setHorizontalGroup(
-                jPanel3uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 100, Short.MAX_VALUE));
+            jPanel3uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
         jPanel3uLayout.setVerticalGroup(
-                jPanel3uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 3, Short.MAX_VALUE));
+            jPanel3uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel3u, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 7, -1, -1));
 
@@ -712,11 +673,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel4uLayout = new javax.swing.GroupLayout(jPanel4u);
         jPanel4u.setLayout(jPanel4uLayout);
         jPanel4uLayout.setHorizontalGroup(
-                jPanel4uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 90, Short.MAX_VALUE));
+            jPanel4uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 90, Short.MAX_VALUE)
+        );
         jPanel4uLayout.setVerticalGroup(
-                jPanel4uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 3, Short.MAX_VALUE));
+            jPanel4uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel4u, new org.netbeans.lib.awtextra.AbsoluteConstraints(278, 7, -1, -1));
 
@@ -726,11 +689,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel5uLayout = new javax.swing.GroupLayout(jPanel5u);
         jPanel5u.setLayout(jPanel5uLayout);
         jPanel5uLayout.setHorizontalGroup(
-                jPanel5uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 120, Short.MAX_VALUE));
+            jPanel5uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 120, Short.MAX_VALUE)
+        );
         jPanel5uLayout.setVerticalGroup(
-                jPanel5uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 3, Short.MAX_VALUE));
+            jPanel5uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel5u, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 7, -1, -1));
 
@@ -740,11 +705,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel6uLayout = new javax.swing.GroupLayout(jPanel6u);
         jPanel6u.setLayout(jPanel6uLayout);
         jPanel6uLayout.setHorizontalGroup(
-                jPanel6uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 100, Short.MAX_VALUE));
+            jPanel6uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
         jPanel6uLayout.setVerticalGroup(
-                jPanel6uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 3, Short.MAX_VALUE));
+            jPanel6uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel6u, new org.netbeans.lib.awtextra.AbsoluteConstraints(492, 7, -1, -1));
 
@@ -754,11 +721,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel7uLayout = new javax.swing.GroupLayout(jPanel7u);
         jPanel7u.setLayout(jPanel7uLayout);
         jPanel7uLayout.setHorizontalGroup(
-                jPanel7uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 100, Short.MAX_VALUE));
+            jPanel7uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
         jPanel7uLayout.setVerticalGroup(
-                jPanel7uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 3, Short.MAX_VALUE));
+            jPanel7uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel7u, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 7, -1, -1));
 
@@ -768,11 +737,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel8uLayout = new javax.swing.GroupLayout(jPanel8u);
         jPanel8u.setLayout(jPanel8uLayout);
         jPanel8uLayout.setHorizontalGroup(
-                jPanel8uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 130, Short.MAX_VALUE));
+            jPanel8uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 130, Short.MAX_VALUE)
+        );
         jPanel8uLayout.setVerticalGroup(
-                jPanel8uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 3, Short.MAX_VALUE));
+            jPanel8uLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel8u, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 7, -1, -1));
 
@@ -782,11 +753,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1dLayout = new javax.swing.GroupLayout(jPanel1d);
         jPanel1d.setLayout(jPanel1dLayout);
         jPanel1dLayout.setHorizontalGroup(
-                jPanel1dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 82, Short.MAX_VALUE));
+            jPanel1dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 82, Short.MAX_VALUE)
+        );
         jPanel1dLayout.setVerticalGroup(
-                jPanel1dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel1dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel1d, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 87, -1, -1));
 
@@ -796,11 +769,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel2dLayout = new javax.swing.GroupLayout(jPanel2d);
         jPanel2d.setLayout(jPanel2dLayout);
         jPanel2dLayout.setHorizontalGroup(
-                jPanel2dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 92, Short.MAX_VALUE));
+            jPanel2dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 92, Short.MAX_VALUE)
+        );
         jPanel2dLayout.setVerticalGroup(
-                jPanel2dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel2dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel2d, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 87, -1, -1));
 
@@ -810,11 +785,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel3dLayout = new javax.swing.GroupLayout(jPanel3d);
         jPanel3d.setLayout(jPanel3dLayout);
         jPanel3dLayout.setHorizontalGroup(
-                jPanel3dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 104, Short.MAX_VALUE));
+            jPanel3dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 104, Short.MAX_VALUE)
+        );
         jPanel3dLayout.setVerticalGroup(
-                jPanel3dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel3dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel3d, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 87, -1, -1));
 
@@ -824,11 +801,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel4dLayout = new javax.swing.GroupLayout(jPanel4d);
         jPanel4d.setLayout(jPanel4dLayout);
         jPanel4dLayout.setHorizontalGroup(
-                jPanel4dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 94, Short.MAX_VALUE));
+            jPanel4dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 94, Short.MAX_VALUE)
+        );
         jPanel4dLayout.setVerticalGroup(
-                jPanel4dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel4dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel4d, new org.netbeans.lib.awtextra.AbsoluteConstraints(276, 87, -1, -1));
 
@@ -838,11 +817,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel5dLayout = new javax.swing.GroupLayout(jPanel5d);
         jPanel5d.setLayout(jPanel5dLayout);
         jPanel5dLayout.setHorizontalGroup(
-                jPanel5dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 124, Short.MAX_VALUE));
+            jPanel5dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 124, Short.MAX_VALUE)
+        );
         jPanel5dLayout.setVerticalGroup(
-                jPanel5dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel5dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel5d, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 87, -1, -1));
 
@@ -852,11 +833,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel6dLayout = new javax.swing.GroupLayout(jPanel6d);
         jPanel6d.setLayout(jPanel6dLayout);
         jPanel6dLayout.setHorizontalGroup(
-                jPanel6dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 104, Short.MAX_VALUE));
+            jPanel6dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 104, Short.MAX_VALUE)
+        );
         jPanel6dLayout.setVerticalGroup(
-                jPanel6dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel6dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel6d, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 87, -1, -1));
 
@@ -866,11 +849,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel7dLayout = new javax.swing.GroupLayout(jPanel7d);
         jPanel7d.setLayout(jPanel7dLayout);
         jPanel7dLayout.setHorizontalGroup(
-                jPanel7dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 104, Short.MAX_VALUE));
+            jPanel7dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 104, Short.MAX_VALUE)
+        );
         jPanel7dLayout.setVerticalGroup(
-                jPanel7dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel7dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel7d, new org.netbeans.lib.awtextra.AbsoluteConstraints(592, 87, -1, -1));
 
@@ -880,11 +865,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel8dLayout = new javax.swing.GroupLayout(jPanel8d);
         jPanel8d.setLayout(jPanel8dLayout);
         jPanel8dLayout.setHorizontalGroup(
-                jPanel8dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 134, Short.MAX_VALUE));
+            jPanel8dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 134, Short.MAX_VALUE)
+        );
         jPanel8dLayout.setVerticalGroup(
-                jPanel8dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel8dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel8d, new org.netbeans.lib.awtextra.AbsoluteConstraints(694, 87, -1, -1));
 
@@ -894,11 +881,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel9dLayout = new javax.swing.GroupLayout(jPanel9d);
         jPanel9d.setLayout(jPanel9dLayout);
         jPanel9dLayout.setHorizontalGroup(
-                jPanel9dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 282, Short.MAX_VALUE));
+            jPanel9dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 282, Short.MAX_VALUE)
+        );
         jPanel9dLayout.setVerticalGroup(
-                jPanel9dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel9dLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanelTask.add(jPanel9d, new org.netbeans.lib.awtextra.AbsoluteConstraints(828, 87, -1, -1));
 
@@ -913,11 +902,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
-                jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 1, Short.MAX_VALUE));
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1, Short.MAX_VALUE)
+        );
         jPanel24Layout.setVerticalGroup(
-                jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 350, Short.MAX_VALUE));
+            jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 350, Short.MAX_VALUE)
+        );
 
         Paneltask2.add(jPanel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(555, 80, -1, -1));
 
@@ -943,9 +934,11 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Paneltask2.add(jPanel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, -1));
 
         thongBaoLanVao.setEditable(false);
+        thongBaoLanVao.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Paneltask2.add(thongBaoLanVao, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, 330, 40));
 
         thongBaoLanRa.setEditable(false);
+        thongBaoLanRa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         Paneltask2.add(thongBaoLanRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 450, 330, 40));
 
         jLabel5.setText("Loại xe");
@@ -957,8 +950,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel24.setText("Giờ vào");
         Paneltask2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
 
-        loaiXeLanVao.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
+        loaiXeLanVao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
         loaiXeLanVao.setPreferredSize(new java.awt.Dimension(62, 30));
         Paneltask2.add(loaiXeLanVao, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 320, -1));
         Paneltask2.add(bienSoLanRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 100, 320, 30));
@@ -985,8 +977,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel29.setText("Ngày ra");
         Paneltask2.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 300, -1, -1));
 
-        loaiXeLanRa.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
+        loaiXeLanRa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
         loaiXeLanRa.setPreferredSize(new java.awt.Dimension(62, 30));
         Paneltask2.add(loaiXeLanRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 180, 320, -1));
 
@@ -1046,6 +1037,11 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         tinhTien.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tinhTien = new CustomRoundedPanel(50, 50);
+        tinhTien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tinhTienMouseClicked(evt);
+            }
+        });
         tinhTien.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -1090,15 +1086,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         search3text.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                try {
-                    search3textKeyReleased(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                search3textKeyReleased(evt);
             }
         });
         Paneltask3.add(search3text, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 95, 160, 30));
@@ -1113,15 +1101,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         giaHanVeThang.setPreferredSize(new java.awt.Dimension(91, 37));
         giaHanVeThang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    giaHanVeThangMouseClicked(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                giaHanVeThangMouseClicked(evt);
             }
         });
         giaHanVeThang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1144,11 +1124,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
-                jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel13Layout.setVerticalGroup(
-                jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 37, Short.MAX_VALUE));
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 37, Short.MAX_VALUE)
+        );
 
         chucNangPanel3.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 1, -1, -1));
 
@@ -1157,15 +1139,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         xoaVeThang.setPreferredSize(new java.awt.Dimension(80, 37));
         xoaVeThang.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    xoaVeThangMouseClicked(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                xoaVeThangMouseClicked(evt);
             }
         });
         xoaVeThang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1180,6 +1154,11 @@ public class AdminDashBoard extends javax.swing.JFrame {
         suaVeThang.setBackground(new java.awt.Color(255, 255, 255));
         suaVeThang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         suaVeThang.setPreferredSize(new java.awt.Dimension(80, 37));
+        suaVeThang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                suaVeThangMouseClicked(evt);
+            }
+        });
         suaVeThang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1195,11 +1174,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
-                jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 100, Short.MAX_VALUE));
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
         jPanel16Layout.setVerticalGroup(
-                jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         chucNangPanel3.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 38, -1, -1));
 
@@ -1209,11 +1190,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
         jPanel17Layout.setHorizontalGroup(
-                jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel17Layout.setVerticalGroup(
-                jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 37, Short.MAX_VALUE));
+            jPanel17Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 37, Short.MAX_VALUE)
+        );
 
         chucNangPanel3.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 1, -1, -1));
 
@@ -1223,11 +1206,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
-                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel18Layout.setVerticalGroup(
-                jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 37, Short.MAX_VALUE));
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 37, Short.MAX_VALUE)
+        );
 
         chucNangPanel3.add(jPanel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 1, -1, -1));
 
@@ -1254,11 +1239,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
         jPanel20.setLayout(jPanel20Layout);
         jPanel20Layout.setHorizontalGroup(
-                jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 80, Short.MAX_VALUE));
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
         jPanel20Layout.setVerticalGroup(
-                jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         chucNangPanel3.add(jPanel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 38, -1, -1));
 
@@ -1268,11 +1255,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
-                jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 80, Short.MAX_VALUE));
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
         jPanel21Layout.setVerticalGroup(
-                jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         chucNangPanel3.add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 38, -1, -1));
 
@@ -1283,11 +1272,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
-                jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 92, Short.MAX_VALUE));
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 92, Short.MAX_VALUE)
+        );
         jPanel22Layout.setVerticalGroup(
-                jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         chucNangPanel3.add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(267, 38, -1, -1));
 
@@ -1295,21 +1286,27 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jScrollPane1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseMoved(evt);
+            }
+        });
 
         bangVeThang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bangVeThang.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+            new Object [][] {
 
-                },
-                new String[] {
-                        "Chọn", "Biển Số", "Ngày Kích Hoạt", "Ngày Hết Hạn", "Loại Xe", "Giá Vé"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    true, false, false, false, false, false
+            },
+            new String [] {
+                "Chọn", "Biển Số", "Ngày Kích Hoạt", "Ngày Hết Hạn", "Loại Xe", "Giá Vé"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         JTableHeader header = bangVeThang.getTableHeader();
@@ -1345,21 +1342,27 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         jScrollPane5.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jScrollPane5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jScrollPane5MouseMoved(evt);
+            }
+        });
 
         bangVeLuot.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         bangVeLuot.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+            new Object [][] {
 
-                },
-                new String[] {
-                        "Chọn", "Biển Số", "Thời Gian Vào", "Loại Xe"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    true, false, false, false
+            },
+            new String [] {
+                "Chọn", "Biển Số", "Thời Gian Vào", "Loại Xe"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         JTableHeader header5 = bangVeLuot.getTableHeader();
@@ -1377,22 +1380,14 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         search3text1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                try {
-                    search3text1KeyReleased(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                search3text1KeyReleased(evt);
             }
         });
         Paneltask4.add(search3text1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 95, 160, 30));
 
         jPanel50.setBackground(new java.awt.Color(255, 255, 255));
         jPanel50.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jPanel50.setPreferredSize(new java.awt.Dimension(164, 40));
+        jPanel50.setPreferredSize(new java.awt.Dimension(83, 40));
         jPanel50.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         xoaVeLuot.setBackground(new java.awt.Color(255, 255, 255));
@@ -1400,15 +1395,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         xoaVeLuot.setPreferredSize(new java.awt.Dimension(80, 37));
         xoaVeLuot.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    xoaVeLuotMouseClicked(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                xoaVeLuotMouseClicked(evt);
             }
         });
         xoaVeLuot.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1420,29 +1407,19 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         jPanel50.add(xoaVeLuot, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, -1, -1));
 
-        jPanel69.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel69.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel69.setPreferredSize(new java.awt.Dimension(80, 37));
-        jPanel69.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel68.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel68.setText("SỬA");
-        jLabel68.setPreferredSize(new java.awt.Dimension(52, 16));
-        jPanel69.add(jLabel68, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 10, 30, -1));
-
-        jPanel50.add(jPanel69, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 1, -1, -1));
-
         jPanel71.setBackground(new java.awt.Color(51, 153, 255));
         jPanel71.setPreferredSize(new java.awt.Dimension(2, 37));
 
         javax.swing.GroupLayout jPanel71Layout = new javax.swing.GroupLayout(jPanel71);
         jPanel71.setLayout(jPanel71Layout);
         jPanel71Layout.setHorizontalGroup(
-                jPanel71Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel71Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel71Layout.setVerticalGroup(
-                jPanel71Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 37, Short.MAX_VALUE));
+            jPanel71Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 37, Short.MAX_VALUE)
+        );
 
         jPanel50.add(jPanel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 1, -1, -1));
 
@@ -1452,27 +1429,15 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel74Layout = new javax.swing.GroupLayout(jPanel74);
         jPanel74.setLayout(jPanel74Layout);
         jPanel74Layout.setHorizontalGroup(
-                jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 80, Short.MAX_VALUE));
+            jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
         jPanel74Layout.setVerticalGroup(
-                jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel74Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanel50.add(jPanel74, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 38, -1, -1));
-
-        jPanel75.setBackground(new java.awt.Color(51, 153, 255));
-        jPanel75.setPreferredSize(new java.awt.Dimension(80, 2));
-
-        javax.swing.GroupLayout jPanel75Layout = new javax.swing.GroupLayout(jPanel75);
-        jPanel75.setLayout(jPanel75Layout);
-        jPanel75Layout.setHorizontalGroup(
-                jPanel75Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 80, Short.MAX_VALUE));
-        jPanel75Layout.setVerticalGroup(
-                jPanel75Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
-
-        jPanel50.add(jPanel75, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 38, -1, -1));
 
         Paneltask4.add(jPanel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
 
@@ -1495,13 +1460,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel61.setText("Tổng số:");
         Paneltask4.add(jLabel61, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, -1, -1));
 
-        jLabel62.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel62.setText("0");
-        Paneltask4.add(jLabel62, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 10, -1));
+        tongVeLuot.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tongVeLuot.setText("0");
+        Paneltask4.add(tongVeLuot, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 10, -1));
 
-        jLabel63.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel63.setText("0");
-        Paneltask4.add(jLabel63, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, -1, -1));
+        dangChonVeLuot.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        dangChonVeLuot.setText("0");
+        Paneltask4.add(dangChonVeLuot, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, -1, -1));
 
         jPanelWindow.add(Paneltask4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, -1, -1));
 
@@ -1519,24 +1484,24 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel86.setText("Loại vé");
         Paneltask5.add(jLabel86, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
 
-        timKiemLoaiVe.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả loại vé", "Vé lượt", "Vé tháng" }));
+        timKiemLoaiVe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả loại vé", "Vé lượt", "Vé tháng" }));
         timKiemLoaiVe.setPreferredSize(new java.awt.Dimension(62, 30));
         Paneltask5.add(timKiemLoaiVe, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 320, -1));
 
         bangTimKiem.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+            new Object [][] {
 
-                },
-                new String[] {
-                        "Biển số", "Loại vé", "Loại xe"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    false, false, false
+            },
+            new String [] {
+                "Biển số", "Loại vé", "Loại xe", "Giờ vào", "Giờ ra"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         JTableHeader header6 = bangTimKiem.getTableHeader();
@@ -1569,21 +1534,12 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    jButton2ActionPerformed(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                jButton2ActionPerformed(evt);
             }
         });
         Paneltask5.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, -1, -1));
 
-        timKiemLoaiXe.setModel(new javax.swing.DefaultComboBoxModel<>(
-                new String[] { "Tất cả loại xe", "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
+        timKiemLoaiXe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả loại xe", "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
         timKiemLoaiXe.setPreferredSize(new java.awt.Dimension(62, 30));
         Paneltask5.add(timKiemLoaiXe, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 320, -1));
 
@@ -1623,45 +1579,44 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel65.setText("Loại vé:");
         jPanel26.add(jLabel65, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 85, 70, -1));
 
-        jDateChooser1.setBackground(new java.awt.Color(255, 255, 255));
-        jDateChooser1.setPreferredSize(new java.awt.Dimension(160, 30));
-        jPanel26.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
+        thongKeNgayVao.setBackground(new java.awt.Color(255, 255, 255));
+        thongKeNgayVao.setPreferredSize(new java.awt.Dimension(160, 30));
+        jPanel26.add(thongKeNgayVao, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
 
-        jDateChooser2.setBackground(new java.awt.Color(255, 255, 255));
-        jDateChooser2.setPreferredSize(new java.awt.Dimension(160, 30));
-        jPanel26.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, -1, -1));
+        thongKeNgayRa.setBackground(new java.awt.Color(255, 255, 255));
+        thongKeNgayRa.setPreferredSize(new java.awt.Dimension(160, 30));
+        jPanel26.add(thongKeNgayRa, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, -1, -1));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(
-                new String[] { "Tất cả loại xe", "Ô tô", "Xe máy", "Xe đạp điện, xe đạp" }));
-        jComboBox3.setPreferredSize(new java.awt.Dimension(90, 30));
-        jPanel26.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 80, 110, -1));
+        thongKeLoaiXe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả loại xe", "Ô tô", "Xe máy", "Xe đạp điện, xe đạp" }));
+        thongKeLoaiXe.setPreferredSize(new java.awt.Dimension(90, 30));
+        jPanel26.add(thongKeLoaiXe, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 80, 110, -1));
 
-        jComboBox4.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả loại vé", "Vé tháng", "Vé lượt" }));
-        jComboBox4.setPreferredSize(new java.awt.Dimension(90, 30));
-        jPanel26.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 120, -1));
+        thongKeLoaiVe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả loại vé", "Vé tháng", "Vé lượt" }));
+        thongKeLoaiVe.setPreferredSize(new java.awt.Dimension(90, 30));
+        jPanel26.add(thongKeLoaiVe, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 120, -1));
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+        bangThongKe.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-                },
-                new String[] {
-                        "Loại vé", "Loại xe", "Tồn đầu kỳ", "Vào trong kỳ", "Ra trong kỳ", "Tồn cuối kỳ", "Tổng tiền"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    false, false, false, false, false, false, false
+            },
+            new String [] {
+                "Loại vé", "Loại xe", "Tồn đầu kỳ", "Vào trong kỳ", "Ra trong kỳ", "Tồn cuối kỳ", "Tổng tiền"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
-        JTableHeader header2 = jTable4.getTableHeader();
+        JTableHeader header2 = bangThongKe.getTableHeader();
         header2.setFont(new Font("Segoe UI", Font.BOLD, 16));
         header2.setBackground(Color.WHITE);
         DefaultTableCellRenderer renderer2 = (DefaultTableCellRenderer) header.getDefaultRenderer();
         renderer2.setHorizontalAlignment(SwingConstants.CENTER);
-        jScrollPane2.setViewportView(jTable4);
+        jScrollPane2.setViewportView(bangThongKe);
 
         jPanel26.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 1040, 340));
 
@@ -1682,6 +1637,11 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jButton3.setText("Thống Kê");
         jButton3.setBorderPainted(false);
         jButton3.setPreferredSize(new java.awt.Dimension(87, 30));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel26.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 80, -1, -1));
 
         Paneltask6.add(jPanel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 510));
@@ -1704,11 +1664,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
         jPanel31.setLayout(jPanel31Layout);
         jPanel31Layout.setHorizontalGroup(
-                jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 28, Short.MAX_VALUE));
+            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
         jPanel31Layout.setVerticalGroup(
-                jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 28, Short.MAX_VALUE));
+            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
 
         chucNang7.add(jPanel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 30, 30));
 
@@ -1717,11 +1679,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel32Layout = new javax.swing.GroupLayout(jPanel32);
         jPanel32.setLayout(jPanel32Layout);
         jPanel32Layout.setHorizontalGroup(
-                jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 28, Short.MAX_VALUE));
+            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
         jPanel32Layout.setVerticalGroup(
-                jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 28, Short.MAX_VALUE));
+            jPanel32Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
 
         chucNang7.add(jPanel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 30, 30));
 
@@ -1774,8 +1738,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         quanLyNguoiDung.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
 
         chucNangQuanLyNguoiDung.setBackground(new java.awt.Color(255, 255, 255));
-        chucNangQuanLyNguoiDung
-                .setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        chucNangQuanLyNguoiDung.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         chucNangQuanLyNguoiDung.setPreferredSize(new java.awt.Dimension(360, 40));
         chucNangQuanLyNguoiDung.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1785,17 +1748,24 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel45Layout = new javax.swing.GroupLayout(jPanel45);
         jPanel45.setLayout(jPanel45Layout);
         jPanel45Layout.setHorizontalGroup(
-                jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel45Layout.setVerticalGroup(
-                jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 37, Short.MAX_VALUE));
+            jPanel45Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 37, Short.MAX_VALUE)
+        );
 
         chucNangQuanLyNguoiDung.add(jPanel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 1, -1, -1));
 
         xoaNguoiDung.setBackground(new java.awt.Color(255, 255, 255));
         xoaNguoiDung.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         xoaNguoiDung.setPreferredSize(new java.awt.Dimension(80, 37));
+        xoaNguoiDung.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                xoaNguoiDungMouseClicked(evt);
+            }
+        });
         xoaNguoiDung.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel53.setText("XÓA");
@@ -1829,11 +1799,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel48Layout = new javax.swing.GroupLayout(jPanel48);
         jPanel48.setLayout(jPanel48Layout);
         jPanel48Layout.setHorizontalGroup(
-                jPanel48Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 100, Short.MAX_VALUE));
+            jPanel48Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
         jPanel48Layout.setVerticalGroup(
-                jPanel48Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel48Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         chucNangQuanLyNguoiDung.add(jPanel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 38, -1, -1));
 
@@ -1843,11 +1815,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel49Layout = new javax.swing.GroupLayout(jPanel49);
         jPanel49.setLayout(jPanel49Layout);
         jPanel49Layout.setHorizontalGroup(
-                jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel49Layout.setVerticalGroup(
-                jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 37, Short.MAX_VALUE));
+            jPanel49Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 37, Short.MAX_VALUE)
+        );
 
         chucNangQuanLyNguoiDung.add(jPanel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 1, -1, -1));
 
@@ -1873,11 +1847,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel52Layout = new javax.swing.GroupLayout(jPanel52);
         jPanel52.setLayout(jPanel52Layout);
         jPanel52Layout.setHorizontalGroup(
-                jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 80, Short.MAX_VALUE));
+            jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
         jPanel52Layout.setVerticalGroup(
-                jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel52Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         chucNangQuanLyNguoiDung.add(jPanel52, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 38, -1, -1));
 
@@ -1887,30 +1863,32 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel53Layout = new javax.swing.GroupLayout(jPanel53);
         jPanel53.setLayout(jPanel53Layout);
         jPanel53Layout.setHorizontalGroup(
-                jPanel53Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 80, Short.MAX_VALUE));
+            jPanel53Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
         jPanel53Layout.setVerticalGroup(
-                jPanel53Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel53Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         chucNangQuanLyNguoiDung.add(jPanel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 38, -1, -1));
 
-        quanLyNguoiDung.add(chucNangQuanLyNguoiDung,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 265, -1));
+        quanLyNguoiDung.add(chucNangQuanLyNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 265, -1));
 
         bangNguoiDung.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+            new Object [][] {
 
-                },
-                new String[] {
-                        "Chọn", "Tên đăng nhập", "Tên người dùng", "Số điện thoại", "Chức vụ", "Ca làm việc"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    true, false, false, false, false, false
+            },
+            new String [] {
+                "Chọn", "Tên đăng nhập", "Tên người dùng", "Số điện thoại", "Giới tính", "Ca làm việc"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         JTableHeader header1 = bangNguoiDung.getTableHeader();
@@ -1949,18 +1927,19 @@ public class AdminDashBoard extends javax.swing.JFrame {
         bangGiaVe.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
 
         giaVe.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
+            new Object [][] {
 
-                },
-                new String[] {
-                        "Loại xe", "6h - 18h", "18h - 22h", "22h - 6h", "Vé tháng"
-                }) {
-            boolean[] canEdit = new boolean[] {
-                    false, false, false, false, false
+            },
+            new String [] {
+                "Loại xe", "6h - 18h", "18h - 22h", "22h - 6h", "Vé tháng"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit[columnIndex];
+                return canEdit [columnIndex];
             }
         });
         JTableHeader header8 = giaVe.getTableHeader();
@@ -1974,32 +1953,25 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         jPanel51.setBackground(new java.awt.Color(255, 255, 255));
         jPanel51.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jPanel51.setPreferredSize(new java.awt.Dimension(246, 40));
+        jPanel51.setPreferredSize(new java.awt.Dimension(83, 40));
         jPanel51.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel70.setBackground(new java.awt.Color(255, 255, 255));
         jPanel70.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel70.setPreferredSize(new java.awt.Dimension(80, 37));
+        jPanel70.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel70MouseClicked(evt);
+            }
+        });
         jPanel70.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel87.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel87.setText("XÓA");
+        jLabel87.setText("SỬA");
         jLabel87.setPreferredSize(new java.awt.Dimension(52, 16));
         jPanel70.add(jLabel87, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 10, 30, -1));
 
         jPanel51.add(jPanel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, -1, -1));
-
-        jPanel72.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel72.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel72.setPreferredSize(new java.awt.Dimension(80, 37));
-        jPanel72.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel88.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel88.setText("SỬA");
-        jLabel88.setPreferredSize(new java.awt.Dimension(52, 16));
-        jPanel72.add(jLabel88, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 10, 30, -1));
-
-        jPanel51.add(jPanel72, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 1, -1, -1));
 
         jPanel73.setBackground(new java.awt.Color(51, 153, 255));
         jPanel73.setPreferredSize(new java.awt.Dimension(2, 37));
@@ -2007,11 +1979,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel73Layout = new javax.swing.GroupLayout(jPanel73);
         jPanel73.setLayout(jPanel73Layout);
         jPanel73Layout.setHorizontalGroup(
-                jPanel73Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel73Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
         jPanel73Layout.setVerticalGroup(
-                jPanel73Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 37, Short.MAX_VALUE));
+            jPanel73Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 37, Short.MAX_VALUE)
+        );
 
         jPanel51.add(jPanel73, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 1, -1, -1));
 
@@ -2021,67 +1995,15 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel76Layout = new javax.swing.GroupLayout(jPanel76);
         jPanel76.setLayout(jPanel76Layout);
         jPanel76Layout.setHorizontalGroup(
-                jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 80, Short.MAX_VALUE));
+            jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+        );
         jPanel76Layout.setVerticalGroup(
-                jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
+            jPanel76Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 2, Short.MAX_VALUE)
+        );
 
         jPanel51.add(jPanel76, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 38, -1, -1));
-
-        jPanel77.setBackground(new java.awt.Color(51, 153, 255));
-        jPanel77.setPreferredSize(new java.awt.Dimension(80, 2));
-
-        javax.swing.GroupLayout jPanel77Layout = new javax.swing.GroupLayout(jPanel77);
-        jPanel77.setLayout(jPanel77Layout);
-        jPanel77Layout.setHorizontalGroup(
-                jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 80, Short.MAX_VALUE));
-        jPanel77Layout.setVerticalGroup(
-                jPanel77Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
-
-        jPanel51.add(jPanel77, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 38, -1, -1));
-
-        jPanel78.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel78.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel78.setPreferredSize(new java.awt.Dimension(80, 37));
-        jPanel78.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel89.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel89.setText("SỬA");
-        jLabel89.setPreferredSize(new java.awt.Dimension(52, 16));
-        jPanel78.add(jLabel89, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 10, 30, -1));
-
-        jPanel51.add(jPanel78, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 1, -1, -1));
-
-        jPanel79.setBackground(new java.awt.Color(51, 153, 255));
-        jPanel79.setPreferredSize(new java.awt.Dimension(80, 2));
-
-        javax.swing.GroupLayout jPanel79Layout = new javax.swing.GroupLayout(jPanel79);
-        jPanel79.setLayout(jPanel79Layout);
-        jPanel79Layout.setHorizontalGroup(
-                jPanel79Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 80, Short.MAX_VALUE));
-        jPanel79Layout.setVerticalGroup(
-                jPanel79Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
-
-        jPanel51.add(jPanel79, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 38, -1, -1));
-
-        jPanel80.setBackground(new java.awt.Color(51, 153, 255));
-        jPanel80.setPreferredSize(new java.awt.Dimension(2, 37));
-
-        javax.swing.GroupLayout jPanel80Layout = new javax.swing.GroupLayout(jPanel80);
-        jPanel80.setLayout(jPanel80Layout);
-        jPanel80Layout.setHorizontalGroup(
-                jPanel80Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 2, Short.MAX_VALUE));
-        jPanel80Layout.setVerticalGroup(
-                jPanel80Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 37, Short.MAX_VALUE));
-
-        jPanel51.add(jPanel80, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 1, -1, -1));
 
         bangGiaVe.add(jPanel51, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
 
@@ -2105,11 +2027,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel27Layout = new javax.swing.GroupLayout(jPanel27);
         jPanel27.setLayout(jPanel27Layout);
         jPanel27Layout.setHorizontalGroup(
-                jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 28, Short.MAX_VALUE));
+            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
         jPanel27Layout.setVerticalGroup(
-                jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 28, Short.MAX_VALUE));
+            jPanel27Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
 
         chucNang8.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 30, 30));
 
@@ -2118,11 +2042,13 @@ public class AdminDashBoard extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
         jPanel28.setLayout(jPanel28Layout);
         jPanel28Layout.setHorizontalGroup(
-                jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 28, Short.MAX_VALUE));
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
         jPanel28Layout.setVerticalGroup(
-                jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 28, Short.MAX_VALUE));
+            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
 
         chucNang8.add(jPanel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 30, 30));
 
@@ -2177,18 +2103,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         capNhatNguoiDung = new CustomRoundedPanel(50, 50);
         capNhatNguoiDung.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    capNhatNguoiDungMouseClicked(evt);
-                } catch (HeadlessException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                capNhatNguoiDungMouseClicked(evt);
             }
         });
         capNhatNguoiDung.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2298,15 +2213,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         capNhatMatKhau = new CustomRoundedPanel(50, 50);
         capNhatMatKhau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                try {
-                    capNhatMatKhauMouseClicked(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                capNhatMatKhauMouseClicked(evt);
             }
         });
         capNhatMatKhau.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -2392,9 +2299,8 @@ public class AdminDashBoard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tableNguoiDung() throws ClassNotFoundException, SQLException {
-        model5 = new DefaultTableModel(
-                new Object[] { "Chọn", "Tên đăng nhập", "Tên người dùng", "Số điện thoại", "Chức vụ", "Ca làm" }, 0) {
+    public static void tableNguoiDung(){
+        model5 = new DefaultTableModel(new Object[]{"Chọn", "Tên đăng nhập", "Tên người dùng", "Số điện thoại", "Giới tính", "Ca làm"}, 0) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
                 return columnIndex == 0 ? Boolean.class : super.getColumnClass(columnIndex);
@@ -2408,32 +2314,45 @@ public class AdminDashBoard extends javax.swing.JFrame {
         bangNguoiDung.setModel(model5);
         userDao.getUsersValue(bangNguoiDung, "");
     }
-
-    private void tableBangGia() throws ClassNotFoundException, SQLException {
+    
+    public static void tableBangGia() {
         vehicle.getPrice(giaVe);
         model6 = (DefaultTableModel) giaVe.getModel();
     }
-
-    private void tableTimKiem() throws ClassNotFoundException, SQLException {
+    
+    public static void tableThongKe() throws ClassNotFoundException, SQLException  {
+        java.util.Date st = thongKeNgayVao.getDate();
+        java.util.Date end = thongKeNgayRa.getDate();
+        java.sql.Date startTime = new java.sql.Date(st.getTime());
+        java.sql.Date endTime = new java.sql.Date(end.getTime());
+        String loaiXe = thongKeLoaiXe.getSelectedItem().toString();
+        vehicleTypeEnum xe = null;
+        if(loaiXe.equals("Ô tô")) xe = vehicleTypeEnum.CAR;
+        else if(loaiXe.equals("Xe máy")) xe = vehicleTypeEnum.MOTORBIKE;
+        else if(loaiXe.equals("Xe đạp, xe đạp điện")) xe = vehicleTypeEnum.BIKE;
+        String loaiVe = thongKeLoaiVe.getSelectedItem().toString();
+        ticketTypeEnum ve = null;
+        if(loaiVe.equals("Vé tháng")) ve = ticketTypeEnum.MONTHLY;
+        else if(loaiVe.equals("Vé lượt")) ve = ticketTypeEnum.DAILY;
+        sta.calculateStatistic(bangThongKe, startTime, endTime, ve, xe);
+        model6 = (DefaultTableModel) giaVe.getModel();
+    }
+    
+    private void tableTimKiem() {
         String bienSo = timKiemBienSo.getText();
         String loaiVe = "";
-        if (timKiemLoaiVe.getSelectedItem().toString().equals("Vé tháng"))
-            loaiVe = "MONTHLY";
-        else if (timKiemLoaiVe.getSelectedItem().toString().equals("Vé lượt"))
-            loaiVe = "DAILY";
+        if(timKiemLoaiVe.getSelectedItem().toString().equals("Vé tháng")) loaiVe = "MONTHLY";
+        else if(timKiemLoaiVe.getSelectedItem().toString().equals("Vé lượt")) loaiVe = "DAILY";
         String loaiXe = "";
-        if (timKiemLoaiXe.getSelectedItem().toString().equals("Ô tô"))
-            loaiXe = "CAR";
-        else if (timKiemLoaiXe.getSelectedItem().toString().equals("Xe máy"))
-            loaiXe = "MOTORBIKE";
-        else if (timKiemLoaiXe.getSelectedItem().toString().equals("Xe đạp, xe đạp điện"))
-            loaiXe = "BIKE";
+        if(timKiemLoaiXe.getSelectedItem().toString().equals("Ô tô")) loaiXe = "CAR";
+        else if(timKiemLoaiXe.getSelectedItem().toString().equals("Xe máy")) loaiXe = "MOTORBIKE";
+        else if(timKiemLoaiXe.getSelectedItem().toString().equals("Xe đạp, xe đạp điện")) loaiXe = "BIKE";
         ticketDao.searchTicket(bangTimKiem, bienSo, loaiVe, loaiXe);
         model3 = (DefaultTableModel) bangTimKiem.getModel();
     }
 
-    private void tableVeLuot() throws ClassNotFoundException, SQLException {
-        model2 = new DefaultTableModel(new Object[] { "Chọn", "Biển số", "Thời gian vào", "Loại xe" }, 0) {
+    public static void tableVeLuot(){
+        model2 = new DefaultTableModel(new Object[]{"Chọn", "Biển số", "Thời gian vào", "Loại xe"}, 0) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
                 return columnIndex == 0 ? Boolean.class : super.getColumnClass(columnIndex);
@@ -2447,10 +2366,9 @@ public class AdminDashBoard extends javax.swing.JFrame {
         bangVeLuot.setModel(model2);
         ticketDao.getDailyTicket(bangVeLuot, "");
     }
-
-    public static void tableVeThang() throws ClassNotFoundException, SQLException {
-        model1 = new DefaultTableModel(
-                new Object[] { "Chọn", "Biển số", "Ngày kích hoạt", "Ngày hết hạn", "Loại xe", "Giá vé" }, 0) {
+    
+    public static void tableVeThang(){
+        model1 = new DefaultTableModel(new Object[]{"Chọn", "Biển số", "Ngày kích hoạt", "Ngày hết hạn", "Loại xe", "Giá vé"}, 0) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
                 return columnIndex == 0 ? Boolean.class : super.getColumnClass(columnIndex);
@@ -2464,8 +2382,8 @@ public class AdminDashBoard extends javax.swing.JFrame {
         bangVeThang.setModel(model1);
         ticketDao.getMonthlyTicket(bangVeThang, "");
     }
-
-    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_jPanel2MouseClicked
+    
+    private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         init();
         initText();
         initTask();
@@ -2487,14 +2405,14 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Paneltask2.setVisible(true);
         jLabel83.setVisible(false);
         jLabel90.setVisible(true);
-    }// GEN-LAST:event_jPanel2MouseClicked
+    }//GEN-LAST:event_jPanel2MouseClicked
 
-    private void initIcon() {
+    private void initIcon(){
         jLabel83.setVisible(true);
         jLabel90.setVisible(false);
     }
-
-    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_jPanel3MouseClicked
+    
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
         init();
         initText();
         initTask();
@@ -2514,9 +2432,9 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel3text.setFont(font2);
         Panel3text.setForeground(barSelect);
         Paneltask3.setVisible(true);
-    }// GEN-LAST:event_jPanel3MouseClicked
+    }//GEN-LAST:event_jPanel3MouseClicked
 
-    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_jPanel4MouseClicked
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
         init();
         initText();
         initTask();
@@ -2535,9 +2453,9 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel4text.setFont(font2);
         Panel4text.setForeground(barSelect);
         Paneltask4.setVisible(true);
-    }// GEN-LAST:event_jPanel4MouseClicked
+    }//GEN-LAST:event_jPanel4MouseClicked
 
-    private void JPanel5MouseClicked(java.awt.event.MouseEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_JPanel5MouseClicked
+    private void JPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JPanel5MouseClicked
         init();
         initText();
         initTask();
@@ -2556,9 +2474,9 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel5text.setFont(font2);
         Panel5text.setForeground(barSelect);
         Paneltask5.setVisible(true);
-    }// GEN-LAST:event_JPanel5MouseClicked
+    }//GEN-LAST:event_JPanel5MouseClicked
 
-    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_jPanel6MouseClicked
+    private void jPanel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel6MouseClicked
         init();
         initText();
         initTask();
@@ -2577,9 +2495,9 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel6text.setFont(font2);
         Panel6text.setForeground(barSelect);
         Paneltask6.setVisible(true);
-    }// GEN-LAST:event_jPanel6MouseClicked
+    }//GEN-LAST:event_jPanel6MouseClicked
 
-    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_jPanel7MouseClicked
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
         init();
         initText();
         initTask();
@@ -2598,9 +2516,9 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel8text.setFont(font2);
         Panel8text.setForeground(barSelect);
         Paneltask7.setVisible(true);
-    }// GEN-LAST:event_jPanel7MouseClicked
+    }//GEN-LAST:event_jPanel7MouseClicked
 
-    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_jPanel8MouseClicked
+    private void jPanel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseClicked
         init();
         initText();
         initTask();
@@ -2619,31 +2537,31 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel9text.setFont(font2);
         Panel9text.setForeground(barSelect);
         Paneltask8.setVisible(true);
-    }// GEN-LAST:event_jPanel8MouseClicked
+    }//GEN-LAST:event_jPanel8MouseClicked
 
-    private void formMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseDragged
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
-    }// GEN-LAST:event_formMouseDragged
+    }//GEN-LAST:event_formMouseDragged
 
-    private void formMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMousePressed
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         xx = evt.getX();
         xy = evt.getY();
-    }// GEN-LAST:event_formMousePressed
+    }//GEN-LAST:event_formMousePressed
 
-    private void task8_thongTinMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_task8_thongTinMouseClicked
+    private void task8_thongTinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_task8_thongTinMouseClicked
         thongTin.setVisible(true);
         doiMatKhau.setVisible(false);
-    }// GEN-LAST:event_task8_thongTinMouseClicked
+    }//GEN-LAST:event_task8_thongTinMouseClicked
 
-    private void task8_doiMatKhauMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_task8_doiMatKhauMouseClicked
+    private void task8_doiMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_task8_doiMatKhauMouseClicked
         doiMatKhau.setVisible(true);
         thongTin.setVisible(false);
-    }// GEN-LAST:event_task8_doiMatKhauMouseClicked
+    }//GEN-LAST:event_task8_doiMatKhauMouseClicked
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
-        for (double i = 0; i <= 1.0; i += 0.1) {
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        for(double i = 0; i <= 1.0; i += 0.1){
             String s = "" + i;
             float f = Float.parseFloat(s);
             this.setOpacity(f);
@@ -2653,58 +2571,78 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }// GEN-LAST:event_formWindowOpened
+    }//GEN-LAST:event_formWindowOpened
 
-    private void themNguoiDungMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_themNguoiDungMouseClicked
+    private void themNguoiDungMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_themNguoiDungMouseClicked
         new AddUser().setVisible(true);
-    }// GEN-LAST:event_themNguoiDungMouseClicked
+    }//GEN-LAST:event_themNguoiDungMouseClicked
 
-    private void jPanel40MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel40MouseClicked
+    private void jPanel40MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel40MouseClicked
         quanLyNguoiDung.setVisible(false);
         bangGiaVe.setVisible(true);
-    }// GEN-LAST:event_jPanel40MouseClicked
+    }//GEN-LAST:event_jPanel40MouseClicked
 
-    private void jPanel39MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel39MouseClicked
+    private void jPanel39MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel39MouseClicked
         quanLyNguoiDung.setVisible(true);
         bangGiaVe.setVisible(false);
-    }// GEN-LAST:event_jPanel39MouseClicked
+    }//GEN-LAST:event_jPanel39MouseClicked
 
-    private void clearLanVaoMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_clearLanVaoMouseClicked
+    private void clearLanVaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearLanVaoMouseClicked
         bienSoLanVao.setText("");
         loaiXeLanVao.setSelectedItem("Ô tô");
         ngayVaoLanVao.setText("");
         gioVaoLanVao.setText("");
-    }// GEN-LAST:event_clearLanVaoMouseClicked
+        thongBaoLanVao.setText("");
+    }//GEN-LAST:event_clearLanVaoMouseClicked
 
-    private void clearLanRaMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_clearLanRaMouseClicked
+    private void clearLanRaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearLanRaMouseClicked
         bienSoLanRa.setText("");
         loaiXeLanRa.setSelectedItem("Ô tô");
         ngayVaoLanRa.setText("");
         gioVaoLanRa.setText("");
         ngayRa.setText("");
         gioRa.setText("");
-    }// GEN-LAST:event_clearLanRaMouseClicked
+        thongBaoLanRa.setText("");
+    }//GEN-LAST:event_clearLanRaMouseClicked
 
-    private void luuLanVaoMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_luuLanVaoMouseClicked
+    private void luuLanVaoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_luuLanVaoMouseClicked
         String bienSo = bienSoLanVao.getText();
-        String loaiXe = loaiXeLanVao.getSelectedItem().toString();
+        String x = loaiXeLanVao.getSelectedItem().toString();
+        vehicleTypeEnum loaiXe;
+        if(x.equals("Ô tô")) loaiXe = vehicleTypeEnum.CAR;
+        else if(x.equals("Xe máy")) loaiXe = vehicleTypeEnum.MOTORBIKE;
+        else loaiXe = vehicleTypeEnum.BIKE;
+        if(bienSo.isEmpty()) thongBaoLanVao.setText("Hãy nhập biển số");
+        else if(ticketDao.isMonthlyTicket(bienSo)) thongBaoLanVao.setText("Vé tháng");
+        else if(ticketDao.isInside(bienSo)) thongBaoLanVao.setText("Biển số đã tồn tại");
+        else{
+            Ticket t = new Ticket(bienSo, loaiXe);
+            try {
+                ticketDao.addDailyTicket(t);
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            thongBaoLanVao.setText("Thành công");
+        }
+        tableVeLuot();
+    }//GEN-LAST:event_luuLanVaoMouseClicked
 
-    }// GEN-LAST:event_luuLanVaoMouseClicked
-
-    private void clearNguoiDungMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_clearNguoiDungMouseClicked
+    private void clearNguoiDungMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearNguoiDungMouseClicked
         tenNguoiDung.setText("");
         sdt.setText("");
-    }// GEN-LAST:event_clearNguoiDungMouseClicked
+    }//GEN-LAST:event_clearNguoiDungMouseClicked
 
-    private void capNhatNguoiDungMouseClicked(java.awt.event.MouseEvent evt)
-            throws HeadlessException, ClassNotFoundException, SQLException {// GEN-FIRST:event_capNhatNguoiDungMouseClicked
+    private void capNhatNguoiDungMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_capNhatNguoiDungMouseClicked
         String phoneNumber = sdt.getText();
-        if (tenNguoiDung.getText().isEmpty() || sdt.getText().isEmpty()) {
+        if(tenNguoiDung.getText().isEmpty() || sdt.getText().isEmpty()){
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ dữ liệu", "Thông báo", 2);
         }
-        if (userDao.isPhoneExist(phoneNumber, u.getId())) {
+        if(userDao.isPhoneExist(phoneNumber, u.getId())){
             JOptionPane.showMessageDialog(this, "Số điện thoại này đã được đăng ký", "Thông báo", 2);
-        } else {
+        }
+        else {
             try {
                 String username = tenDangNhap.getText();
                 String fullName = tenNguoiDung.getText();
@@ -2721,57 +2659,57 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }// GEN-LAST:event_capNhatNguoiDungMouseClicked
+    }//GEN-LAST:event_capNhatNguoiDungMouseClicked
 
-    private void xoaMatKhauMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_xoaMatKhauMouseClicked
+    private void xoaMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaMatKhauMouseClicked
         matKhauCu.setText("");
         matKhauMoi.setText("");
         xacNhanMatKhau.setText("");
-    }// GEN-LAST:event_xoaMatKhauMouseClicked
-
-    private void jLabel66MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel66MouseClicked
+    }//GEN-LAST:event_xoaMatKhauMouseClicked
+    
+    private void jLabel66MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel66MouseClicked
         matKhauCu.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         matKhauCu.setEchoChar((char) 0);
         jLabel66.setVisible(false);
         jLabel70.setVisible(true);
-    }// GEN-LAST:event_jLabel66MouseClicked
+    }//GEN-LAST:event_jLabel66MouseClicked
 
-    private void jLabel70MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel70MouseClicked
+    private void jLabel70MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel70MouseClicked
         matKhauCu.setFont(new Font("Segoe UI", Font.BOLD, 12));
         matKhauCu.setEchoChar('*');
         jLabel66.setVisible(true);
         jLabel70.setVisible(false);
-    }// GEN-LAST:event_jLabel70MouseClicked
+    }//GEN-LAST:event_jLabel70MouseClicked
 
-    private void jLabel71MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel71MouseClicked
+    private void jLabel71MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel71MouseClicked
         matKhauMoi.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         matKhauMoi.setEchoChar((char) 0);
         jLabel71.setVisible(false);
         jLabel72.setVisible(true);
-    }// GEN-LAST:event_jLabel71MouseClicked
+    }//GEN-LAST:event_jLabel71MouseClicked
 
-    private void jLabel72MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel72MouseClicked
+    private void jLabel72MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel72MouseClicked
         matKhauMoi.setFont(new Font("Segoe UI", Font.BOLD, 12));
         matKhauMoi.setEchoChar('*');
         jLabel71.setVisible(true);
         jLabel72.setVisible(false);
-    }// GEN-LAST:event_jLabel72MouseClicked
+    }//GEN-LAST:event_jLabel72MouseClicked
 
-    private void jLabel73MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel73MouseClicked
+    private void jLabel73MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel73MouseClicked
         xacNhanMatKhau.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         xacNhanMatKhau.setEchoChar((char) 0);
         jLabel73.setVisible(false);
         jLabel74.setVisible(true);
-    }// GEN-LAST:event_jLabel73MouseClicked
+    }//GEN-LAST:event_jLabel73MouseClicked
 
-    private void jLabel74MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel74MouseClicked
+    private void jLabel74MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel74MouseClicked
         xacNhanMatKhau.setFont(new Font("Segoe UI", Font.BOLD, 12));
         xacNhanMatKhau.setEchoChar('*');
         jLabel73.setVisible(true);
         jLabel74.setVisible(false);
-    }// GEN-LAST:event_jLabel74MouseClicked
+    }//GEN-LAST:event_jLabel74MouseClicked
 
-    private boolean checkMatKhau(String oldPass, String newPass, String cfPass, String pass) {
+    private boolean checkMatKhau(String oldPass, String newPass, String cfPass, String pass){
         if (oldPass.isEmpty() || newPass.isEmpty() || cfPass.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ dữ liệu", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return false;
@@ -2781,19 +2719,17 @@ public class AdminDashBoard extends javax.swing.JFrame {
             return false;
         }
         if (!newPass.equals(cfPass)) {
-            JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu không chính xác", "Cảnh báo",
-                    JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu không chính xác", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         if (newPass.equals(oldPass)) {
-            JOptionPane.showMessageDialog(this, "Mật khẩu mới không được trùng với mật khẩu cũ", "Cảnh báo",
-                    JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Mật khẩu mới không được trùng với mật khẩu cũ", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return true;
     }
-
-    private void capNhatMatKhauMouseClicked(java.awt.event.MouseEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_capNhatMatKhauMouseClicked
+    
+    private void capNhatMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_capNhatMatKhauMouseClicked
         int id = u.getId();
         String oldPass = new String(matKhauCu.getPassword());
         String newPass = new String(matKhauMoi.getPassword());
@@ -2803,42 +2739,65 @@ public class AdminDashBoard extends javax.swing.JFrame {
         if (checkMatKhau(oldPass, newPass, cfPass, pass)) {
             try {
                 UserDAO.changePassword(id, oldPass, newPass);
-                JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công", "Thông báo",
-                        JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Đổi mật khẩu thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Đổi mật khẩu thất bại. Vui lòng thử lại sau!", "Lỗi",
-                        JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Đổi mật khẩu thất bại. Vui lòng thử lại sau!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }// GEN-LAST:event_capNhatMatKhauMouseClicked
+    }//GEN-LAST:event_capNhatMatKhauMouseClicked
 
-    private void dangKyVeThangMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_dangKyVeThangMouseClicked
+    private void dangKyVeThangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dangKyVeThangMouseClicked
         new AddMonthlyTicket().setVisible(true);
-    }// GEN-LAST:event_dangKyVeThangMouseClicked
+    }//GEN-LAST:event_dangKyVeThangMouseClicked
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel4MouseClicked
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        
+    }//GEN-LAST:event_jLabel4MouseClicked
 
-    }// GEN-LAST:event_jLabel4MouseClicked
+    private void suaNguoiDungMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suaNguoiDungMouseClicked
+        DefaultTableModel model = (DefaultTableModel) bangNguoiDung.getModel();
+        int c = 0, j = 0;
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            Boolean isSelected = (Boolean) model.getValueAt(i, 0);
+            if (isSelected != null && isSelected) {
+                c++; j = i;
+            }
+        }
+        if(c != 1) JOptionPane.showMessageDialog(this, "Hãy chọn người dùng bạn muốn sửa", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        else{
+            ModifyUser n = new ModifyUser();
+            n.tenDangNhap.setText(model.getValueAt(j, 1).toString());
+            n.tenNguoiDung.setText(model.getValueAt(j, 2).toString());
+            n.sdt.setText(model.getValueAt(j, 3).toString());
+            String gt = model.getValueAt(j, 4).toString();
+            String shift = model.getValueAt(j, 1).toString();
+            if(gt.equals("Nam")) n.gtNam.setSelected(true);
+            else n.gtNu.setSelected(true);
+            n.baoVe.setSelected(true);
+            if(shift.equals("Đêm")) n.dem.setSelected(true);
+            else n.ngay.setSelected(true);
+            n.setVisible(true);
+            n.jPasswordField1.setText(userDao.getPassword2(model.getValueAt(j, 1).toString()));
+            n.old = model.getValueAt(j, 1).toString();
+            n.oldphone = model.getValueAt(j, 3).toString();
+        }
+        tableNguoiDung();
+    }//GEN-LAST:event_suaNguoiDungMouseClicked
 
-    private void suaNguoiDungMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_suaNguoiDungMouseClicked
-        new ModifyUser().setVisible(true);
-    }// GEN-LAST:event_suaNguoiDungMouseClicked
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         tableTimKiem();
-    }// GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         timKiemBienSo.setText("");
         timKiemLoaiVe.setSelectedItem("Tất cả loại xe");
         timKiemLoaiVe.setSelectedItem("Tất cả loại vé");
         model3.setRowCount(0);
-    }// GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void search3textKeyReleased(java.awt.event.KeyEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_search3textKeyReleased
-        model1 = new DefaultTableModel(
-                new Object[] { "Chọn", "Biển số", "Ngày kích hoạt", "Ngày hết hạn", "Loại xe", "Giá vé" }, 0) {
+    private void search3textKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search3textKeyReleased
+        model1 = new DefaultTableModel(new Object[]{"Chọn", "Biển số", "Ngày kích hoạt", "Ngày hết hạn", "Loại xe", "Giá vé"}, 0) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
                 return columnIndex == 0 ? Boolean.class : super.getColumnClass(columnIndex);
@@ -2851,10 +2810,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
         };
         bangVeThang.setModel(model1);
         ticketDao.getMonthlyTicket(bangVeThang, search3text.getText());
-    }// GEN-LAST:event_search3textKeyReleased
+    }//GEN-LAST:event_search3textKeyReleased
 
-    private void search3text1KeyReleased(java.awt.event.KeyEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_search3text1KeyReleased
-        model2 = new DefaultTableModel(new Object[] { "Chọn", "Biển số", "Thời gian vào", "Loại xe" }, 0) {
+    private void search3text1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search3text1KeyReleased
+        model2 = new DefaultTableModel(new Object[]{"Chọn", "Biển số", "Thời gian vào", "Loại xe"}, 0) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
                 return columnIndex == 0 ? Boolean.class : super.getColumnClass(columnIndex);
@@ -2867,89 +2826,194 @@ public class AdminDashBoard extends javax.swing.JFrame {
         };
         bangVeLuot.setModel(model2);
         ticketDao.getDailyTicket(bangVeLuot, search3text1.getText());
-    }// GEN-LAST:event_search3text1KeyReleased
+    }//GEN-LAST:event_search3text1KeyReleased
 
-    private void xoaVeThangMouseClicked(java.awt.event.MouseEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_xoaVeThangMouseClicked
+    private void xoaVeThangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaVeThangMouseClicked
         DefaultTableModel model = (DefaultTableModel) bangVeThang.getModel();
-        boolean hasDeleted = false;
+        boolean hasDeleted = false, ok = false;
 
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             Boolean isSelected = (Boolean) model.getValueAt(i, 0);
             if (isSelected != null && isSelected) { // Kiểm tra checkbox
+                ok = true;
                 String bienSo = (String) model.getValueAt(i, 1);
                 boolean isDeleted = ticketDao.delete(bienSo, "MONTHLY");
                 if (isDeleted) {
                     model.removeRow(i);
                     hasDeleted = true;
-                } else {
-                    JOptionPane.showMessageDialog(null, "Không thể xóa vé: " + bienSo, "Lỗi",
-                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
 
         if (hasDeleted) {
             JOptionPane.showMessageDialog(null, "Đã xóa vé thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Không có vé nào được chọn để xóa.", "Thông báo",
-                    JOptionPane.WARNING_MESSAGE);
         }
-    }// GEN-LAST:event_xoaVeThangMouseClicked
+        if(!ok){
+            JOptionPane.showMessageDialog(null, "Không có vé nào được chọn để xóa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }
+        tongVe();
+    }//GEN-LAST:event_xoaVeThangMouseClicked
 
-    private void xoaVeLuotMouseClicked(java.awt.event.MouseEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_xoaVeLuotMouseClicked
+    private void xoaVeLuotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaVeLuotMouseClicked
         DefaultTableModel model = (DefaultTableModel) bangVeLuot.getModel();
-        boolean hasDeleted = false;
+        boolean hasDeleted = false, ok = false;
 
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             Boolean isSelected = (Boolean) model.getValueAt(i, 0);
-            if (isSelected != null && isSelected) { // Kiểm tra checkbox
+            if (isSelected != null && isSelected) {
+                ok = true;
                 String bienSo = (String) model.getValueAt(i, 1);
                 boolean isDeleted = ticketDao.delete(bienSo, "DAILY");
                 if (isDeleted) {
                     model.removeRow(i);
                     hasDeleted = true;
-                } else {
-                    JOptionPane.showMessageDialog(null, "Không thể xóa vé: " + bienSo, "Lỗi",
-                            JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
-
         if (hasDeleted) {
             JOptionPane.showMessageDialog(null, "Đã xóa vé thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Không có vé nào được chọn để xóa.", "Thông báo",
-                    JOptionPane.WARNING_MESSAGE);
         }
-    }// GEN-LAST:event_xoaVeLuotMouseClicked
+        if(!ok){
+            JOptionPane.showMessageDialog(null, "Không có vé nào được chọn để xóa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }
+        tongVe();
+    }//GEN-LAST:event_xoaVeLuotMouseClicked
 
-    private void giaHanVeThangMouseClicked(java.awt.event.MouseEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_giaHanVeThangMouseClicked
+    private void giaHanVeThangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_giaHanVeThangMouseClicked
         DefaultTableModel model = (DefaultTableModel) bangVeThang.getModel();
+        boolean check = false, ok = false;
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            Boolean isSelected = (Boolean) model.getValueAt(i, 0);
+            if (isSelected != null && isSelected) {
+                check = true; // Đã có checkbox được chọn
+                String bienSo = (String) model.getValueAt(i, 1);
+                if (ticketDao.extend(bienSo)) {
+                    tableVeThang(); // Cập nhật bảng sau khi gia hạn thành công
+                    ok = true;
+                }
+            }
+        }
+        if (ok) {
+            JOptionPane.showMessageDialog(this, "Gia hạn thành công", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        } else if (!check) {
+            JOptionPane.showMessageDialog(this, "Xin hãy chọn vé", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_giaHanVeThangMouseClicked
+
+    private void suaVeThangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suaVeThangMouseClicked
+        DefaultTableModel model = (DefaultTableModel) bangVeThang.getModel();
+        int c = 0, j = 0;
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            Boolean isSelected = (Boolean) model.getValueAt(i, 0);
+            if (isSelected != null && isSelected) {
+                c++; j = i;
+            }
+        }
+        if(c != 1) JOptionPane.showMessageDialog(this, "Hãy chọn vé bạn muốn sửa", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        else{
+            ModifyTicket n = new ModifyTicket();
+            n.jTextField1.setText(model.getValueAt(j, 1).toString());
+            n.jComboBox1.setSelectedItem(model.getValueAt(j, 4));
+            n.jDateChooser1.setDate((Date) model.getValueAt(j, 3));
+            n.b = model.getValueAt(j, 1).toString();
+            n.time = (java.sql.Timestamp) model.getValueAt(j, 2);
+        }
+        tableVeThang();
+    }//GEN-LAST:event_suaVeThangMouseClicked
+
+    private void jScrollPane1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseMoved
+        DefaultTableModel model = (DefaultTableModel) bangVeThang.getModel();
+        int c = 0;
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            Boolean isSelected = (Boolean) model.getValueAt(i, 0);
+            if (isSelected != null && isSelected) {
+                c++;
+            }
+        }
+        dangChonVeThang.setText(String.valueOf(c));
+    }//GEN-LAST:event_jScrollPane1MouseMoved
+
+    private void jScrollPane5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane5MouseMoved
+        DefaultTableModel model = (DefaultTableModel) bangVeLuot.getModel();
+        int c = 0;
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            Boolean isSelected = (Boolean) model.getValueAt(i, 0);
+            if (isSelected != null && isSelected) {
+                c++;
+            }
+        }
+        dangChonVeLuot.setText(String.valueOf(c));
+    }//GEN-LAST:event_jScrollPane5MouseMoved
+
+    private void xoaNguoiDungMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_xoaNguoiDungMouseClicked
+        DefaultTableModel model = (DefaultTableModel) bangNguoiDung.getModel();
+        boolean hasDeleted = false, ok = false;
 
         for (int i = model.getRowCount() - 1; i >= 0; i--) {
             Boolean isSelected = (Boolean) model.getValueAt(i, 0);
-            if (isSelected != null && isSelected) { // Kiểm tra checkbox
-                String bienSo = (String) model.getValueAt(i, 1);
-                boolean isExtended = false;
-                try {
-                    isExtended = ticketDao.extendMonthlyTicket(bienSo);
-                } catch (SQLException ex) {
-                    Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                if (isExtended) {
-                    JOptionPane.showMessageDialog(this, "Gia hạn thành công", "Thông báo", 2);
-                    tableVeThang();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Không thể xóa vé: " + bienSo, "Lỗi",
-                            JOptionPane.ERROR_MESSAGE);
+            if (isSelected != null && isSelected) {
+                ok = true;
+                String username = (String) model.getValueAt(i, 1);
+                boolean isDeleted = userDao.delete(username);
+                if (isDeleted) {
+                    model.removeRow(i);
+                    hasDeleted = true;
                 }
             }
         }
-    }// GEN-LAST:event_giaHanVeThangMouseClicked
+        if (hasDeleted) {
+            JOptionPane.showMessageDialog(null, "Đã xóa vé thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+        }
+        if(!ok){
+            JOptionPane.showMessageDialog(null, "Không có vé nào được chọn để xóa.", "Thông báo", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_xoaNguoiDungMouseClicked
 
-    private void init() {
+    private void jPanel70MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel70MouseClicked
+        new EditTicketPrice().setVisible(true);
+    }//GEN-LAST:event_jPanel70MouseClicked
+
+    private void tinhTienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tinhTienMouseClicked
+        String bienSo = bienSoLanRa.getText();
+        String x = loaiXeLanRa.getSelectedItem().toString();
+        vehicleTypeEnum loaiXe;
+        if(x.equals("Ô tô")) loaiXe = vehicleTypeEnum.CAR;
+        else if(x.equals("Xe máy")) loaiXe = vehicleTypeEnum.MOTORBIKE;
+        else loaiXe = vehicleTypeEnum.BIKE;
+        ticketDao.changeTicketType();
+        
+        if(bienSo.isEmpty()) thongBaoLanRa.setText("Hãy nhập biển số");
+        else if(ticketDao.isMonthlyTicket(bienSo)) thongBaoLanRa.setText("Vé tháng");
+        else if(!ticketDao.isPlateNumberExist2(bienSo)) thongBaoLanRa.setText("Vé không tồn tại");
+        else {
+            try {
+                ticketDao.calculateDailyPrice(bienSo);
+                thongBaoLanRa.setText(String.valueOf(ticketDao.getPrice(bienSo)));
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        model4.setRowCount(0);
+        tableVeLuot();
+    }//GEN-LAST:event_tinhTienMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if(thongKeNgayVao.getDate() == null || thongKeNgayRa.getDate() == null)
+            JOptionPane.showMessageDialog(this, "Hãy chọn ngày bạn muốn thống kê", "Thông báo", 2);
+        else{
+            try {
+                tableThongKe();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void init(){
         jPanel1.setBackground(notSelect);
         jPanel2.setBackground(notSelect);
         jPanel3.setBackground(notSelect);
@@ -2984,8 +3048,8 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jPanel7d.setBackground(barNotSelect);
         jPanel8d.setBackground(barNotSelect);
     }
-
-    private void initText() throws ClassNotFoundException, SQLException {
+    
+    private void initText(){
         Panel2text.setForeground(notSelectText);
         Panel3text.setForeground(notSelectText);
         Panel4text.setForeground(notSelectText);
@@ -3001,10 +3065,14 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel6text.setFont(font1);
         Panel8text.setFont(font1);
         Panel9text.setFont(font1);
-        tongVeThang.setText(String.valueOf(ticketDao.getTotalMonthlyTicket()));
     }
-
-    private void initTask() {
+    
+    private void tongVe(){
+        tongVeThang.setText(String.valueOf(ticketDao.getTotalMonthlyTicket()));
+        tongVeLuot.setText(String.valueOf(ticketDao.getTotalDailyTicket()));
+    }
+    
+    private void initTask(){
         Paneltask2.setVisible(false);
         Paneltask3.setVisible(false);
         Paneltask4.setVisible(false);
@@ -3014,15 +3082,15 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Paneltask7.setVisible(false);
         Paneltask8.setVisible(false);
     }
-
-    private void initThongTin() {
+    
+    private void initThongTin(){
         tenDangNhap.setText(u.getUserName());
         tenNguoiDung.setText(u.getFullName());
         sdt.setText(u.getPhoneNumber());
-        // int c = u.getShift();
-        // if(c == 1) caLam.setText("Sáng");
-        // else if(c == 2) caLam.setText("Chiều");
-        // else caLam.setText("Tối");
+//            int c = u.getShift();
+//            if(c == 1) caLam.setText("Sáng");
+//            else if(c == 2) caLam.setText("Chiều");
+//            else caLam.setText("Tối");
         String gt = u.getGender();
         if (gt.toLowerCase().trim().equals("male")) {
             gtNam.setSelected(true);
@@ -3031,7 +3099,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         }
         chucVu.setText("Quản lý");
     }
-
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -3040,18 +3108,8 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 UIManager.put("Component.arc", 999);
                 UIManager.put("Table.alternateRowColor", new java.awt.Color(240, 240, 240));
                 System.setProperty("flatlaf.menuBarEmbbedded", "false");
-                AdminDashBoard n;
-                try {
-                    n = new AdminDashBoard();
-                    n.setVisible(true);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-
+                AdminDashBoard n = new AdminDashBoard();
+                n.setVisible(true);
             }
         });
     }
@@ -3083,9 +3141,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel Tieude6;
     private javax.swing.JLabel Tieude8;
     private javax.swing.JPanel bangGiaVe;
-    private javax.swing.JTable bangNguoiDung;
+    public static javax.swing.JTable bangNguoiDung;
+    public static javax.swing.JTable bangThongKe;
     private javax.swing.JTable bangTimKiem;
-    private javax.swing.JTable bangVeLuot;
+    public static javax.swing.JTable bangVeLuot;
     public static javax.swing.JTable bangVeThang;
     private javax.swing.JTextField bienSoLanRa;
     private javax.swing.JTextField bienSoLanVao;
@@ -3100,11 +3159,12 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel clearLanRa;
     private javax.swing.JPanel clearLanVao;
     private javax.swing.JPanel clearNguoiDung;
+    private javax.swing.JLabel dangChonVeLuot;
     private javax.swing.JLabel dangChonVeThang;
     private javax.swing.JPanel dangKyVeThang;
     private javax.swing.JPanel doiMatKhau;
     private javax.swing.JPanel giaHanVeThang;
-    private javax.swing.JTable giaVe;
+    public static javax.swing.JTable giaVe;
     private javax.swing.JTextField gioRa;
     private javax.swing.JTextField gioVaoLanRa;
     private javax.swing.JTextField gioVaoLanVao;
@@ -3113,10 +3173,6 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3173,13 +3229,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel61;
-    private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
     private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel66;
     private javax.swing.JLabel jLabel67;
-    private javax.swing.JLabel jLabel68;
     private javax.swing.JLabel jLabel69;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel70;
@@ -3197,8 +3250,6 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel85;
     private javax.swing.JLabel jLabel86;
     private javax.swing.JLabel jLabel87;
-    private javax.swing.JLabel jLabel88;
-    private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabel90;
     private javax.swing.JPanel jPanel1;
@@ -3244,26 +3295,19 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5s;
     private javax.swing.JPanel jPanel5u;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel69;
     private javax.swing.JPanel jPanel6d;
     private javax.swing.JPanel jPanel6s;
     private javax.swing.JPanel jPanel6u;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel70;
     private javax.swing.JPanel jPanel71;
-    private javax.swing.JPanel jPanel72;
     private javax.swing.JPanel jPanel73;
     private javax.swing.JPanel jPanel74;
-    private javax.swing.JPanel jPanel75;
     private javax.swing.JPanel jPanel76;
-    private javax.swing.JPanel jPanel77;
-    private javax.swing.JPanel jPanel78;
-    private javax.swing.JPanel jPanel79;
     private javax.swing.JPanel jPanel7d;
     private javax.swing.JPanel jPanel7s;
     private javax.swing.JPanel jPanel7u;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel80;
     private javax.swing.JPanel jPanel8d;
     private javax.swing.JPanel jPanel8s;
     private javax.swing.JPanel jPanel8u;
@@ -3278,7 +3322,6 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable4;
     private javax.swing.JComboBox<String> loaiXeLanRa;
     private javax.swing.JComboBox<String> loaiXeLanVao;
     private javax.swing.JPanel luuLanVao;
@@ -3300,11 +3343,16 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel themNguoiDung;
     private javax.swing.JTextField thongBaoLanRa;
     private javax.swing.JTextField thongBaoLanVao;
+    public static javax.swing.JComboBox<String> thongKeLoaiVe;
+    public static javax.swing.JComboBox<String> thongKeLoaiXe;
+    public static com.toedter.calendar.JDateChooser thongKeNgayRa;
+    public static com.toedter.calendar.JDateChooser thongKeNgayVao;
     private javax.swing.JPanel thongTin;
     private javax.swing.JTextField timKiemBienSo;
     private javax.swing.JComboBox<String> timKiemLoaiVe;
     private javax.swing.JComboBox<String> timKiemLoaiXe;
     private javax.swing.JPanel tinhTien;
+    private javax.swing.JLabel tongVeLuot;
     private javax.swing.JLabel tongVeThang;
     private javax.swing.JPasswordField xacNhanMatKhau;
     private javax.swing.JPanel xoaMatKhau;

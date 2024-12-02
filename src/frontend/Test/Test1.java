@@ -1,5 +1,3 @@
-package src.frontend.Test;
-
 import com.formdev.flatlaf.FlatLightLaf;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.TimePicker;

@@ -10,11 +10,13 @@ import javax.swing.UIManager;
 import enums.vehicleTypeEnum;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-
-public class AddMonthlyTicket extends javax.swing.JFrame {
+import java.sql.Timestamp;
+public class ModifyTicket extends javax.swing.JFrame {
     int xx, xy;
     TicketDAO ticket = new TicketDAO();
-    public AddMonthlyTicket() {
+    public static String b;
+    Timestamp time;
+    public ModifyTicket() {
         this.setUndecorated(true);
         FlatLightLaf.setup();
         UIManager.put("TextComponent.arc", 999);
@@ -46,21 +48,6 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                formMouseDragged(evt);
-            }
-        });
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                formMousePressed(evt);
-            }
-        });
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -116,7 +103,7 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("ĐĂNG KÝ VÉ THÁNG");
+        jLabel1.setText("CẬP NHẬT THÔNG TIN VÉ");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
@@ -136,7 +123,7 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 70));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel12.setText("NGÀY KÍCH HOẠT");
+        jLabel12.setText("NGÀY HẾT HẠN");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
@@ -175,49 +162,6 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        this.dispose();
-    }//GEN-LAST:event_jLabel11MouseClicked
-
-    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xx, y - xy);
-    }//GEN-LAST:event_jPanel1MouseDragged
-
-    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-        xx = evt.getX();
-        xy = evt.getY();
-    }//GEN-LAST:event_jPanel1MousePressed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        for(double i = 0; i <= 1.0; i += 0.1){
-            String s = "" + i;
-            float f = Float.parseFloat(s);
-            this.setOpacity(f);
-            try {
-                Thread.sleep(40);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(AddMonthlyTicket.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_formWindowOpened
-
-    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-        xx = evt.getX();
-        xy = evt.getY();
-    }//GEN-LAST:event_formMousePressed
-
-    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xx, y - xy);
-    }//GEN-LAST:event_formMouseDragged
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String bienSo = jTextField1.getText();
         vehicleTypeEnum loaiXe;
@@ -228,14 +172,15 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
         if(bienSo.isEmpty()){
             JOptionPane.showMessageDialog(this, "Hãy nhập biển số", "Thông báo", 2);
         }
-        else if(ticket.isPlateNumberExist(bienSo)){
+        else if(!bienSo.equals(b) && ticket.isPlateNumberExist(bienSo)){
             JOptionPane.showMessageDialog(this, "Biển số đã được đăng ký", "Thông báo", 2);
         }
         else {
             try {
-                boolean ok = ticket.addAndCalculatePriceForMonthlyTicket(t);
+                ticket.delete2(b, "MONTHLY");
+                boolean ok = ticket.addAndCalculatePriceForMonthlyTicket(t) && ticket.updateDay(time, bienSo);
                 if (ok) {
-                    JOptionPane.showMessageDialog(this, "Đăng ký thành công", "Thông báo", 2);
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công", "Thông báo", 2);
                 }
                 AdminDashBoard.tableVeThang();
             } catch (SQLException ex) {
@@ -252,10 +197,29 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
         jDateChooser1.setDate(new Date());
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_jPanel1MouseDragged
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_jPanel1MousePressed
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        this.dispose();
+    }//GEN-LAST:event_jLabel11MouseClicked
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddMonthlyTicket().setVisible(true);
+                new ModifyTicket().setVisible(true);
             }
         });
     }
@@ -264,8 +228,8 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    public static javax.swing.JComboBox<String> jComboBox1;
+    public static com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -274,6 +238,6 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
+    public static javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

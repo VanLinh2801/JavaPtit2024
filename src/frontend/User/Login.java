@@ -1,4 +1,4 @@
-package src.frontend.User;
+package User;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
@@ -11,23 +11,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import src.backend.databaseConnector.databaseConnector;
-import src.frontend.Admin.AdminDashBoard;
-import src.frontend.User.UserDashboard;
+import connection.databaseConnector;
+import Admin.AdminDashBoard;
+import Dao.UserDAO;
+import User.UserDashboard;
 
 public class Login extends javax.swing.JFrame {
     int xx, xy;
-
+    UserDAO user = new UserDAO();
     public Login() {
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -67,11 +66,13 @@ public class Login extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 230, Short.MAX_VALUE));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 230, Short.MAX_VALUE)
+        );
         jPanel1Layout.setVerticalGroup(
-                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 370, Short.MAX_VALUE));
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 370, Short.MAX_VALUE)
+        );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -98,7 +99,6 @@ public class Login extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField1FocusGained(evt);
             }
-
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextField1FocusLost(evt);
             }
@@ -109,7 +109,6 @@ public class Login extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jPasswordField1FocusGained(evt);
             }
-
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jPasswordField1FocusLost(evt);
             }
@@ -134,12 +133,7 @@ public class Login extends javax.swing.JFrame {
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    jButton1ActionPerformed(evt);
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                jButton1ActionPerformed(evt);
             }
         });
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 160, -1));
@@ -184,26 +178,33 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel6MouseClicked
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         System.exit(0);
-    }// GEN-LAST:event_jLabel6MouseClicked
+    }//GEN-LAST:event_jLabel6MouseClicked
 
-    private boolean isEmpty() {
-        if (jTextField1.getText().equals("Nhập tên người dùng...")) {
+    private boolean isEmpty(){
+        if(jTextField1.getText().equals("Nhập tên người dùng...")){
             JOptionPane.showMessageDialog(this, "Hãy nhập tên đăng nhập", "Thông báo", 2);
             return false;
         }
-        if (String.valueOf(jPasswordField1.getPassword()).toString().equals("Nhập mật khẩu...")) {
+        if(String.valueOf(jPasswordField1.getPassword()).toString().equals("Nhập mật khẩu...")){
             JOptionPane.showMessageDialog(this, "Hãy nhập mật khẩu", "Thông báo", 2);
             return false;
         }
         return true;
     }
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws ClassNotFoundException {// GEN-FIRST:event_jButton1ActionPerformed
-        if (isEmpty()) {
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(isEmpty()){
             String username = jTextField1.getText();
             String password = String.valueOf(jPasswordField1.getPassword());
+            try {
+                user.login(username, password);
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
             try {
                 Connection con = databaseConnector.getConnection();
                 PreparedStatement ps;
@@ -213,28 +214,28 @@ public class Login extends javax.swing.JFrame {
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     int role = rs.getInt(1);
-                    if (role == 1) {
+                    if (role == 1){
                         AdminDashBoard n = new AdminDashBoard();
                         n.setVisible(true);
                         n.Paneltask2.setVisible(true);
-                    } else {
+                    }
+                    else{
                         UserDashboard n = new UserDashboard();
                         n.setVisible(true);
                         n.Paneltask2.setVisible(true);
                     }
                     this.dispose();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Mật khẩu hoặc tên đăng nhập không chính xác",
-                            "Đăng nhập thất bại", 2);
+                    JOptionPane.showMessageDialog(this, "Mật khẩu hoặc tên đăng nhập không chính xác", "Đăng nhập thất bại", 2);
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }// GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {// GEN-FIRST:event_formWindowOpened
-        for (double i = 0; i <= 1.0; i += 0.1) {
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        for(double i = 0; i <= 1.0; i += 0.1){
             String s = "" + i;
             float f = Float.parseFloat(s);
             this.setOpacity(f);
@@ -244,71 +245,71 @@ public class Login extends javax.swing.JFrame {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }// GEN-LAST:event_formWindowOpened
+    }//GEN-LAST:event_formWindowOpened
 
-    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextField1FocusGained
+    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
         if (jTextField1.getText().equals("Nhập tên người dùng...")) {
             jTextField1.setText("");
             jTextField1.setForeground(java.awt.Color.BLACK);
         }
-    }// GEN-LAST:event_jTextField1FocusGained
+    }//GEN-LAST:event_jTextField1FocusGained
 
-    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jTextField1FocusLost
+    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
         if (jTextField1.getText().isEmpty()) {
             jTextField1.setText("Nhập tên người dùng...");
             jTextField1.setForeground(java.awt.Color.GRAY);
         }
-    }// GEN-LAST:event_jTextField1FocusLost
+    }//GEN-LAST:event_jTextField1FocusLost
 
-    private void formMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMousePressed
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         xx = evt.getX();
         xy = evt.getY();
-    }// GEN-LAST:event_formMousePressed
+    }//GEN-LAST:event_formMousePressed
 
-    private void formMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_formMouseDragged
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
-    }// GEN-LAST:event_formMouseDragged
+    }//GEN-LAST:event_formMouseDragged
 
-    private void jPasswordField1FocusGained(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jPasswordField1FocusGained
+    private void jPasswordField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusGained
         if (String.valueOf(jPasswordField1.getPassword()).equals("Nhập mật khẩu...")) {
-            jPasswordField1.setText("");
-            jPasswordField1.setForeground(Color.BLACK);
+            jPasswordField1.setText(""); 
+            jPasswordField1.setForeground(Color.BLACK); 
             jPasswordField1.setFont(new Font("Segoe UI", Font.BOLD, 12));
             jPasswordField1.setEchoChar('•');
         }
-    }// GEN-LAST:event_jPasswordField1FocusGained
+    }//GEN-LAST:event_jPasswordField1FocusGained
 
-    private void jPasswordField1FocusLost(java.awt.event.FocusEvent evt) {// GEN-FIRST:event_jPasswordField1FocusLost
+    private void jPasswordField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusLost
         if (String.valueOf(jPasswordField1.getPassword()).isEmpty()) {
             jPasswordField1.setText("Nhập mật khẩu...");
             jPasswordField1.setForeground(Color.GRAY);
             jPasswordField1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             jPasswordField1.setEchoChar((char) 0);
         }
-    }// GEN-LAST:event_jPasswordField1FocusLost
+    }//GEN-LAST:event_jPasswordField1FocusLost
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel2MouseClicked
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         jPasswordField1.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         jPasswordField1.setEchoChar((char) 0);
         jLabel2.setVisible(false);
         jLabel3.setVisible(true);
-    }// GEN-LAST:event_jLabel2MouseClicked
+    }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel3MouseClicked
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         jPasswordField1.setFont(new Font("Segoe UI", Font.BOLD, 12));
         jPasswordField1.setEchoChar('*');
         jLabel2.setVisible(true);
         jLabel3.setVisible(false);
-    }// GEN-LAST:event_jLabel3MouseClicked
+    }//GEN-LAST:event_jLabel3MouseClicked
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel1MouseClicked
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         JOptionPane.showMessageDialog(this, "Vui lòng liên hệ với Admin để được cấp lại mật khẩu", "Quên mật khẩu", 2);
-    }// GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable(){
             public void run() {
                 FlatLightLaf.setup();
                 UIManager.put("TextComponent.arc", 999);
