@@ -1,21 +1,25 @@
-package Admin;
+package src.frontend.Admin;
 
-import Dao.Ticket;
-import Dao.TicketDAO;
+import src.backend.ticket.Ticket;
+import src.backend.ticket.TicketDAO;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
-import enums.vehicleTypeEnum;
+import src.backend.enums.vehicleTypeEnum;
+
+import java.awt.HeadlessException;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.Timestamp;
+
 public class ModifyTicket extends javax.swing.JFrame {
     int xx, xy;
     TicketDAO ticket = new TicketDAO();
     public static String b;
     Timestamp time;
+
     public ModifyTicket() {
         this.setUndecorated(true);
         FlatLightLaf.setup();
@@ -28,8 +32,10 @@ public class ModifyTicket extends javax.swing.JFrame {
         jDateChooser1.setDate(new Date());
         this.setVisible(true);
     }
+
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
@@ -80,7 +86,15 @@ public class ModifyTicket extends javax.swing.JFrame {
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                try {
+                    jButton1ActionPerformed(evt);
+                } catch (HeadlessException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 90, 30));
@@ -127,7 +141,8 @@ public class ModifyTicket extends javax.swing.JFrame {
         jLabel12.setText("NGÀY HẾT HẠN");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
+        jComboBox1.setModel(
+                new javax.swing.DefaultComboBoxModel<>(new String[] { "Ô tô", "Xe máy", "Xe đạp, xe đạp điện" }));
         jComboBox1.setPreferredSize(new java.awt.Dimension(134, 30));
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 340, -1));
 
@@ -150,33 +165,35 @@ public class ModifyTicket extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 581,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 372,
+                                javax.swing.GroupLayout.PREFERRED_SIZE));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)
+            throws HeadlessException, ClassNotFoundException {// GEN-FIRST:event_jButton1ActionPerformed
         String bienSo = jTextField1.getText();
         vehicleTypeEnum loaiXe;
-        if(jComboBox1.getSelectedItem().toString().equals("Ô tô")) loaiXe = vehicleTypeEnum.CAR;
-        else if(jComboBox1.getSelectedItem().toString().equals("Xe máy")) loaiXe = vehicleTypeEnum.MOTORBIKE;
-        else loaiXe = vehicleTypeEnum.BIKE;
+        if (jComboBox1.getSelectedItem().toString().equals("Ô tô"))
+            loaiXe = vehicleTypeEnum.CAR;
+        else if (jComboBox1.getSelectedItem().toString().equals("Xe máy"))
+            loaiXe = vehicleTypeEnum.MOTORBIKE;
+        else
+            loaiXe = vehicleTypeEnum.BIKE;
         Ticket t = new Ticket(bienSo, loaiXe);
-        if(bienSo.isEmpty()){
+        if (bienSo.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Hãy nhập biển số", "Thông báo", 2);
-        }
-        else if(!bienSo.equals(b) && ticket.isPlateNumberExist(bienSo)){
+        } else if (!bienSo.equals(b) && ticket.isPlateNumberExist(bienSo)) {
             JOptionPane.showMessageDialog(this, "Biển số đã được đăng ký", "Thông báo", 2);
-        }
-        else {
+        } else {
             try {
                 ticket.delete2(b, "MONTHLY");
                 boolean ok = ticket.addAndCalculatePriceForMonthlyTicket(t) && ticket.updateDay(time, bienSo);
@@ -190,32 +207,32 @@ public class ModifyTicket extends javax.swing.JFrame {
                 Logger.getLogger(AddMonthlyTicket.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }// GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
         jTextField1.setText("");
         jComboBox1.setSelectedItem("Ô tô");
         jDateChooser1.setDate(new Date());
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }// GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }// GEN-LAST:event_jButton3ActionPerformed
 
-    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel1MouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);
-    }//GEN-LAST:event_jPanel1MouseDragged
+    }// GEN-LAST:event_jPanel1MouseDragged
 
-    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel1MousePressed
         xx = evt.getX();
         xy = evt.getY();
-    }//GEN-LAST:event_jPanel1MousePressed
+    }// GEN-LAST:event_jPanel1MousePressed
 
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel11MouseClicked
         this.dispose();
-    }//GEN-LAST:event_jLabel11MouseClicked
+    }// GEN-LAST:event_jLabel11MouseClicked
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
