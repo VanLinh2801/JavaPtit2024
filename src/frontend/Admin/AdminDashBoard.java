@@ -395,10 +395,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel2text.setText("VÀO RA");
         jPanel2.add(Panel2text, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 40, -1, -1));
 
-        jLabel83.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user_black.jpg"))); // NOI18N
+        jLabel83.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/user_black.jpg"))); // NOI18N
         jPanel2.add(jLabel83, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        jLabel90.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user_blue.jpg"))); // NOI18N
+        jLabel90.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/user_blue.jpg"))); // NOI18N
         jPanel2.add(jLabel90, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         jPanelTask.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 10, -1, -1));
@@ -497,10 +497,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
         Panel9text.setText("NGƯỜI DÙNG");
         jPanel8.add(Panel9text, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 40, -1, -1));
 
-        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user_gray.jpg"))); // NOI18N
+        jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/user_gray.jpg"))); // NOI18N
         jPanel8.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
-        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user_black.jpg"))); // NOI18N
+        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/user_black.jpg"))); // NOI18N
         jPanel8.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
         jPanelTask.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(696, 10, -1, -1));
@@ -1779,7 +1779,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jLabel53.setPreferredSize(new java.awt.Dimension(52, 16));
         xoaNguoiDung.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 10, 30, -1));
 
-        jLabel46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete_orange.png"))); // NOI18N
+        jLabel46.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/delete_orange.png"))); // NOI18N
         xoaNguoiDung.add(jLabel46, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 5, -1, -1));
 
         chucNangQuanLyNguoiDung.add(xoaNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(103, 1, -1, -1));
@@ -2253,7 +2253,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         doiMatKhau.add(xoaMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 390, 90, 40));
 
-        jLabel66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/password_hide.jpg"))); // NOI18N
+        jLabel66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/password_hide.jpg"))); // NOI18N
         jLabel66.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel66.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2262,7 +2262,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         doiMatKhau.add(jLabel66, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 175, -1, -1));
 
-        jLabel70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/password_show.jpg"))); // NOI18N
+        jLabel70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/password_show.jpg"))); // NOI18N
         jLabel70.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel70.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2271,7 +2271,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         doiMatKhau.add(jLabel70, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 175, -1, -1));
 
-        jLabel71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/password_hide.jpg"))); // NOI18N
+        jLabel71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/password_hide.jpg"))); // NOI18N
         jLabel71.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel71.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2280,7 +2280,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         doiMatKhau.add(jLabel71, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 255, -1, -1));
 
-        jLabel72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/password_show.jpg"))); // NOI18N
+        jLabel72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/password_show.jpg"))); // NOI18N
         jLabel72.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel72.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2289,7 +2289,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         doiMatKhau.add(jLabel72, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 255, -1, -1));
 
-        jLabel73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/password_hide.jpg"))); // NOI18N
+        jLabel73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/password_hide.jpg"))); // NOI18N
         jLabel73.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel73.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -2298,7 +2298,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         });
         doiMatKhau.add(jLabel73, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 335, -1, -1));
 
-        jLabel74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/password_show.jpg"))); // NOI18N
+        jLabel74.setIcon(new javax.swing.ImageIcon(getClass().getResource("/src/frontend/icons/password_show.jpg"))); // NOI18N
         jLabel74.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel74.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
