@@ -1,19 +1,17 @@
-package src.backend.statistic;
+package Dao;
 
 import java.util.*;
-
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import src.backend.databaseConnector.databaseConnector;
-import src.backend.enums.ticketTypeEnum;
-import src.backend.enums.vehicleTypeEnum;
+import connection.databaseConnector;
+import enums.ticketTypeEnum;
+import enums.vehicleTypeEnum;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class StatisticDAO {
     public void calculateStatistic(JTable table, Date startTime, Date endTime, ticketTypeEnum ticketType,

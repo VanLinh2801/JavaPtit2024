@@ -13,6 +13,8 @@ import javax.swing.UIManager;
 
 public class ModifyUser extends javax.swing.JFrame {
     int xx, xy;
+    public static String old, oldphone;
+    UserDAO u = new UserDAO();
 
     public ModifyUser() {
         this.setUndecorated(true);
@@ -357,7 +359,8 @@ public class ModifyUser extends javax.swing.JFrame {
             throws HeadlessException, ClassNotFoundException, SQLException {// GEN-FIRST:event_jButton1ActionPerformed
         String username = tenDangNhap.getText();
         String fullName = tenNguoiDung.getText();
-        String password = jPasswordField1.getPassword().toString();
+        char[] passwordChars = jPasswordField1.getPassword();
+        String password = new String(passwordChars);
         String phone = sdt.getText();
         String gt = "";
         if (gtNam.isSelected())
@@ -372,28 +375,17 @@ public class ModifyUser extends javax.swing.JFrame {
             role = 2;
         if (username.isEmpty() || fullName.isEmpty() || password.isEmpty() || phone.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ dữ liệu", "Thông báo", 2);
-        } else if (UserDAO.isPhoneExist(phone, 0)) {
+        } else if (!phone.equals(oldphone) && UserDAO.isPhoneExist(phone, 0)) {
             JOptionPane.showMessageDialog(this, "Số điện thoại này đã được đăng ký", "Thông báo", 2);
-        } else if (UserDAO.isUsernameExist(username)) {
+        } else if (!username.equals(old) && UserDAO.isUsernameExist(username)) {
             JOptionPane.showMessageDialog(this, "Tên người dùng đã tồn tại", "Thông báo", 2);
         } else {
-            try {
-                int id = UserDAO.getUserId(username);
-                Users user = new Users(username, password, fullName, gt, phone, workShift, role);
-                try {
-                    UserDAO.removeSecurityGuard(id);
-                    UserDAO.addSecurityGuard(user);
-                    JOptionPane.showMessageDialog(this, "Cập nhật thành công", "Thông báo", 2);
-                    this.dispose();
-                } catch (SQLException ex) {
-                    Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(ModifyUser.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ModifyUser.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Users user = new Users(username, password, fullName, gt, phone, workShift, role);
+            u.upDate(username, fullName, phone, gt, role, workShift, gt, old);
+            JOptionPane.showMessageDialog(this, "Cập nhật thành công", "Thông báo", 2);
+            this.dispose();
         }
+        AdminDashBoard.tableNguoiDung();
     }// GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
@@ -405,13 +397,13 @@ public class ModifyUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton baoVe;
+    public static javax.swing.JRadioButton baoVe;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.JRadioButton dem;
-    private javax.swing.JRadioButton gtNam;
-    private javax.swing.JRadioButton gtNu;
+    public static javax.swing.JRadioButton dem;
+    public static javax.swing.JRadioButton gtNam;
+    public static javax.swing.JRadioButton gtNu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -430,11 +422,11 @@ public class ModifyUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JRadioButton ngay;
-    private javax.swing.JRadioButton quanLy;
-    private javax.swing.JTextField sdt;
-    private javax.swing.JTextField tenDangNhap;
-    private javax.swing.JTextField tenNguoiDung;
+    public static javax.swing.JPasswordField jPasswordField1;
+    public static javax.swing.JRadioButton ngay;
+    public static javax.swing.JRadioButton quanLy;
+    public static javax.swing.JTextField sdt;
+    public static javax.swing.JTextField tenDangNhap;
+    public static javax.swing.JTextField tenNguoiDung;
     // End of variables declaration//GEN-END:variables
 }

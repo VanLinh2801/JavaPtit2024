@@ -1,13 +1,13 @@
-package src.backend.ticket;
+package Dao;
 
 import java.sql.*;
 import java.sql.Date;
 import java.time.*;
 import java.util.*;
 
-import src.backend.databaseConnector.databaseConnector;
-import src.backend.enums.ticketTypeEnum;
-import src.backend.enums.vehicleTypeEnum;
+import connection.databaseConnector;
+import enums.ticketTypeEnum;
+import enums.vehicleTypeEnum;
 
 import java.time.temporal.ChronoUnit;
 import java.util.logging.Level;
@@ -18,6 +18,11 @@ import javax.swing.table.DefaultTableModel;
 
 public class TicketDAO {
 
+    Connection con = databaseConnector.getConnection();
+    PreparedStatement ps;
+    Statement st;
+    ResultSet rs;
+    
     public boolean addDailyTicket(Ticket ticket) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
         String currentUserId = "SELECT * FROM LastLogin WHERE loginTime = (SELECT MAX(loginTime) FROM LastLogin)";
@@ -40,21 +45,23 @@ public class TicketDAO {
         return false;
     }
 
-    public boolean isPlateNumberExist(String bienSo) throws ClassNotFoundException {
-        String query = "SELECT 1 FROM Ticket WHERE plateNumber = ? AND ticketType = 'MONTHLY'";
-        try (
-                Connection connection = databaseConnector.getConnection();
-                PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, bienSo);
-            try (ResultSet rs = ps.executeQuery()) {
-                return rs.next();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
+   public boolean isPlateNumberExist(String bienSo) {
+    String query = "SELECT 1 FROM Ticket WHERE plateNumber = ? AND ticketType = 'MONTHLY'";
+    try (
+        Connection connection = databaseConnector.getConnection();
+        PreparedStatement ps = connection.prepareStatement(query)
+    ) {
+        ps.setString(1, bienSo);
+        try (ResultSet rs = ps.executeQuery()) {
+            return rs.next(); 
         }
-        return false;
+    } catch (SQLException ex) {
+        Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
     }
+    return false;
+}
 
+    
     public boolean addAndCalculatePriceForMonthlyTicket(Ticket ticket) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
         String currentUserIdQuery = "SELECT * FROM LastLogin WHERE loginTime = (SELECT MAX(loginTime) FROM LastLogin)";
@@ -103,55 +110,43 @@ public class TicketDAO {
         return false;
     }
 
-    public boolean changeTicketType() throws ClassNotFoundException, SQLException {
+    public boolean changeTicketType(){
         String sql = "UPDATE Ticket SET ticketType = 'DAILY', entryTime = exitTime, exitTime = NULL WHERE exitTime < CURRENT_TIMESTAMP AND ticketType = 'MONTHLY'";
-        Connection con = databaseConnector.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
         try {
             ps = con.prepareStatement(sql);
-            if (ps.executeUpdate() > 0)
-                return true;
+            if(ps.executeUpdate() > 0) return true;
         } catch (SQLException ex) {
             Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
-
-    public boolean isPlateNumberExist2(String bienSo) throws ClassNotFoundException, SQLException {
+    
+    public boolean isPlateNumberExist2(String bienSo){
         String sql = "Select * from Ticket where ticketType = 'DAILY' and exitTime is null and plateNumber = ?";
-        Connection con = databaseConnector.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, bienSo);
             rs = ps.executeQuery();
-            if (rs.next())
-                return true;
+            if(rs.next()) return true;
         } catch (SQLException ex) {
             Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
-
-    public double getPrice(String bienSo) throws ClassNotFoundException, SQLException {
+    
+    public double getPrice(String bienSo){
         String sql = "Select price from Ticket where plateNumber = ?";
-        Connection con = databaseConnector.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, bienSo);
             rs = ps.executeQuery();
-            if (rs.next())
-                return rs.getDouble(1);
+            if(rs.next()) return rs.getDouble(1);
         } catch (SQLException ex) {
             Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
     }
-
+    
     public boolean calculateDailyPrice(String plateNumber) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
         String findTicket = "SELECT * FROM Ticket WHERE entryTime = (SELECT MAX(entryTime) FROM Ticket WHERE plateNumber = ?) AND ticketType = ?";
@@ -209,7 +204,7 @@ public class TicketDAO {
         return result > 0;
     }
 
-    public boolean delete(String bienSo, String loaiVe) throws ClassNotFoundException, SQLException {
+    public boolean delete(String bienSo, String loaiVe) {
         int x = JOptionPane.showOptionDialog(
                 null,
                 "Bạn có chắc chắn xóa vé này không?",
@@ -217,11 +212,9 @@ public class TicketDAO {
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
-                new Object[] { "Xóa", "Hủy" },
-                "Hủy");
-        Connection con = databaseConnector.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
+                new Object[]{"Xóa", "Hủy"},
+                "Hủy"
+        );
         if (x == JOptionPane.OK_OPTION) {
             String sql = "delete from ticket where plateNumber = ? and ticketType = ?";
             try {
@@ -235,46 +228,35 @@ public class TicketDAO {
         }
         return false;
     }
-
-    public boolean isMonthlyTicket(String bienSo) throws ClassNotFoundException, SQLException {
+    
+    public boolean isMonthlyTicket(String bienSo){
         String sql = "SELECT 1 FROM Ticket WHERE plateNumber = ? AND ticketType = 'MONTHLY' AND exitTime IS NOT NULL AND exitTime >= CURRENT_TIMESTAMP";
-        Connection con = databaseConnector.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, bienSo);
             rs = ps.executeQuery();
-            if (rs.next())
-                return true;
+            if(rs.next()) return true;
         } catch (SQLException ex) {
             Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
-
-    public boolean isInside(String bienSo) throws ClassNotFoundException, SQLException {
+    
+    public boolean isInside(String bienSo){
         String sql = "SELECT ticketType FROM Ticket WHERE plateNumber = ? AND ticketType = 'DAILY' AND exitTime IS NULL";
-        Connection con = databaseConnector.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, bienSo);
             rs = ps.executeQuery();
-            if (rs.next())
-                return true;
+            if(rs.next()) return true;
         } catch (SQLException ex) {
             Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
-
-    public boolean delete2(String bienSo, String loaiVe) throws ClassNotFoundException, SQLException {
+    
+    public boolean delete2(String bienSo, String loaiVe) {
         String sql = "delete from ticket where plateNumber = ? and ticketType = ?";
-        Connection con = databaseConnector.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, bienSo);
@@ -285,8 +267,8 @@ public class TicketDAO {
         }
         return false;
     }
-
-    public boolean extend(String bienSo) throws ClassNotFoundException, SQLException {
+    
+    public boolean extend(String bienSo) {
         int x = JOptionPane.showOptionDialog(
                 null,
                 "Bạn có chắc chắn gia hạn vé này không?",
@@ -294,13 +276,11 @@ public class TicketDAO {
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
-                new Object[] { "Gia hạn", "Hủy" },
-                "Hủy");
+                new Object[]{"Gia hạn", "Hủy"},
+                "Hủy"
+        );
         if (x == JOptionPane.OK_OPTION) {
             String sql = "Update ticket set exitTime = DateAdd(day, 30, exitTime) where plateNumber = ? and ticketType = 'MONTHLY'";
-            Connection con = databaseConnector.getConnection();
-            PreparedStatement ps;
-            ResultSet rs;
             try {
                 ps = con.prepareStatement(sql);
                 ps.setString(1, bienSo);
@@ -312,12 +292,9 @@ public class TicketDAO {
         }
         return false;
     }
-
-    public boolean updateDay(java.sql.Timestamp s, String bienSo) throws ClassNotFoundException, SQLException {
+    
+    public boolean updateDay(java.sql.Timestamp s, String bienSo){
         String sql = "Update ticket set entryTime = ? where plateNumber = ? and ticketType = 'MONTHLY'";
-        Connection con = databaseConnector.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
         try {
             ps = con.prepareStatement(sql);
             ps.setTimestamp(1, s);
@@ -329,12 +306,9 @@ public class TicketDAO {
         }
         return false;
     }
-
-    public boolean updateDaily(String bienSo, String loaiXe, String old) throws ClassNotFoundException, SQLException {
+    
+    public boolean updateDaily(String bienSo, String loaiXe, String old){
         String sql = "Update ticket set plateNumber = ? and vehicleType = ? where plateNumber = ?";
-        Connection con = databaseConnector.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, bienSo);
@@ -347,7 +321,7 @@ public class TicketDAO {
         }
         return false;
     }
-
+    
     public boolean deleteManyTickets(List<Integer> idToDeleteList) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
         String query = "DELETE FROM Ticket WHERE id = ?";
@@ -453,12 +427,8 @@ public class TicketDAO {
         return false;
     }
 
-    public void searchTicket(JTable table, String bienSo, String loaiVe, String loaiXe)
-            throws ClassNotFoundException, SQLException {
+    public void searchTicket(JTable table, String bienSo, String loaiVe, String loaiXe){
         String sql = "Select plateNumber, ticketType, vehicleType, entryTime, exitTime From Ticket where plateNumber like ? and ticketType like ? and vehicleType like ?";
-        Connection con = databaseConnector.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, "%" + bienSo + "%");
@@ -467,7 +437,7 @@ public class TicketDAO {
             rs = ps.executeQuery();
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             Object[] row;
-            while (rs.next()) {
+            while(rs.next()){
                 row = new Object[5];
                 row[0] = rs.getString(1);
                 row[1] = rs.getString(2);
@@ -480,61 +450,49 @@ public class TicketDAO {
             Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void getDailyTicket(JTable table, String search) throws ClassNotFoundException, SQLException {
+    
+    public void getDailyTicket(JTable table, String search){
         String sql = "select plateNumber, entryTime, vehicleType from ticket where plateNumber like ? and TicketType = 'DAILY' and exitTime is null";
-        Connection con = databaseConnector.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, "%" + search + "%");
             rs = ps.executeQuery();
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             Object[] row;
-            while (rs.next()) {
+            while(rs.next()){
                 row = new Object[4];
                 row[0] = false;
                 row[1] = rs.getString(1);
                 row[2] = rs.getTimestamp(2);
                 String xe = rs.getString(3);
-                if (xe.equals("CAR"))
-                    row[3] = "Ô tô";
-                else if (xe.equals("MOTORBIKE"))
-                    row[3] = "Xe máy";
-                else
-                    row[3] = "Xe đạp, xe đạp điện";
-                model.addRow(row);
+                if(xe.equals("CAR")) row[3] = "Ô tô";
+                else if(xe.equals("MOTORBIKE")) row[3] = "Xe máy";
+                else row[3] = "Xe đạp, xe đạp điện";
+                model.addRow(row); 
             }
         } catch (SQLException ex) {
             Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void getMonthlyTicket(JTable table, String search) throws ClassNotFoundException, SQLException {
+    
+    public void getMonthlyTicket(JTable table, String search){
         String sql = "select plateNumber, entryTime, exitTime, vehicleType, price from ticket where plateNumber like ? and TicketType = 'MONTHLY'";
-        Connection con = databaseConnector.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, "%" + search + "%");
             rs = ps.executeQuery();
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             Object[] row;
-            while (rs.next()) {
+            while(rs.next()){
                 row = new Object[6];
                 row[0] = false;
                 row[1] = rs.getString(1);
                 row[2] = rs.getTimestamp(2);
                 row[3] = rs.getTimestamp(3);
                 String xe = rs.getString(4);
-                if (xe.equals("CAR"))
-                    row[4] = "Ô tô";
-                else if (xe.equals("MOTORBIKE"))
-                    row[4] = "Xe máy";
-                else
-                    row[4] = "Xe đạp, xe đạp điện";
+                if(xe.equals("CAR")) row[4] = "Ô tô";
+                else if(xe.equals("MOTORBIKE")) row[4] = "Xe máy";
+                else row[4] = "Xe đạp, xe đạp điện";
                 row[5] = rs.getDouble(5);
                 model.addRow(row);
             }
@@ -542,33 +500,25 @@ public class TicketDAO {
             Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public int getTotalMonthlyTicket() throws ClassNotFoundException, SQLException {
+    
+    public int getTotalMonthlyTicket(){
         String sql = "select count(*) from ticket where TicketType = 'MONTHLY'";
-        Connection con = databaseConnector.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-            if (rs.next())
-                return rs.getInt(1);
+            if(rs.next()) return rs.getInt(1);
         } catch (SQLException ex) {
             Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
     }
-
-    public int getTotalDailyTicket() throws ClassNotFoundException, SQLException {
+    
+    public int getTotalDailyTicket(){
         String sql = "select count(*) from ticket where TicketType = 'DAILY'";
-        Connection con = databaseConnector.getConnection();
-        PreparedStatement ps;
-        ResultSet rs;
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-            if (rs.next())
-                return rs.getInt(1);
+            if(rs.next()) return rs.getInt(1);
         } catch (SQLException ex) {
             Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

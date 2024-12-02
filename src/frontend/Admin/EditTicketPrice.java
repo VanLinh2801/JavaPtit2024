@@ -1,11 +1,9 @@
 package src.frontend.Admin;
 
-import com.formdev.flatlaf.FlatLightLaf;
-
-import src.backend.enums.vehicleTypeEnum;
-import src.backend.vehiclePrice.VehiclePrice;
 import src.backend.vehiclePrice.VehiclePriceDAO;
-
+import src.backend.vehiclePrice.VehiclePrice;
+import com.formdev.flatlaf.FlatLightLaf;
+import src.backend.enums.vehicleTypeEnum;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -168,7 +166,15 @@ public class EditTicketPrice extends javax.swing.JFrame {
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                try {
+                    jButton1ActionPerformed(evt);
+                } catch (ClassNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, 80, -1));
@@ -224,7 +230,7 @@ public class EditTicketPrice extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel11MouseClicked
-        System.exit(0);
+        this.dispose();
     }// GEN-LAST:event_jLabel11MouseClicked
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel1MouseDragged
@@ -298,7 +304,7 @@ public class EditTicketPrice extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_jTextField6KeyTyped
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_jButton1ActionPerformed
         String sang = jTextField2.getText();
         String chieu = jTextField3.getText();
         String toi = jTextField5.getText();
@@ -324,8 +330,8 @@ public class EditTicketPrice extends javax.swing.JFrame {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(EditTicketPrice.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
+        AdminDashBoard.tableBangGia();
     }// GEN-LAST:event_jButton1ActionPerformed
 
     private void init(vehicleTypeEnum loaiXe) {

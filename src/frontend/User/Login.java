@@ -1,6 +1,9 @@
 package src.frontend.User;
 
 import com.formdev.flatlaf.FlatLightLaf;
+
+import src.frontend.Admin.AdminDashBoard;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.Connection;
@@ -12,11 +15,12 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import src.backend.databaseConnector.databaseConnector;
-import src.frontend.Admin.AdminDashBoard;
+import src.backend.users.UserDAO;
 import src.frontend.User.UserDashboard;
 
 public class Login extends javax.swing.JFrame {
     int xx, xy;
+    UserDAO user = new UserDAO();
 
     public Login() {
         this.setUndecorated(true);
@@ -204,6 +208,13 @@ public class Login extends javax.swing.JFrame {
         if (isEmpty()) {
             String username = jTextField1.getText();
             String password = String.valueOf(jPasswordField1.getPassword());
+            try {
+                user.login(username, password);
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
             try {
                 Connection con = databaseConnector.getConnection();
                 PreparedStatement ps;

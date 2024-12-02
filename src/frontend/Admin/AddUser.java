@@ -1,9 +1,8 @@
 package src.frontend.Admin;
 
-import com.formdev.flatlaf.FlatLightLaf;
-
 import src.backend.users.UserDAO;
 import src.backend.users.Users;
+import com.formdev.flatlaf.FlatLightLaf;
 
 import java.awt.HeadlessException;
 import java.sql.SQLException;
@@ -279,7 +278,9 @@ public class AddUser extends javax.swing.JFrame {
             throws HeadlessException, ClassNotFoundException, SQLException {// GEN-FIRST:event_jButton1ActionPerformed
         String username = tenDangNhap.getText();
         String fullName = tenNguoiDung.getText();
-        String password = jPasswordField1.getPassword().toString();
+        char[] passwordChars = jPasswordField1.getPassword();
+        String password = new String(passwordChars);
+        System.out.println(password);
         String phone = sdt.getText();
         String gt = "";
         if (gtNam.isSelected())
@@ -310,6 +311,7 @@ public class AddUser extends javax.swing.JFrame {
                 Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        AdminDashBoard.tableNguoiDung();
     }// GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
