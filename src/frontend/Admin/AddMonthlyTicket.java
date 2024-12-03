@@ -2,6 +2,7 @@ package src.frontend.Admin;
 
 import src.backend.ticket.Ticket;
 import src.backend.ticket.TicketDAO;
+import src.backend.users.UserDAO;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.Date;
 import java.util.logging.Level;
@@ -12,10 +13,12 @@ import src.backend.enums.vehicleTypeEnum;
 import java.awt.HeadlessException;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import src.frontend.User.UserDashboard;
 
 public class AddMonthlyTicket extends javax.swing.JFrame {
     int xx, xy;
     TicketDAO ticket = new TicketDAO();
+    UserDAO user = new UserDAO();
 
     public AddMonthlyTicket() {
         this.setUndecorated(true);
@@ -98,15 +101,7 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    jButton1ActionPerformed(evt);
-                } catch (HeadlessException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                jButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 90, 30));
@@ -232,8 +227,7 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
         this.dispose();
     }// GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)
-            throws HeadlessException, ClassNotFoundException {// GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
         String bienSo = jTextField1.getText();
         vehicleTypeEnum loaiXe;
         if (jComboBox1.getSelectedItem().toString().equals("Ô tô"))
@@ -245,21 +239,33 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
         Ticket t = new Ticket(bienSo, loaiXe);
         if (bienSo.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Hãy nhập biển số", "Thông báo", 2);
-        } else if (ticket.isPlateNumberExist(bienSo)) {
-            JOptionPane.showMessageDialog(this, "Biển số đã được đăng ký", "Thông báo", 2);
-        } else {
+        } else
             try {
-                boolean ok = ticket.addAndCalculatePriceForMonthlyTicket(t);
-                if (ok) {
-                    JOptionPane.showMessageDialog(this, "Đăng ký thành công", "Thông báo", 2);
+                if (ticket.isPlateNumberExist(bienSo)) {
+                    JOptionPane.showMessageDialog(this, "Biển số đã được đăng ký", "Thông báo", 2);
+                } else {
+                    try {
+                        boolean ok = ticket.addAndCalculatePriceForMonthlyTicket(t);
+                        if (ok) {
+                            JOptionPane.showMessageDialog(this, "Đăng ký thành công", "Thông báo", 2);
+                        }
+                        if (user.getRole() == 1)
+                            AdminDashBoard.tableVeThang();
+                        else
+                            UserDashboard.tableVeThang();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AddMonthlyTicket.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException ex) {
+                        Logger.getLogger(AddMonthlyTicket.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-                AdminDashBoard.tableVeThang();
-            } catch (SQLException ex) {
-                Logger.getLogger(AddMonthlyTicket.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AddMonthlyTicket.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (HeadlessException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
-        }
     }// GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed

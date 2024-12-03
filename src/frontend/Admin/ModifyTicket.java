@@ -2,6 +2,7 @@ package src.frontend.Admin;
 
 import src.backend.ticket.Ticket;
 import src.backend.ticket.TicketDAO;
+import src.backend.users.UserDAO;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.util.Date;
 import java.util.logging.Level;
@@ -13,12 +14,14 @@ import java.awt.HeadlessException;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import java.sql.Timestamp;
+import src.frontend.User.UserDashboard;
 
 public class ModifyTicket extends javax.swing.JFrame {
     int xx, xy;
     TicketDAO ticket = new TicketDAO();
     public static String b;
     public Timestamp time;
+    UserDAO user = new UserDAO();
 
     public ModifyTicket() {
         this.setUndecorated(true);
@@ -200,7 +203,10 @@ public class ModifyTicket extends javax.swing.JFrame {
                 if (ok) {
                     JOptionPane.showMessageDialog(this, "Cập nhật thành công", "Thông báo", 2);
                 }
-                AdminDashBoard.tableVeThang();
+                if (user.getRole() == 1)
+                    AdminDashBoard.tableVeThang();
+                else
+                    UserDashboard.tableVeThang();
             } catch (SQLException ex) {
                 Logger.getLogger(AddMonthlyTicket.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {

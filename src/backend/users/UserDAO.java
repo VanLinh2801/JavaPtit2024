@@ -93,6 +93,17 @@ public class UserDAO {
         return 0;
     }
 
+    public int getRole() throws SQLException, ClassNotFoundException {
+        Connection connection = databaseConnector.getConnection();
+        String query = "select u.RoleID From Users u inner join LastLogin l on l.UserId = u.id where loginTime = (select max(loginTime) from LastLogin)";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ResultSet rs = preparedStatement.executeQuery();
+        if (rs.next())
+            return rs.getInt(1);
+        connection.close();
+        return 0;
+    }
+
     public static String getFullName(String username) throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
         String query = "Select fullName from users where username = ?";
@@ -212,7 +223,7 @@ public class UserDAO {
         return result > 0;
     }
 
-    public static String getPassword(int id) throws ClassNotFoundException, SQLException {
+    public static String getPasswordById(int id) throws ClassNotFoundException, SQLException {
         Connection connection = databaseConnector.getConnection();
         ResultSet result;
         String res = "";
@@ -230,7 +241,7 @@ public class UserDAO {
         return res;
     }
 
-    public static String getPassword2(String username) throws ClassNotFoundException, SQLException {
+    public static String getPasswordByUsername(String username) throws ClassNotFoundException, SQLException {
         Connection connection = databaseConnector.getConnection();
         ResultSet result;
         String res = "";

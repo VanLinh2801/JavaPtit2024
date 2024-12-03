@@ -3,13 +3,13 @@ package src.frontend.Admin;
 import src.backend.users.UserDAO;
 import src.backend.users.Users;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.Font;
+import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import java.awt.Font;
-import java.awt.HeadlessException;
 
 public class AddUser extends javax.swing.JFrame {
     int xx, xy;
@@ -175,6 +175,9 @@ public class AddUser extends javax.swing.JFrame {
                 } catch (ClassNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
             }
         });
@@ -289,7 +292,7 @@ public class AddUser extends javax.swing.JFrame {
     }// GEN-LAST:event_formMouseDragged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)
-            throws HeadlessException, ClassNotFoundException {// GEN-FIRST:event_jButton1ActionPerformed
+            throws HeadlessException, ClassNotFoundException, SQLException {// GEN-FIRST:event_jButton1ActionPerformed
         String username = tenDangNhap.getText();
         String fullName = tenNguoiDung.getText();
         char[] passwordChars = jPasswordField1.getPassword();
@@ -325,15 +328,7 @@ public class AddUser extends javax.swing.JFrame {
                 Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        try {
-            AdminDashBoard.tableNguoiDung();
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        AdminDashBoard.tableNguoiDung();
     }// GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed

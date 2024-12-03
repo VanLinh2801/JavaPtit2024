@@ -4,6 +4,7 @@ import src.backend.users.UserDAO;
 import src.backend.users.Users;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -178,6 +179,9 @@ public class ModifyUser extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     jButton1ActionPerformed(evt);
+                } catch (HeadlessException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 } catch (ClassNotFoundException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -351,7 +355,8 @@ public class ModifyUser extends javax.swing.JFrame {
         jLabel13.setVisible(true);
     }// GEN-LAST:event_jLabel10MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws ClassNotFoundException, SQLException {// GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)
+            throws HeadlessException, ClassNotFoundException, SQLException {// GEN-FIRST:event_jButton1ActionPerformed
         String username = tenDangNhap.getText();
         String fullName = tenNguoiDung.getText();
         char[] passwordChars = jPasswordField1.getPassword();

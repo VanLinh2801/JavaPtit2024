@@ -40,7 +40,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
     Color downSelect = new Color(204, 255, 255);
     Color notSelectText = new Color(153, 153, 153);
     Color warning = new Color(255, 51, 51);
-    Color ok = new Color(102, 255, 51);
+    Color ok = new Color(51, 204, 0);
     int xx, xy;
     Font font1 = new Font("Segoe UI", Font.PLAIN, 18);
     Font font2 = new Font("Segoe UI", Font.BOLD, 18);
@@ -260,10 +260,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jPanel40 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         jLabel101 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
         jPanel39 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel100 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         quanLyNguoiDung = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
@@ -1858,6 +1858,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Thống Kê");
         jButton3.setBorderPainted(false);
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.setPreferredSize(new java.awt.Dimension(87, 30));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1879,7 +1880,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel16.setText("QUẢN TRỊ VIÊN");
-        chucNang7.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
+        chucNang7.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 170, 120, -1));
 
         jPanel40.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel40.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1900,10 +1901,6 @@ public class AdminDashBoard extends javax.swing.JFrame {
 
         chucNang7.add(jPanel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 230, 50));
 
-        jLabel38.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel38.setText("icon");
-        chucNang7.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, -1, -1));
-
         jPanel39.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel39.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel39 = new CustomRoundedPanel(50, 50);
@@ -1922,6 +1919,10 @@ public class AdminDashBoard extends javax.swing.JFrame {
         jPanel39.add(jLabel100, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 28, 28));
 
         chucNang7.add(jPanel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 230, 50));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ava.png"))); // NOI18N
+        chucNang7.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
 
         Paneltask7.add(chucNang7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 510));
 
@@ -2253,9 +2254,8 @@ public class AdminDashBoard extends javax.swing.JFrame {
         chucNang8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         name.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        name.setForeground(new java.awt.Color(255, 255, 255));
         name.setText("ADMIN");
-        chucNang8.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+        chucNang8.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
 
         task8_thongTin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         task8_thongTin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -2296,8 +2296,8 @@ public class AdminDashBoard extends javax.swing.JFrame {
         chucNang8.add(task8_doiMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 230, 50));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel7.setText("ICON");
-        chucNang8.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ava.png"))); // NOI18N
+        chucNang8.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, -1));
 
         Paneltask8.add(chucNang8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -3006,8 +3006,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         String phoneNumber = sdt.getText();
         if (tenNguoiDung.getText().isEmpty() || sdt.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đủ dữ liệu", "Thông báo", 2);
-        }
-        if (userDao.isPhoneExist(phoneNumber, u.getId())) {
+        } else if (userDao.isPhoneExist(phoneNumber, u.getId())) {
             JOptionPane.showMessageDialog(this, "Số điện thoại này đã được đăng ký", "Thông báo", 2);
         } else {
             try {
@@ -3103,7 +3102,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         String oldPass = new String(matKhauCu.getPassword());
         String newPass = new String(matKhauMoi.getPassword());
         String cfPass = new String(xacNhanMatKhau.getPassword());
-        String pass = userDao.getPassword(id);
+        String pass = userDao.getPasswordById(id);
 
         if (checkMatKhau(oldPass, newPass, cfPass, pass)) {
             try {
@@ -3158,7 +3157,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 n.ngay.setSelected(true);
             }
             n.setVisible(true);
-            n.jPasswordField1.setText(userDao.getPassword2(model.getValueAt(j, 1).toString()));
+            n.jPasswordField1.setText(userDao.getPasswordByUsername(model.getValueAt(j, 1).toString()));
             n.old = model.getValueAt(j, 1).toString();
             n.oldphone = model.getValueAt(j, 3).toString();
         }
@@ -3422,7 +3421,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 new Object[] { "Có", "Hủy" },
                 "Hủy");
         if (a == 0) {
-            src.frontend.User.Login n = new Login();
+            Login n = new Login();
             n.setLocationRelativeTo(null);
             n.setVisible(true);
             this.dispose();
@@ -3440,7 +3439,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
                 new Object[] { "Có", "Hủy" },
                 "Hủy");
         if (a == 0) {
-            src.frontend.User.Login n = new Login();
+            Login n = new Login();
             n.setLocationRelativeTo(null);
             n.setVisible(true);
             this.dispose();
@@ -3643,6 +3642,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
     private javax.swing.JLabel jLabel101;
     private javax.swing.JLabel jLabel102;
@@ -3683,7 +3683,6 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
