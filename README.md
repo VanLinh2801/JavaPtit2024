@@ -4,6 +4,8 @@
 
 Báo cáo: https://docs.google.com/document/d/1I_KthIkkYzksk3W6GJOJou9JO26tVRqQ/edit?usp=sharing&ouid=103665712743104293226&rtpof=true&sd=true
 
+Thiết kế giao diện: https://www.figma.com/design/RBrJYRR8GNADTy0AWHeYb7/Parking-Management?fuid=1443588314773175735
+
 ---
 
 # I. Yêu cầu dự án
