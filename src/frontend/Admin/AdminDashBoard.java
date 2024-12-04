@@ -3393,7 +3393,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
                     thongBaoLanRa.setText(String.valueOf(ticketDao.getPrice(bienSo)));
                 } else {
                     thongBaoLanRa.setForeground(warning);
-                    thongBaoLanRa.setText("Loại xe không đúng");
+                    thongBaoLanRa.setText("Vé không tồn tại");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
