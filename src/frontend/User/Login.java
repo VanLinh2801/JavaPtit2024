@@ -362,18 +362,6 @@ public class Login extends javax.swing.JFrame {
         System.exit(0);
     }// GEN-LAST:event_jLabel6MouseClicked
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FlatLightLaf.setup();
-                UIManager.put("TextComponent.arc", 999);
-                UIManager.put("Button.arc", 999);
-                System.setProperty("flatlaf.menuBarEmbbedded", "false");
-                new Login().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

@@ -4,6 +4,8 @@
  */
 package src.frontend.quanlybaidoxe;
 
+import src.frontend.User.Login;
+
 /**
  *
  * @author ADMIN
@@ -14,7 +16,7 @@ public class QuanLyBaiDoXe {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        new Login().setVisible(true);
     }
 
 }
