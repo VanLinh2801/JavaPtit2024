@@ -3387,9 +3387,14 @@ public class AdminDashBoard extends javax.swing.JFrame {
             thongBaoLanRa.setText("Vé không tồn tại");
         } else {
             try {
-                ticketDao.calculateDailyPrice(bienSo);
-                thongBaoLanRa.setForeground(ok);
-                thongBaoLanRa.setText(String.valueOf(ticketDao.getPrice(bienSo)));
+                boolean check = ticketDao.calculateDailyPrice(bienSo, loaiXe);
+                if (check) {
+                    thongBaoLanRa.setForeground(ok);
+                    thongBaoLanRa.setText(String.valueOf(ticketDao.getPrice(bienSo)));
+                } else {
+                    thongBaoLanRa.setForeground(warning);
+                    thongBaoLanRa.setText("Loại xe không đúng");
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {

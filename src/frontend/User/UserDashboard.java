@@ -2534,9 +2534,14 @@ public class UserDashboard extends javax.swing.JFrame {
             thongBaoLanRa.setText("Vé không tồn tại");
         } else {
             try {
-                ticketDao.calculateDailyPrice(bienSo);
-                thongBaoLanRa.setForeground(ok);
-                thongBaoLanRa.setText(String.valueOf(ticketDao.getPrice(bienSo)));
+                boolean check = ticketDao.calculateDailyPrice(bienSo, loaiXe);
+                if (check) {
+                    thongBaoLanRa.setForeground(ok);
+                    thongBaoLanRa.setText(String.valueOf(ticketDao.getPrice(bienSo)));
+                } else {
+                    thongBaoLanRa.setForeground(warning);
+                    thongBaoLanRa.setText("Không đúng loại xe");
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(UserDashboard.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {

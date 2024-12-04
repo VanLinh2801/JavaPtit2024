@@ -152,12 +152,14 @@ public class TicketDAO {
         return 0;
     }
 
-    public boolean calculateDailyPrice(String plateNumber) throws SQLException, ClassNotFoundException {
+    public boolean calculateDailyPrice(String plateNumber, vehicleTypeEnum vehicleTypeParameter)
+            throws SQLException, ClassNotFoundException {
         Connection connection = databaseConnector.getConnection();
-        String findTicket = "SELECT * FROM Ticket WHERE entryTime = (SELECT MAX(entryTime) FROM Ticket WHERE plateNumber = ?) AND ticketType = ?";
+        String findTicket = "SELECT * FROM Ticket WHERE entryTime = (SELECT MAX(entryTime) FROM Ticket WHERE plateNumber = ?) AND ticketType = ? AND vehicleType = ?";
         PreparedStatement findTicketStatement = connection.prepareStatement(findTicket);
         findTicketStatement.setString(1, plateNumber);
         findTicketStatement.setString(2, ticketTypeEnum.DAILY.toString());
+        findTicketStatement.setString(3, vehicleTypeParameter.toString());
         ResultSet findTicketResultSet = findTicketStatement.executeQuery();
         while (findTicketResultSet.next()) {
             Timestamp entryTime = findTicketResultSet.getTimestamp("entryTime");
