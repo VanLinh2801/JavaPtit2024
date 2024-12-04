@@ -15,6 +15,11 @@ public class AddUser extends javax.swing.JFrame {
     int xx, xy;
 
     public AddUser() {
+        FlatLightLaf.setup();
+        UIManager.put("TextComponent.arc", 999);
+        UIManager.put("Button.arc", 999);
+        UIManager.put("Component.arc", 999);
+        System.setProperty("flatlaf.menuBarEmbbedded", "false");
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);

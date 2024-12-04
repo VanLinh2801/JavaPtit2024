@@ -61,6 +61,11 @@ public class UserDashboard extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserDashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
+        FlatLightLaf.setup();
+        UIManager.put("TextComponent.arc", 999);
+        UIManager.put("Button.arc", 999);
+        UIManager.put("Component.arc", 999);
+        System.setProperty("flatlaf.menuBarEmbbedded", "false");
         this.setUndecorated(true);
         initComponents();
         init();
@@ -2954,29 +2959,6 @@ public class UserDashboard extends javax.swing.JFrame {
             gtNu.setSelected(true);
         }
         chucVu.setText("Bảo vệ");
-    }
-
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FlatLightLaf.setup();
-                UIManager.put("TextComponent.arc", 999);
-                UIManager.put("Table.alternateRowColor", new java.awt.Color(240, 240, 240));
-                System.setProperty("flatlaf.menuBarEmbbedded", "false");
-                UserDashboard n;
-                try {
-                    n = new UserDashboard();
-                    n.setVisible(true);
-
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

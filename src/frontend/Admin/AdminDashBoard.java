@@ -59,6 +59,11 @@ public class AdminDashBoard extends javax.swing.JFrame {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminDashBoard.class.getName()).log(Level.SEVERE, null, ex);
         }
+        FlatLightLaf.setup();
+        UIManager.put("TextComponent.arc", 999);
+        UIManager.put("Button.arc", 999);
+        UIManager.put("Component.arc", 999);
+        System.setProperty("flatlaf.menuBarEmbbedded", "false");
         this.setUndecorated(true);
         initComponents();
         init();
