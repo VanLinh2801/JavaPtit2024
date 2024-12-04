@@ -3418,7 +3418,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private void jLabel110MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel110MouseClicked
         int a = JOptionPane.showOptionDialog(
                 null,
-                "Bạn có muốn đăng xuất này không?",
+                "Bạn có muốn đăng xuất không?",
                 "Thông báo",
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
@@ -3436,7 +3436,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
     private void jLabel111MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel111MouseClicked
         int a = JOptionPane.showOptionDialog(
                 null,
-                "Bạn có muốn đăng xuất này không?",
+                "Bạn có muốn đăng xuất không?",
                 "Thông báo",
                 JOptionPane.OK_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
