@@ -9,6 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.table.DefaultTableModel;
+
+import src.frontend.Admin.AdminDashBoard;
 
 public class EditTicketPrice extends javax.swing.JFrame {
     int xx, xy;
@@ -331,6 +334,8 @@ public class EditTicketPrice extends javax.swing.JFrame {
                 Logger.getLogger(EditTicketPrice.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        AdminDashBoard.model6 = (DefaultTableModel) AdminDashBoard.giaVe.getModel();
+        AdminDashBoard.model6.setRowCount(0);
         AdminDashBoard.tableBangGia();
     }// GEN-LAST:event_jButton1ActionPerformed
 

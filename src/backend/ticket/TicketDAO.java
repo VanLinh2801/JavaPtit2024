@@ -136,7 +136,7 @@ public class TicketDAO {
     }
 
     public double getPrice(String bienSo) throws ClassNotFoundException, SQLException {
-        String sql = "Select price from Ticket where plateNumber = ?";
+        String sql = "Select price from Ticket where plateNumber = ? and entryTime = (Select max(entryTime) from Ticket where plateNumber = ?)";
         Connection con = databaseConnector.getConnection();
         PreparedStatement ps;
         ResultSet rs;

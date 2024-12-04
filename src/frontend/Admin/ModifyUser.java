@@ -279,8 +279,9 @@ public class ModifyUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jLabel11MouseClicked
-        System.exit(0);
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {
+        // GEN-FIRST:event_jLabel11MouseClicked
+        this.dispose();
     }// GEN-LAST:event_jLabel11MouseClicked
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jPanel1MouseDragged

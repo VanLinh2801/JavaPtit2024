@@ -2680,6 +2680,7 @@ public class AdminDashBoard extends javax.swing.JFrame {
         }
         ticketDao.searchTicket(bangTimKiem, bienSo, loaiVe, loaiXe);
         model3 = (DefaultTableModel) bangTimKiem.getModel();
+
     }
 
     public static void tableVeLuot() throws ClassNotFoundException, SQLException {
