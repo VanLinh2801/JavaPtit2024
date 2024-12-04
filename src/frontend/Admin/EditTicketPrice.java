@@ -359,14 +359,6 @@ public class EditTicketPrice extends javax.swing.JFrame {
         init(loaiXe);
     }// GEN-LAST:event_jComboBox1ActionPerformed
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EditTicketPrice().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

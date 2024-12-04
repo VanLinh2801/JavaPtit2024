@@ -388,14 +388,6 @@ public class ModifyUser extends javax.swing.JFrame {
         AdminDashBoard.tableNguoiDung();
     }// GEN-LAST:event_jButton1ActionPerformed
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ModifyUser().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JRadioButton baoVe;
     private javax.swing.ButtonGroup buttonGroup1;

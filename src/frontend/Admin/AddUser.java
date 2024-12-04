@@ -349,18 +349,6 @@ public class AddUser extends javax.swing.JFrame {
         jLabel13.setVisible(false);
     }// GEN-LAST:event_jLabel13MouseClicked
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FlatLightLaf.setup();
-                UIManager.put("TextComponent.arc", 999);
-                UIManager.put("Button.arc", 999);
-                System.setProperty("flatlaf.menuBarEmbbedded", "false");
-                new AddUser().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton baoVe;
     private javax.swing.ButtonGroup buttonGroup1;

@@ -211,14 +211,6 @@ public class ModifyDailyTicket extends javax.swing.JFrame {
         xy = evt.getY();
     }// GEN-LAST:event_jPanel1MousePressed
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ModifyDailyTicket().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

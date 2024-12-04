@@ -198,18 +198,6 @@ public class TicketInfo extends javax.swing.JFrame {
         this.setLocation(x - xx, y - xy);
     }// GEN-LAST:event_formMouseDragged
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FlatLightLaf.setup();
-                UIManager.put("TextComponent.arc", 999);
-                UIManager.put("Button.arc", 999);
-                System.setProperty("flatlaf.menuBarEmbbedded", "false");
-                new TicketInfo().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

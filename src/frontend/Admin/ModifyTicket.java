@@ -240,14 +240,6 @@ public class ModifyTicket extends javax.swing.JFrame {
         this.dispose();
     }// GEN-LAST:event_jLabel11MouseClicked
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ModifyTicket().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

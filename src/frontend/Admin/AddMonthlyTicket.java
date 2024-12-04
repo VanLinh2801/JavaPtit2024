@@ -274,14 +274,6 @@ public class AddMonthlyTicket extends javax.swing.JFrame {
         jDateChooser1.setDate(new Date());
     }// GEN-LAST:event_jButton2ActionPerformed
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddMonthlyTicket().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

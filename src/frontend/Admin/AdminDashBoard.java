@@ -3559,30 +3559,6 @@ public class AdminDashBoard extends javax.swing.JFrame {
         chucVu.setText("Quản lý");
     }
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FlatLightLaf.setup();
-                UIManager.put("TextComponent.arc", 999);
-                UIManager.put("Component.arc", 999);
-                UIManager.put("Table.alternateRowColor", new java.awt.Color(240, 240, 240));
-                System.setProperty("flatlaf.menuBarEmbbedded", "false");
-                AdminDashBoard n;
-                try {
-                    n = new AdminDashBoard();
-                    n.setVisible(true);
-
-                } catch (ClassNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanel5;
     private javax.swing.JLabel Panel2text;
