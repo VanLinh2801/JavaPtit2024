@@ -181,7 +181,7 @@ public class TicketDAO {
                 int exitHour = exitTime.toLocalDateTime().getHour();
                 if (exitHour >= 6 && exitHour < 18) {
                     priceByDay = morningPrice;
-                } else if (exitHour >= 18 && exitHour < 23) {
+                } else if (exitHour >= 18 && exitHour < 22) {
                     priceByDay = afternoonPrice;
                 } else {
                     priceByDay = nightPrice;
