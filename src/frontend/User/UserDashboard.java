@@ -2540,7 +2540,7 @@ public class UserDashboard extends javax.swing.JFrame {
                     thongBaoLanRa.setText(String.valueOf(ticketDao.getPrice(bienSo)));
                 } else {
                     thongBaoLanRa.setForeground(warning);
-                    thongBaoLanRa.setText("Không đúng loại xe");
+                    thongBaoLanRa.setText("Vé không tồn tại");
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(UserDashboard.class.getName()).log(Level.SEVERE, null, ex);
